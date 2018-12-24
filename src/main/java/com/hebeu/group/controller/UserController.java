@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2018/12/20 15:22
  */
 @Controller
+@RequestMapping("/user/")
 public class UserController {
     private AdminService adminService;
 
