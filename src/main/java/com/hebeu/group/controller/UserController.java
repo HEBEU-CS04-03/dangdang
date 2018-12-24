@@ -28,7 +28,7 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     public Admin login() {
-        // 返回值
+        // 返回值好
         return adminService.getAdminById(1);
     }
 
