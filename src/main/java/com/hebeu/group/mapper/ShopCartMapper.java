@@ -10,7 +10,7 @@ public interface ShopCartMapper {
 
     int deleteByExample(ShopCartExample example);
 
-    int deleteByPrimaryKey(Integer cId);
+    int deleteByPrimaryKey(Integer sId);
 
     int insert(ShopCart record);
 
@@ -18,7 +18,7 @@ public interface ShopCartMapper {
 
     List<ShopCart> selectByExample(ShopCartExample example);
 
-    ShopCart selectByPrimaryKey(Integer cId);
+    ShopCart selectByPrimaryKey(Integer sId);
 
     int updateByExampleSelective(@Param("record") ShopCart record, @Param("example") ShopCartExample example);
 

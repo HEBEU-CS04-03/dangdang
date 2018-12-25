@@ -104,63 +104,63 @@ public class ShopCartExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCIdIsNull() {
-            addCriterion("c_id is null");
+        public Criteria andSIdIsNull() {
+            addCriterion("s_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCIdIsNotNull() {
-            addCriterion("c_id is not null");
+        public Criteria andSIdIsNotNull() {
+            addCriterion("s_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCIdEqualTo(Integer value) {
-            addCriterion("c_id =", value, "cId");
+        public Criteria andSIdEqualTo(Integer value) {
+            addCriterion("s_id =", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdNotEqualTo(Integer value) {
-            addCriterion("c_id <>", value, "cId");
+        public Criteria andSIdNotEqualTo(Integer value) {
+            addCriterion("s_id <>", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdGreaterThan(Integer value) {
-            addCriterion("c_id >", value, "cId");
+        public Criteria andSIdGreaterThan(Integer value) {
+            addCriterion("s_id >", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("c_id >=", value, "cId");
+        public Criteria andSIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("s_id >=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdLessThan(Integer value) {
-            addCriterion("c_id <", value, "cId");
+        public Criteria andSIdLessThan(Integer value) {
+            addCriterion("s_id <", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdLessThanOrEqualTo(Integer value) {
-            addCriterion("c_id <=", value, "cId");
+        public Criteria andSIdLessThanOrEqualTo(Integer value) {
+            addCriterion("s_id <=", value, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdIn(List<Integer> values) {
-            addCriterion("c_id in", values, "cId");
+        public Criteria andSIdIn(List<Integer> values) {
+            addCriterion("s_id in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdNotIn(List<Integer> values) {
-            addCriterion("c_id not in", values, "cId");
+        public Criteria andSIdNotIn(List<Integer> values) {
+            addCriterion("s_id not in", values, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdBetween(Integer value1, Integer value2) {
-            addCriterion("c_id between", value1, value2, "cId");
+        public Criteria andSIdBetween(Integer value1, Integer value2) {
+            addCriterion("s_id between", value1, value2, "sId");
             return (Criteria) this;
         }
 
-        public Criteria andCIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("c_id not between", value1, value2, "cId");
+        public Criteria andSIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("s_id not between", value1, value2, "sId");
             return (Criteria) this;
         }
 
