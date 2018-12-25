@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.ShopCartMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.ShopCart">
+    <result column="c_id" jdbcType="INTEGER" property="cId" />
     <result column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="b_id" jdbcType="CHAR" property="bId" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    c_name, b_id, b_name, b_price, b_number, b_image
+    c_id, c_name, b_id, b_name, b_price, b_number, b_image
   </sql>
   <select id="selectByExample" parameterType="com.hebeu.group.pojo.ShopCartExample" resultMap="BaseResultMap">
     select
@@ -91,16 +92,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hebeu.group.pojo.ShopCart">
-    insert into shop_cart (c_name, b_id, b_name, 
-      b_price, b_number, b_image
-      )
-    values (#{cName,jdbcType=VARCHAR}, #{bId,jdbcType=CHAR}, #{bName,jdbcType=VARCHAR}, 
-      #{bPrice,jdbcType=DOUBLE}, #{bNumber,jdbcType=INTEGER}, #{bImage,jdbcType=VARCHAR}
-      )
+    insert into shop_cart (c_id, c_name, b_id, 
+      b_name, b_price, b_number, 
+      b_image)
+    values (#{cId,jdbcType=INTEGER}, #{cName,jdbcType=VARCHAR}, #{bId,jdbcType=CHAR}, 
+      #{bName,jdbcType=VARCHAR}, #{bPrice,jdbcType=DOUBLE}, #{bNumber,jdbcType=INTEGER}, 
+      #{bImage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hebeu.group.pojo.ShopCart">
     insert into shop_cart
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        c_id,
+      </if>
       <if test="cName != null">
         c_name,
       </if>
@@ -121,6 +125,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cId != null">
+        #{cId,jdbcType=INTEGER},
+      </if>
       <if test="cName != null">
         #{cName,jdbcType=VARCHAR},
       </if>
@@ -150,6 +157,9 @@
   <update id="updateByExampleSelective" parameterType="map">
     update shop_cart
     <set>
+      <if test="record.cId != null">
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
       <if test="record.cName != null">
         c_name = #{record.cName,jdbcType=VARCHAR},
       </if>
@@ -175,7 +185,8 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update shop_cart
-    set c_name = #{record.cName,jdbcType=VARCHAR},
+    set c_id = #{record.cId,jdbcType=INTEGER},
+      c_name = #{record.cName,jdbcType=VARCHAR},
       b_id = #{record.bId,jdbcType=CHAR},
       b_name = #{record.bName,jdbcType=VARCHAR},
       b_price = #{record.bPrice,jdbcType=DOUBLE},

@@ -104,6 +104,66 @@ public class ShopCartExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andCIdIsNull() {
+            addCriterion("c_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdIsNotNull() {
+            addCriterion("c_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdEqualTo(Integer value) {
+            addCriterion("c_id =", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdNotEqualTo(Integer value) {
+            addCriterion("c_id <>", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdGreaterThan(Integer value) {
+            addCriterion("c_id >", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("c_id >=", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdLessThan(Integer value) {
+            addCriterion("c_id <", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdLessThanOrEqualTo(Integer value) {
+            addCriterion("c_id <=", value, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdIn(List<Integer> values) {
+            addCriterion("c_id in", values, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdNotIn(List<Integer> values) {
+            addCriterion("c_id not in", values, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdBetween(Integer value1, Integer value2) {
+            addCriterion("c_id between", value1, value2, "cId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("c_id not between", value1, value2, "cId");
+            return (Criteria) this;
+        }
+
         public Criteria andCNameIsNull() {
             addCriterion("c_name is null");
             return (Criteria) this;

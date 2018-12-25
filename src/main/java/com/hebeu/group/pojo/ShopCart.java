@@ -1,6 +1,8 @@
 package com.hebeu.group.pojo;
 
 public class ShopCart {
+    private Integer cId;
+
     private String cName;
 
     private String bId;
@@ -12,6 +14,14 @@ public class ShopCart {
     private Integer bNumber;
 
     private String bImage;
+
+    public Integer getcId() {
+        return cId;
+    }
+
+    public void setcId(Integer cId) {
+        this.cId = cId;
+    }
 
     public String getcName() {
         return cName;
