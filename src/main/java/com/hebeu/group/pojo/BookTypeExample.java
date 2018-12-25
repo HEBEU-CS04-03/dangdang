@@ -104,253 +104,133 @@ public class BookTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andBookTypeIdIsNull() {
-            addCriterion("book_type_id is null");
+        public Criteria andTIdIsNull() {
+            addCriterion("t_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdIsNotNull() {
-            addCriterion("book_type_id is not null");
+        public Criteria andTIdIsNotNull() {
+            addCriterion("t_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdEqualTo(Integer value) {
-            addCriterion("book_type_id =", value, "bookTypeId");
+        public Criteria andTIdEqualTo(Integer value) {
+            addCriterion("t_id =", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdNotEqualTo(Integer value) {
-            addCriterion("book_type_id <>", value, "bookTypeId");
+        public Criteria andTIdNotEqualTo(Integer value) {
+            addCriterion("t_id <>", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdGreaterThan(Integer value) {
-            addCriterion("book_type_id >", value, "bookTypeId");
+        public Criteria andTIdGreaterThan(Integer value) {
+            addCriterion("t_id >", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("book_type_id >=", value, "bookTypeId");
+        public Criteria andTIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("t_id >=", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdLessThan(Integer value) {
-            addCriterion("book_type_id <", value, "bookTypeId");
+        public Criteria andTIdLessThan(Integer value) {
+            addCriterion("t_id <", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("book_type_id <=", value, "bookTypeId");
+        public Criteria andTIdLessThanOrEqualTo(Integer value) {
+            addCriterion("t_id <=", value, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdIn(List<Integer> values) {
-            addCriterion("book_type_id in", values, "bookTypeId");
+        public Criteria andTIdIn(List<Integer> values) {
+            addCriterion("t_id in", values, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdNotIn(List<Integer> values) {
-            addCriterion("book_type_id not in", values, "bookTypeId");
+        public Criteria andTIdNotIn(List<Integer> values) {
+            addCriterion("t_id not in", values, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdBetween(Integer value1, Integer value2) {
-            addCriterion("book_type_id between", value1, value2, "bookTypeId");
+        public Criteria andTIdBetween(Integer value1, Integer value2) {
+            addCriterion("t_id between", value1, value2, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("book_type_id not between", value1, value2, "bookTypeId");
+        public Criteria andTIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("t_id not between", value1, value2, "tId");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameIsNull() {
-            addCriterion("book_type_name is null");
+        public Criteria andTTypeIsNull() {
+            addCriterion("t_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameIsNotNull() {
-            addCriterion("book_type_name is not null");
+        public Criteria andTTypeIsNotNull() {
+            addCriterion("t_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameEqualTo(String value) {
-            addCriterion("book_type_name =", value, "bookTypeName");
+        public Criteria andTTypeEqualTo(String value) {
+            addCriterion("t_type =", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameNotEqualTo(String value) {
-            addCriterion("book_type_name <>", value, "bookTypeName");
+        public Criteria andTTypeNotEqualTo(String value) {
+            addCriterion("t_type <>", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameGreaterThan(String value) {
-            addCriterion("book_type_name >", value, "bookTypeName");
+        public Criteria andTTypeGreaterThan(String value) {
+            addCriterion("t_type >", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameGreaterThanOrEqualTo(String value) {
-            addCriterion("book_type_name >=", value, "bookTypeName");
+        public Criteria andTTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("t_type >=", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameLessThan(String value) {
-            addCriterion("book_type_name <", value, "bookTypeName");
+        public Criteria andTTypeLessThan(String value) {
+            addCriterion("t_type <", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameLessThanOrEqualTo(String value) {
-            addCriterion("book_type_name <=", value, "bookTypeName");
+        public Criteria andTTypeLessThanOrEqualTo(String value) {
+            addCriterion("t_type <=", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameLike(String value) {
-            addCriterion("book_type_name like", value, "bookTypeName");
+        public Criteria andTTypeLike(String value) {
+            addCriterion("t_type like", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameNotLike(String value) {
-            addCriterion("book_type_name not like", value, "bookTypeName");
+        public Criteria andTTypeNotLike(String value) {
+            addCriterion("t_type not like", value, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameIn(List<String> values) {
-            addCriterion("book_type_name in", values, "bookTypeName");
+        public Criteria andTTypeIn(List<String> values) {
+            addCriterion("t_type in", values, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameNotIn(List<String> values) {
-            addCriterion("book_type_name not in", values, "bookTypeName");
+        public Criteria andTTypeNotIn(List<String> values) {
+            addCriterion("t_type not in", values, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameBetween(String value1, String value2) {
-            addCriterion("book_type_name between", value1, value2, "bookTypeName");
+        public Criteria andTTypeBetween(String value1, String value2) {
+            addCriterion("t_type between", value1, value2, "tType");
             return (Criteria) this;
         }
 
-        public Criteria andBookTypeNameNotBetween(String value1, String value2) {
-            addCriterion("book_type_name not between", value1, value2, "bookTypeName");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdIsNull() {
-            addCriterion("subject_type_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdIsNotNull() {
-            addCriterion("subject_type_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdEqualTo(Integer value) {
-            addCriterion("subject_type_id =", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdNotEqualTo(Integer value) {
-            addCriterion("subject_type_id <>", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdGreaterThan(Integer value) {
-            addCriterion("subject_type_id >", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("subject_type_id >=", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdLessThan(Integer value) {
-            addCriterion("subject_type_id <", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("subject_type_id <=", value, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdIn(List<Integer> values) {
-            addCriterion("subject_type_id in", values, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdNotIn(List<Integer> values) {
-            addCriterion("subject_type_id not in", values, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdBetween(Integer value1, Integer value2) {
-            addCriterion("subject_type_id between", value1, value2, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSubjectTypeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("subject_type_id not between", value1, value2, "subjectTypeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveIsNull() {
-            addCriterion("is_effective is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveIsNotNull() {
-            addCriterion("is_effective is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveEqualTo(Integer value) {
-            addCriterion("is_effective =", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveNotEqualTo(Integer value) {
-            addCriterion("is_effective <>", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveGreaterThan(Integer value) {
-            addCriterion("is_effective >", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveGreaterThanOrEqualTo(Integer value) {
-            addCriterion("is_effective >=", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveLessThan(Integer value) {
-            addCriterion("is_effective <", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveLessThanOrEqualTo(Integer value) {
-            addCriterion("is_effective <=", value, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveIn(List<Integer> values) {
-            addCriterion("is_effective in", values, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveNotIn(List<Integer> values) {
-            addCriterion("is_effective not in", values, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveBetween(Integer value1, Integer value2) {
-            addCriterion("is_effective between", value1, value2, "isEffective");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsEffectiveNotBetween(Integer value1, Integer value2) {
-            addCriterion("is_effective not between", value1, value2, "isEffective");
+        public Criteria andTTypeNotBetween(String value1, String value2) {
+            addCriterion("t_type not between", value1, value2, "tType");
             return (Criteria) this;
         }
     }

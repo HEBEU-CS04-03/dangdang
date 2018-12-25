@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.CustomerMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.Customer">
-    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <id column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="c_pass" jdbcType="VARCHAR" property="cPass" />
     <result column="c_phone" jdbcType="VARCHAR" property="cPhone" />
     <result column="c_address" jdbcType="VARCHAR" property="cAddress" />
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from customer
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.CustomerExample">
     delete from customer
     <if test="_parameter != null">
@@ -195,5 +205,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.Customer">
+    update customer
+    <set>
+      <if test="cPass != null">
+        c_pass = #{cPass,jdbcType=VARCHAR},
+      </if>
+      <if test="cPhone != null">
+        c_phone = #{cPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cAddress != null">
+        c_address = #{cAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="cEmail != null">
+        c_email = #{cEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="cScore != null">
+        c_score = #{cScore,jdbcType=INTEGER},
+      </if>
+      <if test="cBlance != null">
+        c_blance = #{cBlance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.Customer">
+    update customer
+    set c_pass = #{cPass,jdbcType=VARCHAR},
+      c_phone = #{cPhone,jdbcType=VARCHAR},
+      c_address = #{cAddress,jdbcType=VARCHAR},
+      c_email = #{cEmail,jdbcType=VARCHAR},
+      c_score = #{cScore,jdbcType=INTEGER},
+      c_blance = #{cBlance,jdbcType=DOUBLE}
+    where c_name = #{cName,jdbcType=VARCHAR}
   </update>
 </mapper>

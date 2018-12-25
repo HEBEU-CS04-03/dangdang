@@ -1,75 +1,105 @@
 package com.hebeu.group.pojo;
 
-import java.math.BigDecimal;
+import java.util.Date;
 
 public class Book {
-    private String bid;
+    private String bId;
 
-    private String bname;
+    private Integer tId;
 
-    private BigDecimal price;
+    private String bName;
 
-    private String author;
+    private Float bPrice;
 
-    private String image;
+    private String bImage;
 
-    private Boolean del;
+    private Integer bQuantity;
 
-    private String cid;
+    private String bDescription;
 
-    public String getBid() {
-        return bid;
+    private Date bTime;
+
+    private String bAuthor;
+
+    private String bPress;
+
+    public String getbId() {
+        return bId;
     }
 
-    public void setBid(String bid) {
-        this.bid = bid == null ? null : bid.trim();
+    public void setbId(String bId) {
+        this.bId = bId == null ? null : bId.trim();
     }
 
-    public String getBname() {
-        return bname;
+    public Integer gettId() {
+        return tId;
     }
 
-    public void setBname(String bname) {
-        this.bname = bname == null ? null : bname.trim();
+    public void settId(Integer tId) {
+        this.tId = tId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getbName() {
+        return bName;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setbName(String bName) {
+        this.bName = bName == null ? null : bName.trim();
     }
 
-    public String getAuthor() {
-        return author;
+    public Float getbPrice() {
+        return bPrice;
     }
 
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
+    public void setbPrice(Float bPrice) {
+        this.bPrice = bPrice;
     }
 
-    public String getImage() {
-        return image;
+    public String getbImage() {
+        return bImage;
     }
 
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
+    public void setbImage(String bImage) {
+        this.bImage = bImage == null ? null : bImage.trim();
     }
 
-    public Boolean getDel() {
-        return del;
+    public Integer getbQuantity() {
+        return bQuantity;
     }
 
-    public void setDel(Boolean del) {
-        this.del = del;
+    public void setbQuantity(Integer bQuantity) {
+        this.bQuantity = bQuantity;
     }
 
-    public String getCid() {
-        return cid;
+    public String getbDescription() {
+        return bDescription;
     }
 
-    public void setCid(String cid) {
-        this.cid = cid == null ? null : cid.trim();
+    public void setbDescription(String bDescription) {
+        this.bDescription = bDescription == null ? null : bDescription.trim();
+    }
+
+    public Date getbTime() {
+        return bTime;
+    }
+
+    public void setbTime(Date bTime) {
+        this.bTime = bTime;
+    }
+
+    public String getbAuthor() {
+        return bAuthor;
+    }
+
+    public void setbAuthor(String bAuthor) {
+        this.bAuthor = bAuthor == null ? null : bAuthor.trim();
+    }
+
+    public String getbPress() {
+        return bPress;
+    }
+
+    public void setbPress(String bPress) {
+        this.bPress = bPress == null ? null : bPress.trim();
     }
 }

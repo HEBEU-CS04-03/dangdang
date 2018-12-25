@@ -1,43 +1,23 @@
 package com.hebeu.group.pojo;
 
 public class BookType {
-    private Integer bookTypeId;
+    private Integer tId;
 
-    private String bookTypeName;
+    private String tType;
 
-    private Integer subjectTypeId;
-
-    private Integer isEffective;
-
-    public Integer getBookTypeId() {
-        return bookTypeId;
+    public Integer gettId() {
+        return tId;
     }
 
-    public void setBookTypeId(Integer bookTypeId) {
-        this.bookTypeId = bookTypeId;
+    public void settId(Integer tId) {
+        this.tId = tId;
     }
 
-    public String getBookTypeName() {
-        return bookTypeName;
+    public String gettType() {
+        return tType;
     }
 
-    public void setBookTypeName(String bookTypeName) {
-        this.bookTypeName = bookTypeName == null ? null : bookTypeName.trim();
-    }
-
-    public Integer getSubjectTypeId() {
-        return subjectTypeId;
-    }
-
-    public void setSubjectTypeId(Integer subjectTypeId) {
-        this.subjectTypeId = subjectTypeId;
-    }
-
-    public Integer getIsEffective() {
-        return isEffective;
-    }
-
-    public void setIsEffective(Integer isEffective) {
-        this.isEffective = isEffective;
+    public void settType(String tType) {
+        this.tType = tType == null ? null : tType.trim();
     }
 }

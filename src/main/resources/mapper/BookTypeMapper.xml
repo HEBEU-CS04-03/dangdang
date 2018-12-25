@@ -2,10 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.BookTypeMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.BookType">
-    <result column="book_type_id" jdbcType="INTEGER" property="bookTypeId" />
-    <result column="book_type_name" jdbcType="VARCHAR" property="bookTypeName" />
-    <result column="subject_type_id" jdbcType="INTEGER" property="subjectTypeId" />
-    <result column="is_effective" jdbcType="INTEGER" property="isEffective" />
+    <id column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_type" jdbcType="VARCHAR" property="tType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    book_type_id, book_type_name, subject_type_id, is_effective
+    t_id, t_type
   </sql>
   <select id="selectByExample" parameterType="com.hebeu.group.pojo.BookTypeExample" resultMap="BaseResultMap">
     select
@@ -82,6 +80,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book_type
+    where t_id = #{tId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book_type
+    where t_id = #{tId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.BookTypeExample">
     delete from book_type
     <if test="_parameter != null">
@@ -89,39 +97,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hebeu.group.pojo.BookType">
-    insert into book_type (book_type_id, book_type_name, subject_type_id, 
-      is_effective)
-    values (#{bookTypeId,jdbcType=INTEGER}, #{bookTypeName,jdbcType=VARCHAR}, #{subjectTypeId,jdbcType=INTEGER}, 
-      #{isEffective,jdbcType=INTEGER})
+    insert into book_type (t_id, t_type)
+    values (#{tId,jdbcType=INTEGER}, #{tType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hebeu.group.pojo.BookType">
     insert into book_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bookTypeId != null">
-        book_type_id,
+      <if test="tId != null">
+        t_id,
       </if>
-      <if test="bookTypeName != null">
-        book_type_name,
-      </if>
-      <if test="subjectTypeId != null">
-        subject_type_id,
-      </if>
-      <if test="isEffective != null">
-        is_effective,
+      <if test="tType != null">
+        t_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bookTypeId != null">
-        #{bookTypeId,jdbcType=INTEGER},
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
       </if>
-      <if test="bookTypeName != null">
-        #{bookTypeName,jdbcType=VARCHAR},
-      </if>
-      <if test="subjectTypeId != null">
-        #{subjectTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="isEffective != null">
-        #{isEffective,jdbcType=INTEGER},
+      <if test="tType != null">
+        #{tType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,17 +128,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update book_type
     <set>
-      <if test="record.bookTypeId != null">
-        book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
       </if>
-      <if test="record.bookTypeName != null">
-        book_type_name = #{record.bookTypeName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.subjectTypeId != null">
-        subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
-      </if>
-      <if test="record.isEffective != null">
-        is_effective = #{record.isEffective,jdbcType=INTEGER},
+      <if test="record.tType != null">
+        t_type = #{record.tType,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -153,12 +141,24 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update book_type
-    set book_type_id = #{record.bookTypeId,jdbcType=INTEGER},
-      book_type_name = #{record.bookTypeName,jdbcType=VARCHAR},
-      subject_type_id = #{record.subjectTypeId,jdbcType=INTEGER},
-      is_effective = #{record.isEffective,jdbcType=INTEGER}
+    set t_id = #{record.tId,jdbcType=INTEGER},
+      t_type = #{record.tType,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.BookType">
+    update book_type
+    <set>
+      <if test="tType != null">
+        t_type = #{tType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where t_id = #{tId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.BookType">
+    update book_type
+    set t_type = #{tType,jdbcType=VARCHAR}
+    where t_id = #{tId,jdbcType=INTEGER}
   </update>
 </mapper>

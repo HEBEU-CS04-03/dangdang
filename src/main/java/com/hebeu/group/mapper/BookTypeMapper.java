@@ -10,13 +10,21 @@ public interface BookTypeMapper {
 
     int deleteByExample(BookTypeExample example);
 
+    int deleteByPrimaryKey(Integer tId);
+
     int insert(BookType record);
 
     int insertSelective(BookType record);
 
     List<BookType> selectByExample(BookTypeExample example);
 
+    BookType selectByPrimaryKey(Integer tId);
+
     int updateByExampleSelective(@Param("record") BookType record, @Param("example") BookTypeExample example);
 
     int updateByExample(@Param("record") BookType record, @Param("example") BookTypeExample example);
+
+    int updateByPrimaryKeySelective(BookType record);
+
+    int updateByPrimaryKey(BookType record);
 }

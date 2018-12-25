@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.OrderRecordMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.OrderRecord">
-    <result column="c_name" jdbcType="VARCHAR" property="cName" />
+    <id column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="b_id" jdbcType="VARCHAR" property="bId" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
     <result column="order_id" jdbcType="CHAR" property="orderId" />
@@ -86,6 +86,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_record
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_record
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.OrderRecordExample">
     delete from order_record
     <if test="_parameter != null">
@@ -206,5 +216,43 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.OrderRecord">
+    update order_record
+    <set>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=VARCHAR},
+      </if>
+      <if test="bName != null">
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=CHAR},
+      </if>
+      <if test="bPrice != null">
+        b_price = #{bPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bNumber != null">
+        b_number = #{bNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bImage != null">
+        b_Image = #{bImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bTotalcost != null">
+        b_totalcost = #{bTotalcost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where c_name = #{cName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.OrderRecord">
+    update order_record
+    set b_id = #{bId,jdbcType=VARCHAR},
+      b_name = #{bName,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=CHAR},
+      b_price = #{bPrice,jdbcType=DOUBLE},
+      b_number = #{bNumber,jdbcType=INTEGER},
+      b_Image = #{bImage,jdbcType=VARCHAR},
+      b_totalcost = #{bTotalcost,jdbcType=DOUBLE}
+    where c_name = #{cName,jdbcType=VARCHAR}
   </update>
 </mapper>

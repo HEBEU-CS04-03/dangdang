@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.ShopCartMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.ShopCart">
-    <result column="c_id" jdbcType="INTEGER" property="cId" />
+    <id column="c_id" jdbcType="INTEGER" property="cId" />
     <result column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="b_id" jdbcType="CHAR" property="bId" />
     <result column="b_name" jdbcType="VARCHAR" property="bName" />
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_cart
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_cart
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.ShopCartExample">
     delete from shop_cart
     <if test="_parameter != null">
@@ -195,5 +205,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.ShopCart">
+    update shop_cart
+    <set>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=CHAR},
+      </if>
+      <if test="bName != null">
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bPrice != null">
+        b_price = #{bPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="bNumber != null">
+        b_number = #{bNumber,jdbcType=INTEGER},
+      </if>
+      <if test="bImage != null">
+        b_image = #{bImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.ShopCart">
+    update shop_cart
+    set c_name = #{cName,jdbcType=VARCHAR},
+      b_id = #{bId,jdbcType=CHAR},
+      b_name = #{bName,jdbcType=VARCHAR},
+      b_price = #{bPrice,jdbcType=DOUBLE},
+      b_number = #{bNumber,jdbcType=INTEGER},
+      b_image = #{bImage,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -10,13 +10,21 @@ public interface CustomerMapper {
 
     int deleteByExample(CustomerExample example);
 
+    int deleteByPrimaryKey(String cName);
+
     int insert(Customer record);
 
     int insertSelective(Customer record);
 
     List<Customer> selectByExample(CustomerExample example);
 
+    Customer selectByPrimaryKey(String cName);
+
     int updateByExampleSelective(@Param("record") Customer record, @Param("example") CustomerExample example);
 
     int updateByExample(@Param("record") Customer record, @Param("example") CustomerExample example);
+
+    int updateByPrimaryKeySelective(Customer record);
+
+    int updateByPrimaryKey(Customer record);
 }

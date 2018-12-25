@@ -2,13 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.BookMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.Book">
-    <result column="bid" jdbcType="CHAR" property="bid" />
-    <result column="bname" jdbcType="VARCHAR" property="bname" />
-    <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="del" jdbcType="BIT" property="del" />
-    <result column="cid" jdbcType="CHAR" property="cid" />
+    <id column="b_id" jdbcType="VARCHAR" property="bId" />
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="b_name" jdbcType="VARCHAR" property="bName" />
+    <result column="b_price" jdbcType="REAL" property="bPrice" />
+    <result column="b_image" jdbcType="VARCHAR" property="bImage" />
+    <result column="b_quantity" jdbcType="INTEGER" property="bQuantity" />
+    <result column="b_description" jdbcType="VARCHAR" property="bDescription" />
+    <result column="b_time" jdbcType="TIMESTAMP" property="bTime" />
+    <result column="b_author" jdbcType="VARCHAR" property="bAuthor" />
+    <result column="b_press" jdbcType="VARCHAR" property="bPress" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    bid, bname, price, author, image, del, cid
+    b_id, t_id, b_name, b_price, b_image, b_quantity, b_description, b_time, b_author, 
+    b_press
   </sql>
   <select id="selectByExample" parameterType="com.hebeu.group.pojo.BookExample" resultMap="BaseResultMap">
     select
@@ -85,6 +89,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where b_id = #{bId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from book
+    where b_id = #{bId,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.BookExample">
     delete from book
     <if test="_parameter != null">
@@ -92,59 +106,79 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hebeu.group.pojo.Book">
-    insert into book (bid, bname, price, 
-      author, image, del, cid
-      )
-    values (#{bid,jdbcType=CHAR}, #{bname,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
-      #{author,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, #{cid,jdbcType=CHAR}
-      )
+    insert into book (b_id, t_id, b_name, 
+      b_price, b_image, b_quantity, 
+      b_description, b_time, b_author, 
+      b_press)
+    values (#{bId,jdbcType=VARCHAR}, #{tId,jdbcType=INTEGER}, #{bName,jdbcType=VARCHAR}, 
+      #{bPrice,jdbcType=REAL}, #{bImage,jdbcType=VARCHAR}, #{bQuantity,jdbcType=INTEGER}, 
+      #{bDescription,jdbcType=VARCHAR}, #{bTime,jdbcType=TIMESTAMP}, #{bAuthor,jdbcType=VARCHAR}, 
+      #{bPress,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hebeu.group.pojo.Book">
     insert into book
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="bid != null">
-        bid,
+      <if test="bId != null">
+        b_id,
       </if>
-      <if test="bname != null">
-        bname,
+      <if test="tId != null">
+        t_id,
       </if>
-      <if test="price != null">
-        price,
+      <if test="bName != null">
+        b_name,
       </if>
-      <if test="author != null">
-        author,
+      <if test="bPrice != null">
+        b_price,
       </if>
-      <if test="image != null">
-        image,
+      <if test="bImage != null">
+        b_image,
       </if>
-      <if test="del != null">
-        del,
+      <if test="bQuantity != null">
+        b_quantity,
       </if>
-      <if test="cid != null">
-        cid,
+      <if test="bDescription != null">
+        b_description,
+      </if>
+      <if test="bTime != null">
+        b_time,
+      </if>
+      <if test="bAuthor != null">
+        b_author,
+      </if>
+      <if test="bPress != null">
+        b_press,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="bid != null">
-        #{bid,jdbcType=CHAR},
+      <if test="bId != null">
+        #{bId,jdbcType=VARCHAR},
       </if>
-      <if test="bname != null">
-        #{bname,jdbcType=VARCHAR},
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
       </if>
-      <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+      <if test="bName != null">
+        #{bName,jdbcType=VARCHAR},
       </if>
-      <if test="author != null">
-        #{author,jdbcType=VARCHAR},
+      <if test="bPrice != null">
+        #{bPrice,jdbcType=REAL},
       </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
+      <if test="bImage != null">
+        #{bImage,jdbcType=VARCHAR},
       </if>
-      <if test="del != null">
-        #{del,jdbcType=BIT},
+      <if test="bQuantity != null">
+        #{bQuantity,jdbcType=INTEGER},
       </if>
-      <if test="cid != null">
-        #{cid,jdbcType=CHAR},
+      <if test="bDescription != null">
+        #{bDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="bTime != null">
+        #{bTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bAuthor != null">
+        #{bAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bPress != null">
+        #{bPress,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -157,26 +191,35 @@
   <update id="updateByExampleSelective" parameterType="map">
     update book
     <set>
-      <if test="record.bid != null">
-        bid = #{record.bid,jdbcType=CHAR},
+      <if test="record.bId != null">
+        b_id = #{record.bId,jdbcType=VARCHAR},
       </if>
-      <if test="record.bname != null">
-        bname = #{record.bname,jdbcType=VARCHAR},
+      <if test="record.tId != null">
+        t_id = #{record.tId,jdbcType=INTEGER},
       </if>
-      <if test="record.price != null">
-        price = #{record.price,jdbcType=DECIMAL},
+      <if test="record.bName != null">
+        b_name = #{record.bName,jdbcType=VARCHAR},
       </if>
-      <if test="record.author != null">
-        author = #{record.author,jdbcType=VARCHAR},
+      <if test="record.bPrice != null">
+        b_price = #{record.bPrice,jdbcType=REAL},
       </if>
-      <if test="record.image != null">
-        image = #{record.image,jdbcType=VARCHAR},
+      <if test="record.bImage != null">
+        b_image = #{record.bImage,jdbcType=VARCHAR},
       </if>
-      <if test="record.del != null">
-        del = #{record.del,jdbcType=BIT},
+      <if test="record.bQuantity != null">
+        b_quantity = #{record.bQuantity,jdbcType=INTEGER},
       </if>
-      <if test="record.cid != null">
-        cid = #{record.cid,jdbcType=CHAR},
+      <if test="record.bDescription != null">
+        b_description = #{record.bDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bTime != null">
+        b_time = #{record.bTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bAuthor != null">
+        b_author = #{record.bAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bPress != null">
+        b_press = #{record.bPress,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -185,15 +228,64 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update book
-    set bid = #{record.bid,jdbcType=CHAR},
-      bname = #{record.bname,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      author = #{record.author,jdbcType=VARCHAR},
-      image = #{record.image,jdbcType=VARCHAR},
-      del = #{record.del,jdbcType=BIT},
-      cid = #{record.cid,jdbcType=CHAR}
+    set b_id = #{record.bId,jdbcType=VARCHAR},
+      t_id = #{record.tId,jdbcType=INTEGER},
+      b_name = #{record.bName,jdbcType=VARCHAR},
+      b_price = #{record.bPrice,jdbcType=REAL},
+      b_image = #{record.bImage,jdbcType=VARCHAR},
+      b_quantity = #{record.bQuantity,jdbcType=INTEGER},
+      b_description = #{record.bDescription,jdbcType=VARCHAR},
+      b_time = #{record.bTime,jdbcType=TIMESTAMP},
+      b_author = #{record.bAuthor,jdbcType=VARCHAR},
+      b_press = #{record.bPress,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.Book">
+    update book
+    <set>
+      <if test="tId != null">
+        t_id = #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="bName != null">
+        b_name = #{bName,jdbcType=VARCHAR},
+      </if>
+      <if test="bPrice != null">
+        b_price = #{bPrice,jdbcType=REAL},
+      </if>
+      <if test="bImage != null">
+        b_image = #{bImage,jdbcType=VARCHAR},
+      </if>
+      <if test="bQuantity != null">
+        b_quantity = #{bQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="bDescription != null">
+        b_description = #{bDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="bTime != null">
+        b_time = #{bTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bAuthor != null">
+        b_author = #{bAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bPress != null">
+        b_press = #{bPress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where b_id = #{bId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.Book">
+    update book
+    set t_id = #{tId,jdbcType=INTEGER},
+      b_name = #{bName,jdbcType=VARCHAR},
+      b_price = #{bPrice,jdbcType=REAL},
+      b_image = #{bImage,jdbcType=VARCHAR},
+      b_quantity = #{bQuantity,jdbcType=INTEGER},
+      b_description = #{bDescription,jdbcType=VARCHAR},
+      b_time = #{bTime,jdbcType=TIMESTAMP},
+      b_author = #{bAuthor,jdbcType=VARCHAR},
+      b_press = #{bPress,jdbcType=VARCHAR}
+    where b_id = #{bId,jdbcType=VARCHAR}
   </update>
 </mapper>

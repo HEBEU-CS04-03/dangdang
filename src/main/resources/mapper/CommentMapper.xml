@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.CommentMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.Comment">
-    <result column="co_id" jdbcType="VARCHAR" property="coId" />
+    <id column="co_id" jdbcType="VARCHAR" property="coId" />
     <result column="b_id" jdbcType="CHAR" property="bId" />
     <result column="c_name" jdbcType="VARCHAR" property="cName" />
     <result column="co_message" jdbcType="VARCHAR" property="coMessage" />
@@ -83,6 +83,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from comment
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.CommentExample">
     delete from comment
     <if test="_parameter != null">
@@ -171,5 +181,31 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.Comment">
+    update comment
+    <set>
+      <if test="bId != null">
+        b_id = #{bId,jdbcType=CHAR},
+      </if>
+      <if test="cName != null">
+        c_name = #{cName,jdbcType=VARCHAR},
+      </if>
+      <if test="coMessage != null">
+        co_message = #{coMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="coTime != null">
+        co_time = #{coTime,jdbcType=CHAR},
+      </if>
+    </set>
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.Comment">
+    update comment
+    set b_id = #{bId,jdbcType=CHAR},
+      c_name = #{cName,jdbcType=VARCHAR},
+      co_message = #{coMessage,jdbcType=VARCHAR},
+      co_time = #{coTime,jdbcType=CHAR}
+    where co_id = #{coId,jdbcType=VARCHAR}
   </update>
 </mapper>
