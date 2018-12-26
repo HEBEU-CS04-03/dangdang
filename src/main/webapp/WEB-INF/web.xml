@@ -5,7 +5,6 @@
          version="3.1">
 
     <display-name>Archetype Created Web Application</display-name>
-
     <!--
         启动spring容器,并且需要配置Spring的配置文件，这样Spring容器才能够正确的启动
     -->
@@ -70,8 +69,6 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-
 
 
 </web-app>
