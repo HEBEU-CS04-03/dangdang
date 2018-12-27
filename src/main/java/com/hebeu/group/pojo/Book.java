@@ -1,5 +1,7 @@
 package com.hebeu.group.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Book {
@@ -79,6 +81,7 @@ public class Book {
         this.bDescription = bDescription == null ? null : bDescription.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getbTime() {
         return bTime;
     }
@@ -101,5 +104,21 @@ public class Book {
 
     public void setbPress(String bPress) {
         this.bPress = bPress == null ? null : bPress.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bId='" + bId + '\'' +
+                ", tId=" + tId +
+                ", bName='" + bName + '\'' +
+                ", bPrice=" + bPrice +
+                ", bImage='" + bImage + '\'' +
+                ", bQuantity=" + bQuantity +
+                ", bDescription='" + bDescription + '\'' +
+                ", bTime=" + bTime +
+                ", bAuthor='" + bAuthor + '\'' +
+                ", bPress='" + bPress + '\'' +
+                '}';
     }
 }

@@ -1,12 +1,18 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2018/12/26
+  Time: 15:51
+  图书分类
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
     <meta charset="utf-8"/>
-    <title>${book.bName}详情页-当当书城</title>
+    <title>${bookType}分类下的图书-当当书城</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/goodsmessage.css"/>
 
 </head>
 
@@ -15,7 +21,6 @@
 <!--头部-->
 <div id="booktop">
     <div class="widthmid">
-
         <c:if test="${username eq null}">
             <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="javascript:PageTopLogIn();" target="_self" rel="nofollow"
                                            class="login_link">登录</a></span>
@@ -48,7 +53,7 @@
 
     <!--搜索开始-->
     <div id="booksearch">
-        <a href="${pageContext.request.contextPath}/book/toIndex" class="logo">
+        <a href="" class="logo">
             <img src="${pageContext.request.contextPath}/static/img/logo.jpg" style="border: none;">
         </a>
         <div class="searchdiv">
@@ -101,74 +106,28 @@
     <!--横向菜单end-->
 
     <div id="bookbodym" class="clearfloat ">
-        <div class="goodsmessageout">
-            <div class="goodsmessageoutleft">
-                <img src="${pageContext.request.contextPath}/static/img/${book.bImage}" style="width: 80%;"/>
-            </div>
-            <div class="goodsmessageoutright">
-
-                <div class="name_info" ddt-area="001">
-                    <!-- 主标题 -->
-                    <h3 title="">
-                        ${book.bName} </h3>
-                    <!-- 副标题、促销语 -->
-                    <h4>
-                        <span class="head_title_name" title="">
-                            包邮！${book.bDescription}
-                        </span>
-                        <span class="hot" title="">
-                            <a href="http://book.dangdang.com/20170612_nrsg">青春动漫传记分会场畅品3折起5折封</a>
-                        </span>
-                        <span class="yushou" id="presale-title" style="display: none;"></span>
-                    </h4>
-                </div>
-
-                <div class="messbox_info">
-                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者:<a href="" target="_blank"
-                                                                                   dd_name="作者">${book.bAuthor}</a></span>&nbsp;&nbsp;
-                    <span class="t1" dd_name="出版社" ddt-area="003">出版社:<a href="" target="_blank"
-                                                                         dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;<span
-                        class="t1">出版时间:${book.bTime}&nbsp;</span>
-                    <!-- 评论数 -->
-                    <div class="pinglun">
-                        <!-- 排名 -->
-                        <span class="t1" id="pubbang" style="display:none" dd_name="图书排行榜排名"></span>
-                        <!-- 星级 -->
-                        <span class="star_box">
-        	<span class="star" style="width:92.4%"><img
-                    src="${pageContext.request.contextPath}/static/img/xingxing.png"/></span>
-								</span>
-                        <a href="javascript:void(0)" id="comm_num_down" dd_name="评论数">134</a>条评论
-                    </div>
-                </div>
-
-                <hr/>
-                <div class="messbox_info">
-                    配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费
-
-                </div>
-                <hr style="color: #FFFFFF;border: 0px;"/>
-                <div class="messbox_info">
-                    <ul>
-                        <li class="commonli"><input type="text" id="" value="-" style="width: 10px;height: 30px;"
-                                                    readonly="readonly"
-                                                    onclick="document.all.num.value=document.all.num.value-1"/></li>
-                        <li class="commonli"><input type="text" style="width: 40px;height: 30px;" id="num" value="1"
-                                                    readonly="readonly"/></li>
-                        <li class="commonli"><input type="text" id="" value="+" style="width: 10px;height: 30px;"
-                                                    readonly="readonly"
-                                                    onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
-                        </li>
-
-                        <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
-                                src="${pageContext.request.contextPath}/static/img/addshop.png"/></li>
-                    </ul>
-
-                </div>
-
-            </div>
-
+        <div class="weekdaytitle booktypebody">
+            <span class="bodytitlespan">分类：${bookType}</span>
         </div>
+        <c:forEach items="${books}" var="book">
+            <div class="bookshow ">
+                <img class="bookshowleftimg" src="${pageContext.request.contextPath}/static/img/${book.bImage}"/>
+                <ul class="bookshowrightul">
+                    <li class="bookname">${book.bName}</li>
+                    <li class="bookauthor">${book.bAuthor}</li>
+                    <li class="bookimg"><img src="${pageContext.request.contextPath}/static/img/xingxing.png"></li>
+                    <li class="bookprice">￥${book.bPrice}</li>
+                    <li class="bookmes">${book.bDescription}</li>
+                    <li class="bookxiangxi">
+                        <a class="bookxiangxia" target="_blank"
+                           href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${book.bId}">查看详细</a>
+                    </li>
+                </ul>
+            </div>
+        </c:forEach>
+        <c:if test="${books eq null}">
+            <p style="color: red">当前分类暂无图书</p>
+        </c:if>
 
     </div>
 
