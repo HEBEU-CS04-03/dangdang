@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -6,7 +7,8 @@
     <title>当当网购物车页面</title>
     <link href="${pageContext.request.contextPath}/static/css/global.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/static/css/layout.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/shopping.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/shopping.js"></script>--%>
 </head>
 
 <body>
@@ -86,111 +88,72 @@
                 <td class="shopping_list_title_3">市场价</td>
                 <td class="shopping_list_title_4">当当价</td>
                 <td class="shopping_list_title_5">数量</td>
-                <td class="shopping_list_title_6">删除</td>
+                <td class="shopping_list_title_6">操作</td>
             </tr>
         </table>
         <table width="100%" border="0" cellspacing="0" cellpadding="0" id="myTableProduct">
-            <tr class="shopping_product_list" id="shoppingProduct_01" onMouseOver="productOver('shoppingProduct_01')"
-                onMouseOut="productOut('shoppingProduct_01')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue">私募（首部披露资本博弈秘密的金融...</a></td>
-                <td class="shopping_product_list_2"><label>189</label></td>
-                <td class="shopping_product_list_3">￥<label>32.00</label></td>
-                <td class="shopping_product_list_4">￥<label>18.90 </label>(59折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="1" onblur="productCount()"></td>
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_01')"
-                                                       class="blue">删除</a></td>
-            </tr>
-            <tr class="shopping_product_list" id="shoppingProduct_02" onMouseOver="productOver('shoppingProduct_02')"
-                onMouseOut="productOut('shoppingProduct_02')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue"> 小团圆（张爱玲最神秘小说遗稿）</a></td>
-                <td class="shopping_product_list_2"><label>173</label></td>
-                <td class="shopping_product_list_3">￥<label>28.00</label></td>
-                <td class="shopping_product_list_4">￥<label>17.30</label>(62折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="1" onBlur="productCount()"></td>
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_02')"
-                                                       class="blue">删除</a></td>
-            </tr>
+            <c:forEach items="${shopCartList}" var="shopCartList">
+                <tr class="shopping_product_list" id="shoppingProduct_01" onMouseOver="productOver('shoppingProduct_01')"
+                    onMouseOut="productOut('shoppingProduct_01')">
+                    <td class="shopping_product_list_1">
+                        <input type="checkbox" name="" value="" checked="checked"/>
+                        <a href="#" class="blue">${shopCartList.bName}</a>
+                    </td>
+                    <td class="shopping_product_list_2">
+                        <label>${shopCartList.bPrice}</label>
+                    </td>
+                    <td class="shopping_product_list_3">
+                        ￥<label>${shopCartList.bPrice * 1.2}</label>
+                    </td>
+                    <td class="shopping_product_list_4">
+                        ￥<label>${shopCartList.bPrice} </label>(8折)
+                    </td>
+                    <td class="shopping_product_list_5">
+                        <input id="bNumber" type="text" value="${shopCartList.bNumber}" onchange="productCount(${shopCartList.sId})">
+                    </td>
+                    <td class="shopping_product_list_6">
+                        <a href="${pageContext.request.contextPath}/shopCart/deleteBookFormShopCart?sid=${shopCartList.sId}" class="blue">删除</a>
+                    </td>
+                </tr>
+            </c:forEach>
 
-            <tr class="shopping_product_list" id="shoppingProduct_03" onMouseOver="productOver('shoppingProduct_03')"
-                onMouseOut="productOut('shoppingProduct_03')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue">
-                        不抱怨的世界(畅销全球80国的世界...</a></td>
-                <td class="shopping_product_list_2"><label>154</label></td>
-                <td class="shopping_product_list_3">￥<label>24.80</label></td>
-                <td class="shopping_product_list_4">￥<label>15.40</label> (62折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="2" onBlur="productCount()"></td>
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_03')"
-                                                       class="blue">删除</a></td>
-            </tr>
-            <tr class="shopping_product_list" id="shoppingProduct_04" onMouseOver="productOver('shoppingProduct_04')"
-                onMouseOut="productOut('shoppingProduct_04')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue">福玛特双桶洗衣机XPB20-07S</a></td>
-                <td class="shopping_product_list_2"><label>358</label></td>
-                <td class="shopping_product_list_3">￥<label>458.00</label></td>
-                <td class="shopping_product_list_4">￥<label>358.00</label> (78折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="1" onBlur="productCount()"></td>
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_04')"
-                                                       class="blue">删除</a></td>
-            </tr>
-            <tr class="shopping_product_list" id="shoppingProduct_05" onMouseOver="productOver('shoppingProduct_05')"
-                onMouseOut="productOut('shoppingProduct_05')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue">PHP和MySQL Web开发 （原书第4版）</a></td>
-                <td class="shopping_product_list_2"><label>712</label></td>
-                <td class="shopping_product_list_3">￥<label>95.00</label></td>
-                <td class="shopping_product_list_4">￥<label>71.20</label> (75折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="1" onBlur="productCount()"></td>
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_05')"
-                                                       class="blue">删除</a></td>
-            </tr>
-            <tr class="shopping_product_list" id="shoppingProduct_06" onMouseOver="productOver('shoppingProduct_06')"
-                onMouseOut="productOut('shoppingProduct_06')">
-                <td class="shopping_product_list_1">
-                    <input type="checkbox" name="" id="" value="" checked="checked"/>
-                    <a href="#" class="blue">法布尔昆虫记</a>（再买￥68.30即可参加“满199元减10元现金”活动）
-                </td>
-                <td class="shopping_product_list_2"><label>10</label></td>
-                <td class="shopping_product_list_3">￥<label>198.00</label></td>
-                <td class="shopping_product_list_4">￥<label>130.70</label> (66折)</td>
-                <td class="shopping_product_list_5"><input type="text" value="1" onBlur="productCount()"></td>
-
-                <td class="shopping_product_list_6"><a href="javascript:deleteProduct('shoppingProduct_06')"
-                                                       class="blue">删除</a></td>
-            </tr>
         </table>
 
         <div class="ordersmessage" style="margin-top: 10px;">
             <ul class="floatclear">
                 <li class="ordersmessageli shopping_product_list_6">收货地址</li>
-                <li class="ordersmessageli"><input type="text" id="" value="" name=""/></li>
-
+                <li class="ordersmessageli">
+                    <input type="text" id="address" value="" name=""/>
+                </li>
             </ul>
             <ul class="floatclear">
                 <li class="ordersmessageli shopping_product_list_6">收货人</li>
-                <li class="ordersmessageli"><input type="text" id="" value="" name=""/></li>
+                <li class="ordersmessageli">
+                    <input type="text" id="receiver" value="" name=""/>
+                </li>
             </ul>
             <ul class="floatclear">
                 <li class="ordersmessageli shopping_product_list_6">电话</li>
-                <li class="ordersmessageli"><input type="text" id="" value="" name=""/></li>
+                <li class="ordersmessageli">
+                    <input type="text" id="phone" value="" name=""/>
+                </li>
             </ul>
         </div>
         <div class="shopping_list_end floatclear">
             <ul>
-                <li class="shopping_list_end_1"><input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif"></li>
-                <li class="shopping_list_end_2">￥<label id="product_total"></label></li>
-                <li class="shopping_list_end_3">商品金额总计：</li>
-                <li class="shopping_list_end_4">您共节省金额：￥<label class="shopping_list_end_yellow"
-                                                               id="product_save"></label><br/>
-                    可获商品积分：<label class="shopping_list_end_yellow" id="product_integral"></label>
+                <li class="shopping_list_end_1">
+                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif">
+                </li>
+                <li class="shopping_list_end_2">
+                    ￥<label id="product_total"></label>
+                </li>
+                <li class="shopping_list_end_3">
+                    商品金额总计：${totalMoney}
+                </li>
+                <li class="shopping_list_end_4">
+                    您共节省金额：${totalMoney*0.2}￥<label class="shopping_list_end_yellow" id="product_save"></label>
+                    <br/>
+                    可获商品积分：${totalMoney}<label class="shopping_list_end_yellow" id="product_integral"></label>
                 </li>
             </ul>
         </div>
@@ -204,5 +167,25 @@
 <!--网站版权部分开始-->
 <div id="footer">
 </div>
+
+<script>
+    function productCount(sId) {
+        var bNumber = document.getElementById("bNumber").value;
+        location.href="${pageContext.request.contextPath}/shopCart/updateShopCart?sid="+sId+"&number="+bNumber+"";
+        // $.ajax({
+        //     type:"POST",
+        //     url: '/shopCart/updateShopCart',
+        //     data:{sid:sId,number:bNumber},
+        //     success:function (){
+        //         alert("修改图书数量成功！")
+        //     },
+        //     error: function (msg) {    //服务器执行异常调用此方法，msg为异常是服务器返回的数据
+        //         alert("服务器异常！");
+        //     }
+        // })
+    }
+
+
+</script>
 </body>
 </html>
