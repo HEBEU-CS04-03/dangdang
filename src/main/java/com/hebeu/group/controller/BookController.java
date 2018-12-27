@@ -4,12 +4,14 @@ import com.hebeu.group.pojo.Book;
 import com.hebeu.group.pojo.BookType;
 import com.hebeu.group.pojo.Customer;
 import com.hebeu.group.service.BookService;
+import com.hebeu.group.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,7 +64,7 @@ public class BookController {
         }
         // 2.查询分类
         BookType bookType = bookService.selectBookTypeById(typeId);
-        model.addAttribute("bookType", bookType.gettType());
+        model.addAttribute("bookType", "分类：" + bookType.gettType() + "下的图书");
         // 3.查询此分类的图书
         List<Book> books = bookService.selectBooksByType(typeId);
         model.addAttribute("books", books);
@@ -70,6 +72,13 @@ public class BookController {
         return "bookList";
     }
 
+    /**
+     * 跳转到图书详细信息页面
+     * @param bookId
+     * @param model
+     * @param session
+     * @return
+     */
     @RequestMapping("/toBookMessage")
     public String toBookMessage(String bookId, Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
@@ -79,20 +88,52 @@ public class BookController {
             Customer customer = (Customer) user;
             model.addAttribute("username", customer.getcName());
         }
+        DateUtil dateUtil = new DateUtil();
+        model.addAttribute("dateUtil", dateUtil);
         Book book = bookService.selectBookById(bookId);
         model.addAttribute("book", book);
         return "goodsmessage";
     }
 
+    /**
+     * 搜索图书
+     * @param keyword
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("/searchBook")
+    public String searchBook(String keyword, Model model, HttpSession session) {
+        //1. 获取用户信息，如果用户信息不为空的话
+        Object user = session.getAttribute("user");
+        if (user != null) {
+            // 强制类型转换
+            Customer customer = (Customer) user;
+            model.addAttribute("username", customer.getcName());
+        }
 
-    @RequestMapping("/toGoodsmessage")
-    public String toGoodsMessage() {
-
-        return "goodsmessage";
-    }
-
-    @RequestMapping("/toShopping")
-    public String toShopping() {
-        return "shopping";
+        // 2. 设置信息关键字
+        model.addAttribute("bookType", "关键字：" + keyword);
+        // 3. 查询图书
+        List<Book> books = new ArrayList<>();
+        // 3.1 查询图书名称
+        List<Book> bookList1 = bookService.selectBookByName("%" + keyword + "%");
+        books.addAll(bookList1);
+        // 3.2 查询图书作者
+        List<Book> bookList2 = bookService.selectBookByAuthor("%" + keyword + "%");
+        for (Book book : bookList2) {
+            if (!books.contains(book)) {
+                books.add(book);
+            }
+        }
+        // 3.3 查询出版社
+        List<Book> bookList3 = bookService.selectBookByPress("%" + keyword + "%");
+        for (Book book : bookList3) {
+            if (!books.contains(book)) {
+                books.add(book);
+            }
+        }
+        model.addAttribute("books", books);
+        return "bookList";
     }
 }

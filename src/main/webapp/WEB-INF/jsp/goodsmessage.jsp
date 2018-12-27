@@ -52,8 +52,8 @@
             <img src="${pageContext.request.contextPath}/static/img/logo.jpg" style="border: none;">
         </a>
         <div class="searchdiv">
-            <input type="text" placeholder="作品、作者、出版社" class="searchtext">
-            <span type="button" value="提交" class="searchbtn"></span>
+            <input id="keyword" type="text" placeholder="作品、作者、出版社" class="searchtext">
+            <span onclick="search()" type="button" value="提交" class="searchbtn"></span>
         </div>
 
         <ul class="header_fun header_funina">
@@ -124,11 +124,11 @@
                 </div>
 
                 <div class="messbox_info">
-                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者:<a href="" target="_blank"
+                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="" target="_blank"
                                                                                    dd_name="作者">${book.bAuthor}</a></span>&nbsp;&nbsp;
-                    <span class="t1" dd_name="出版社" ddt-area="003">出版社:<a href="" target="_blank"
+                    <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="" target="_blank"
                                                                          dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;<span
-                        class="t1">出版时间:${book.bTime}&nbsp;</span>
+                        class="t1">出版时间：${dateUtil.formateTime(book.bTime)}&nbsp;</span>
                     <!-- 评论数 -->
                     <div class="pinglun">
                         <!-- 排名 -->
@@ -138,7 +138,7 @@
         	<span class="star" style="width:92.4%"><img
                     src="${pageContext.request.contextPath}/static/img/xingxing.png"/></span>
 								</span>
-                        <a href="javascript:void(0)" id="comm_num_down" dd_name="评论数">134</a>条评论
+                        <a href="javascript:void(0)" id="comm_num_down" dd_name="评论数">134</a> 条评论
                     </div>
                 </div>
 
@@ -218,6 +218,14 @@
     <!--底部end-->
 
 </div>
+<script>
+    function search() {
+        var keyword = document.getElementById("keyword");
+        // alert("关键字：" + keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
+    }
+</script>
+
 </body>
 
 </html>

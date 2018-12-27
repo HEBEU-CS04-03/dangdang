@@ -49,4 +49,25 @@ public interface BookService {
      * @return
      */
     Book selectBookById(String bookId);
+
+    /**
+     * 通过图书名查询图书
+     * @param keyword
+     * @return
+     */
+    List<Book> selectBookByName(String keyword);
+
+    /**
+     * 通过作者查询图书
+     * @param keyword
+     * @return
+     */
+    List<Book> selectBookByAuthor(String keyword);
+
+    /**
+     * 通过出版社查询图书
+     * @param keyword
+     * @return
+     */
+    List<Book> selectBookByPress(String keyword);
 }
