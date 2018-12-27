@@ -45,7 +45,7 @@
   <div class="login_main_mid">
     <div class="login_content_top">请登录当当网</div>
     <div class="login_content_line"></div>
-    <form action="" method="post" onSubmit="return checkLogin()">
+    <form action="${pageContext.request.contextPath}/login" method="post" onSubmit="return checkLogin()">
     <dl class="login_content">
        <dt>用户名：</dt>
        <dd><input id="email" type="text" class="login_content_input" onFocus="emailFocus()" onBlur="emailBlur()"></dd>
@@ -56,7 +56,7 @@
     </dl>
      <dl class="login_content">
        <dt></dt>
-       <dd><input id="btn" value=" 登    陆 " type="submit" class="login_btn_out"  onmouseover="this.className='login_btn_over'"  onmouseout="this.className='login_btn_out'"></dd>
+       <dd><input id="btn" value=" 登    录 " type="submit" class="login_btn_out"  onmouseover="this.className='login_btn_over'"  onmouseout="this.className='login_btn_out'"></dd>
     </dl>
     </form>
     <div class="login_content_dotted"></div>

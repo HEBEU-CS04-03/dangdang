@@ -4,8 +4,12 @@ import com.hebeu.group.mapper.AdminMapper;
 import com.hebeu.group.pojo.Admin;
 import com.hebeu.group.pojo.AdminExample;
 import com.hebeu.group.service.AdminService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 言立慧
@@ -13,8 +17,42 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
-    private AdminMapper adminMapper;
+   /**
+    * 自动注入数据层（Dao）
+    */
+	private AdminMapper adminMapper;
 
+	
+	
+	/*****************管理员服务接口实现*************************************/
+	/**
+	 * AdminServiceImpl接口login方法实现
+	 *  @see { AdminService }
+	 * */
+	@Transactional(readOnly=true)
+    @Override
+	public Admin login(String loginname, String password) {
+		// TODO Auto-generated method stub
+		//定义一个新的Example对象
+		AdminExample adminExample = new AdminExample();
+		//不知道
+		AdminExample.Criteria criteria = adminExample.createCriteria();
+		//判断用户名密码是否正确
+		criteria.andANameEqualTo(loginname);
+		criteria.andAPassEqualTo(password);
+		
+		//得到该用户的结果集，是一个list集合
+		List<Admin> admins = adminMapper.selectByExample(adminExample);
+		//如果存在则集合长度不为0
+		if (admins.size() != 0) {
+			//得到第一条数据就是一个用户
+			return admins.get(0);
+		}
+		//不存在就为空
+		return null;
+	}
+    
+    
     @Autowired
     public AdminServiceImpl(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
