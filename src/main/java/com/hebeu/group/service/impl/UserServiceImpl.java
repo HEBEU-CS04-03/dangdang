@@ -8,6 +8,7 @@ import com.hebeu.group.pojo.OrderRecord;
 import com.hebeu.group.pojo.OrderRecordExample;
 import com.hebeu.group.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * @author 言立慧
  * @date 2018/12/24 10:48
  */
-
+@Service
 public class UserServiceImpl implements UserService {
     private AdminMapper adminMapper;
     private OrderRecordMapper orderRecordMapper;

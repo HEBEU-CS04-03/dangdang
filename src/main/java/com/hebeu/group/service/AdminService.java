@@ -8,7 +8,15 @@ import com.hebeu.group.pojo.Admin;
  */
 
 public interface AdminService {
-    /**
+	/**
+	 * 用户登录
+	 * @param  loginname
+	 * @param  password
+	 * @return User对象
+	 * */
+	Admin login(String username, String passwrod);
+	
+	/**
      * 通过id查询管理员
      * @param id
      * @return
