@@ -8,7 +8,6 @@
     <link href="${pageContext.request.contextPath}/static/css/global.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/static/css/layout.css" rel="stylesheet" type="text/css"/>
     <script src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
-    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/shopping.js"></script>--%>
 </head>
 
 <body>

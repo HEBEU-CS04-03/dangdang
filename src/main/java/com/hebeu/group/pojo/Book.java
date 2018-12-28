@@ -1,7 +1,5 @@
 package com.hebeu.group.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class Book {
@@ -80,8 +78,6 @@ public class Book {
     public void setbDescription(String bDescription) {
         this.bDescription = bDescription == null ? null : bDescription.trim();
     }
-
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     public Date getbTime() {
         return bTime;
     }

@@ -11,7 +11,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title>${bookType}分类下的图书-当当书城</title>
+    <title>${bookType}-当当书城</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css"/>
 
 </head>
@@ -57,8 +57,8 @@
             <img src="${pageContext.request.contextPath}/static/img/logo.jpg" style="border: none;">
         </a>
         <div class="searchdiv">
-            <input type="text" placeholder="作品、作者、出版社" class="searchtext">
-            <span type="button" value="提交" class="searchbtn"></span>
+            <input  id="keyword" type="text" placeholder="作品、作者、出版社" class="searchtext">
+            <span onclick="search()" type="button" value="提交" class="searchbtn"></span>
         </div>
 
         <ul class="header_fun header_funina">
@@ -107,7 +107,7 @@
 
     <div id="bookbodym" class="clearfloat ">
         <div class="weekdaytitle booktypebody">
-            <span class="bodytitlespan">分类：${bookType}</span>
+            <span class="bodytitlespan">${bookType}</span>
         </div>
         <c:forEach items="${books}" var="book">
             <div class="bookshow ">
@@ -126,7 +126,7 @@
             </div>
         </c:forEach>
         <c:if test="${books eq null}">
-            <p style="color: red">当前分类暂无图书</p>
+            <p style="color: red; font-size: medium">暂无图书</p>
         </c:if>
 
     </div>
@@ -177,6 +177,14 @@
     <!--底部end-->
 
 </div>
+
+<script>
+    function search() {
+        var keyword = document.getElementById("keyword");
+        // alert("关键字：" + keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword="+keyword.value);
+    }
+</script>
 </body>
 
 </html>

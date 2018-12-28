@@ -79,4 +79,28 @@ public class BookServiceImpl implements BookService {
     public Book selectBookById(String bookId) {
         return bookMapper.selectByPrimaryKey(bookId);
     }
+
+    @Override
+    public List<Book> selectBookByName(String keyword) {
+        BookExample bookExample = new BookExample();
+        BookExample.Criteria criteria = bookExample.createCriteria();
+        criteria.andBNameLike(keyword);
+        return bookMapper.selectByExample(bookExample);
+    }
+
+    @Override
+    public List<Book> selectBookByAuthor(String keyword) {
+        BookExample bookExample = new BookExample();
+        BookExample.Criteria criteria = bookExample.createCriteria();
+        criteria.andBAuthorLike(keyword);
+        return bookMapper.selectByExample(bookExample);
+    }
+
+    @Override
+    public List<Book> selectBookByPress(String keyword) {
+        BookExample bookExample = new BookExample();
+        BookExample.Criteria criteria = bookExample.createCriteria();
+        criteria.andBPressLike(keyword);
+        return bookMapper.selectByExample(bookExample);
+    }
 }

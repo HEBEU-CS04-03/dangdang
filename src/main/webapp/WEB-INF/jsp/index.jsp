@@ -5,12 +5,12 @@
 <head>
     <meta charset="utf-8"/>
     <title>当当书城-首页</title>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css"/>
 
 </head>
 
 <body>
-
 <!--头部-->
 <div id="booktop">
     <div class="widthmid">
@@ -50,8 +50,8 @@
             <img src="${pageContext.request.contextPath}/static/img/logo.jpg" style="border: none;">
         </a>
         <div class="searchdiv">
-            <input type="text" placeholder="作品、作者、出版社" class="searchtext">
-            <span type="button" value="提交" class="searchbtn"></span>
+            <input id="keyword" type="text" placeholder="作品、作者、出版社" class="searchtext">
+            <span value="提交" class="searchbtn" onclick="search()"></span>
         </div>
 
         <ul class="header_fun header_funina">
@@ -221,6 +221,15 @@
     <!--底部end-->
 
 </div>
+
+<script>
+    function search() {
+        var keyword = document.getElementById("keyword");
+        // alert("关键字：" + keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword="+keyword.value);
+    }
+</script>
+
 </body>
 
 </html>
