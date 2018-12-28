@@ -7,6 +7,8 @@
     <title>${book.bName}详情页-当当书城</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/goodsmessage.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/css/bootstrap.css"/>
 
 </head>
 
@@ -103,7 +105,8 @@
     <div id="bookbodym" class="clearfloat ">
         <div class="goodsmessageout">
             <div class="goodsmessageoutleft">
-                <img src="${pageContext.request.contextPath}/static/img/${book.bImage}" style="width: 80%;"/>
+                <img src="${pageContext.request.contextPath}/static/img/${book.bImage}"
+                     style="width: 70%; height: 50%"/>
             </div>
             <div class="goodsmessageoutright">
 
@@ -116,6 +119,7 @@
                         <span class="head_title_name" title="">
                             包邮！${book.bDescription}
                         </span>
+                        <br/>
                         <span class="hot" title="">
                             <a href="http://book.dangdang.com/20170612_nrsg">青春动漫传记分会场畅品3折起5折封</a>
                         </span>
@@ -126,23 +130,30 @@
                 <div class="messbox_info">
                     <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="" target="_blank"
                                                                                    dd_name="作者">${book.bAuthor}</a></span>&nbsp;&nbsp;
+                    <br/>
                     <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="" target="_blank"
-                                                                         dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;<span
-                        class="t1">出版时间：${dateUtil.formateTime(book.bTime)}&nbsp;</span>
+                                                                         dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;
+                    <br/>
+                    <span class="t1">出版时间：${dateUtil.formateTime(book.bTime)}&nbsp;</span>
                     <!-- 评论数 -->
                     <div class="pinglun">
                         <!-- 排名 -->
                         <span class="t1" id="pubbang" style="display:none" dd_name="图书排行榜排名"></span>
                         <!-- 星级 -->
+                        <span class="t1">评分：&nbsp;</span>
                         <span class="star_box">
         	<span class="star" style="width:92.4%"><img
                     src="${pageContext.request.contextPath}/static/img/xingxing.png"/></span>
 								</span>
-                        <a href="javascript:void(0)" id="comm_num_down" dd_name="评论数">134</a> 条评论
+                        <br/>
+                        <span class="t1">评论数：&nbsp;</span>
+                        <a href="javascript:void(0)" id="comm_num_down" dd_name="评论数">${comments.size()}</a> 条评论
                     </div>
                 </div>
 
                 <hr/>
+                <br/>
+                <br/>
                 <div class="messbox_info">
                     配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费
 
@@ -150,8 +161,7 @@
                 <hr style="color: #FFFFFF;border: 0px;"/>
                 <div class="messbox_info">
                     <ul>
-                        <li class="commonli"><input type="text" id="" value="-" style="width: 10px;height: 30px;"
-                                                    readonly="readonly"
+                        <li class="commonli"><input type="text" id="v1" value="-" style="width: 10px;height: 30px;"
                                                     onclick="document.all.num.value=document.all.num.value-1"/></li>
                         <li class="commonli"><input type="text" style="width: 40px;height: 30px;" id="num" value="1"
                                                     readonly="readonly"/></li>
@@ -172,59 +182,85 @@
 
     </div>
 
-    <!--底部开始-->
+    <!-- 评论开始 -->
+    <div id="commit" class="clearfloat ">
+        <div class="weekdaytitle booktypebody">
+            <span class="bodytitlespan">评论列表</span>
+        </div>
 
-    <div class="publicfootmod clearfloat">
-        <div class="kong">
+        <c:forEach items="${comments}" var="comment">
+            <div class="media">
+                <h5 style="font-weight: bolder">${comment.cName}</h5>
+                <div class="media-left">
+                    <a href="#">
+                        <img style="vertical-align: middle;height: 30px;width: 30px;border: 0;"
+                             src="${pageContext.request.contextPath}/static/img/user.png" title="One movies" alt=" "/>
+                    </a>
+                </div>
+                <div class="media-body">
+                    <p>${comment.coMessage}</p>
+                    <span style="color: red;">发布时间 :<a href="#"> ${comment.coTime} </a></span>
+                </div>
+            </div>
+        </c:forEach>
+
+
+
+        <!--底部开始-->
+
+        <div class="publicfootmod clearfloat">
+            <div class="kong">
+
+            </div>
+            <div class="inner">
+                <ul>
+                    <li class="func focusOn clearfix">
+                        <div class="left">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt=""
+                                 class="icon">
+                        </div>
+                        <div class="right">
+                            <p class="title">关注我们</p>
+                            <p class="desc">最受欢迎的阅读产品</p>
+                            <p class="subtitle">关注我们：</p>
+
+                        </div>
+                    </li>
+                    <li class="func author clearfix">
+                        <div class="left">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt=""
+                                 class="icon">
+                        </div>
+                        <div class="right">
+                            <p class="title">作者后台</p>
+                            <p class="desc">加入当当原创网，尊享作者</p>
+                            <p class="subtitle">福利，成就网文大神</p>
+                        </div>
+                    </li>
+                    <li class="func about_us clearfix">
+                        <div class="left">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
+                        </div>
+                        <div class="right">
+                            <p class="title">关于我们</p>
+                            <p class="desc">欢迎反馈宝贵意见给我们</p>
+                            <p class="subtitle">客服书吧：当当读书5.0问答</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
         </div>
-        <div class="inner">
-            <ul>
-                <li class="func focusOn clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">关注我们</p>
-                        <p class="desc">最受欢迎的阅读产品</p>
-                        <p class="subtitle">关注我们：</p>
-
-                    </div>
-                </li>
-                <li class="func author clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">作者后台</p>
-                        <p class="desc">加入当当原创网，尊享作者</p>
-                        <p class="subtitle">福利，成就网文大神</p>
-                    </div>
-                </li>
-                <li class="func about_us clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">关于我们</p>
-                        <p class="desc">欢迎反馈宝贵意见给我们</p>
-                        <p class="subtitle">客服书吧：当当读书5.0问答</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <!--底部end-->
 
     </div>
-    <!--底部end-->
-
-</div>
-<script>
-    function search() {
-        var keyword = document.getElementById("keyword");
-        // alert("关键字：" + keyword.value);
-        window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
-    }
-</script>
+    <script>
+        function search() {
+            var keyword = document.getElementById("keyword");
+            // alert("关键字：" + keyword.value);
+            window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
+        }
+    </script>
 
 </body>
 

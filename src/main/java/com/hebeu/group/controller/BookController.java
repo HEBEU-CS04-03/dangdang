@@ -2,8 +2,10 @@ package com.hebeu.group.controller;
 
 import com.hebeu.group.pojo.Book;
 import com.hebeu.group.pojo.BookType;
+import com.hebeu.group.pojo.Comment;
 import com.hebeu.group.pojo.Customer;
 import com.hebeu.group.service.BookService;
+import com.hebeu.group.service.CommentService;
 import com.hebeu.group.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +24,12 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
     private BookService bookService;
+    private CommentService commentService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, CommentService commentService) {
         this.bookService = bookService;
+        this.commentService = commentService;
     }
 
     /**
@@ -74,6 +78,7 @@ public class BookController {
 
     /**
      * 跳转到图书详细信息页面
+     *
      * @param bookId
      * @param model
      * @param session
@@ -92,11 +97,15 @@ public class BookController {
         model.addAttribute("dateUtil", dateUtil);
         Book book = bookService.selectBookById(bookId);
         model.addAttribute("book", book);
+        //2. 查询图书评论
+        List<Comment> comments = commentService.selectCommentByBookId(bookId);
+        model.addAttribute("comments", comments);
         return "goodsmessage";
     }
 
     /**
      * 搜索图书
+     *
      * @param keyword
      * @param model
      * @param session
