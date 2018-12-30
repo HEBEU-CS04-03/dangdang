@@ -129,10 +129,10 @@
                 </div>
 
                 <div class="messbox_info">
-                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="" target="_blank"
+                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="/book/searchBook?keyword=${book.bAuthor}" target="_blank"
                                                                                    dd_name="作者">${book.bAuthor}</a></span>&nbsp;&nbsp;
                     <br/>
-                    <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="" target="_blank"
+                    <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="/book/searchBook?keyword=${book.bPress}" target="_blank"
                                                                          dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;
                     <br/>
                     <span class="t1">出版时间：${dateUtil.formateTime(book.bTime)}&nbsp;</span>
