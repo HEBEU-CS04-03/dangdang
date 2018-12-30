@@ -57,8 +57,8 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="javascript:void(0)" name="购物车">
-                    购物车0
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车" target="_blank">
+                    购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>

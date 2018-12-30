@@ -47,7 +47,7 @@ public class UserController {
         session.setAttribute("loginUser",customer);
 
         // 返回值
-        return "index";
+        return "redirect:/book/toIndex";
     }
 
     @RequestMapping("/logout")

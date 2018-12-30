@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import com.hebeu.group.common.DangConstants;
+//import com.hebeu.group.common.DangConstants;
 import com.hebeu.group.pojo.Admin;
 import com.hebeu.group.service.AdminService;
 
@@ -34,12 +34,12 @@ public class AdminController {
 		return "admin/admin_login";
 		// ${username}
 	}
-	
-	
+
+
 	/**
 	 * 处理登录请求
-	 * @param String loginname  登录名
-	 * @param String password 密码
+	 * @param  username  登录名
+	 * @param  password 密码
 	 * @return 跳转的视图
 	 * */
 	@RequestMapping("/login")
@@ -57,13 +57,13 @@ public class AdminController {
 		return "admin/main";
 		// ${username}
 	}
-	
+
 		/**
 		 * 处理退出请求
 		 */
 		@RequestMapping("/logout")
 		public String logout(String username) {
-		
+
 			return "admin/admin_login";
 
 		}

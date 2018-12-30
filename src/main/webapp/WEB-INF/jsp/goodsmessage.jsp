@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/goodsmessage.css"/>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
 
 </head>
 
@@ -61,8 +62,8 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="javascript:void(0)" name="购物车">
-                    购物车0
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车">
+                    购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>
@@ -152,8 +153,6 @@
                 </div>
 
                 <hr/>
-                <br/>
-                <br/>
                 <div class="messbox_info">
                     配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费
 
@@ -169,9 +168,9 @@
                                                     readonly="readonly"
                                                     onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
                         </li>
-
-                        <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
-                                src="${pageContext.request.contextPath}/static/img/addshop.png"/></li>
+                        <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="${pageContext.request.contextPath}/static/img/addshop.png"  onclick="addShopCart(${book.bId})" />
+                        </li>
                     </ul>
 
                 </div>
@@ -261,6 +260,31 @@
             window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
         }
     </script>
+</div>
+<script>
+    function search() {
+        var keyword = document.getElementById("keyword");
+        // alert("关键字：" + keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
+    }
+
+    function addShopCart(bId) {
+        var bNumber = document.getElementById("num").value;
+
+        alert(bNumber);
+        $.ajax({
+            type:"POST",
+            url:"/shopCart/addBookToShopCart",
+            data:{bId:bId,bNumber:bNumber},
+            success:function (data) {
+                alert("已添加"+bNumber+"件商品到购物车！");
+            },
+            fail:function (msg) {
+                alert("服务器错误！");
+            }
+        })
+    }
+</script>
 
 </body>
 
