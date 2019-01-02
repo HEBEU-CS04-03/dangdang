@@ -1,6 +1,9 @@
 package com.hebeu.group.service;
 
-import com.hebeu.group.pojo.Admin;
+import com.hebeu.group.pojo.*;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author 言立慧
@@ -22,4 +25,14 @@ public interface AdminService {
      * @return
      */
     Admin getAdminById(Integer id);
+    /**
+     * 获得所有的订单项
+     */
+    List<Orders> findOrdersByorderTime(Date orderTime);
+
+    List<Book> findBookBybId(String bId);
+
+    List<BookType> findBookType(Integer tId);
+
+    List<OrderRecord> findOrderRecordByOrderId(String OrderId);
 }

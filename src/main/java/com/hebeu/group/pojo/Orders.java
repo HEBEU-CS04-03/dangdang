@@ -72,4 +72,17 @@ public class Orders {
     public void setOrderSum(Float orderSum) {
         this.orderSum = orderSum;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderId='" + orderId + '\'' +
+                ", orderPayment='" + orderPayment + '\'' +
+                ", orderAdress='" + orderAdress + '\'' +
+                ", orderEmail='" + orderEmail + '\'' +
+                ", orderUser='" + orderUser + '\'' +
+                ", orderTime=" + orderTime +
+                ", orderSum=" + orderSum +
+                '}';
+    }
 }
