@@ -33,8 +33,8 @@ public class AdminController {
 		return "houtai/admin/admin_login";
 		// ${username}
 	}
-	
-	
+
+
 	/**
 	 * 处理登录请求
 	 * @param String loginname  登录名
@@ -42,7 +42,7 @@ public class AdminController {
 	 * @return 跳转的视图
 	 * */
 	@RequestMapping("/login")
-	public String login(Model model, String username, String password,HttpSession session) {
+	public String login(Model model, String username, String password) {
 		//调用接口方法，返回对象接收
 		Admin admin=adminService.login(username,password);
 		//判断该返回的对象是否存在
@@ -57,14 +57,14 @@ public class AdminController {
 		return "houtai/main";
 		// ${username}
 	}
-	
+
 		/**
 		 * 处理退出请求
 		 */
 		@RequestMapping("/logout")
-		public String logout(HttpSession session) {
-//			session.removeAttribute(DangConstants.USER_SESSION);
-			return "houtai/admin/admin_login";
+		public String logout(String username) {
+
+			return "admin/admin_login";
 
 		}
 	

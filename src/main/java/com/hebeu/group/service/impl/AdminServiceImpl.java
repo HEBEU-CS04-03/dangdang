@@ -24,7 +24,7 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	
-	/*****************管理员服务接口实现*************************************/
+	/**********************************管理员服务接口实现*************************************/
 	/**
 	 * AdminServiceImpl接口login方法实现
 	 *  @see { AdminService }

@@ -878,9 +878,10 @@
 }
 
 .registerBtn {
-	height: 35px;
-	margin: 10px 0px 10px 200px;
+	height: 31px;
+	margin: 15px 0px 10px 200px;
 	clear: both;
+	position: relative;
 }
 
 
