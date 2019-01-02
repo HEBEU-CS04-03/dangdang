@@ -55,7 +55,18 @@ public class ShopCartController {
             for(ShopCart shopCart:shopCartList){
                 totalMoney+=shopCart.getbPrice()*shopCart.getbNumber();
             }
+            List<Book> bookList = bookService.selectAllBook();
+            List<Book> firstBookList = new ArrayList<>();
+            for(int i=0;i<4;i++){
+                firstBookList.add(bookList.get(i));
+            }
+            List<Book> secondBookList = new ArrayList<>();
+            for(int i=4;i<8;i++){
+                secondBookList.add(bookList.get(i));
+            }
 
+            model.addAttribute("firstBookList",firstBookList);
+            model.addAttribute("secondBookList",secondBookList);
             model.addAttribute("loginCustomer",loginCustomer);
             model.addAttribute("shopCartList",shopCartService.selectShopCartByCName(loginCustomer.getcName()));
             model.addAttribute("totalMoney",totalMoney);
@@ -70,9 +81,12 @@ public class ShopCartController {
      */
     @RequestMapping("addBookToShopCart")
     @ResponseBody
-    public void addBookToShopCart(String bId,Integer bNumber, HttpSession session){
+    public boolean addBookToShopCart(String bId,Integer bNumber, HttpSession session){
         //获取session中的登录用户信息
         Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
+        if (loginCustomer == null){
+            return false;
+        }
         ShopCart oldShopCart = shopCartService.selectShopCartByCNameAndBId(loginCustomer.getcName(), bId);
         //判断该图书是否已在购物车中
         if(oldShopCart == null){
@@ -93,6 +107,8 @@ public class ShopCartController {
                 e.printStackTrace();
             }
         }
+
+        return true;
     }
 
     /**
@@ -216,9 +232,6 @@ public class ShopCartController {
             orderRecord.setbTotalcost(shopCart.getbNumber()*shopCart.getbPrice());
             orderRecordList.add(orderRecord);
         }
-
-
-
         return "order";
     }
 

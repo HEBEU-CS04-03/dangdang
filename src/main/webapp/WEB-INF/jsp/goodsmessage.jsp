@@ -160,13 +160,14 @@
                 <hr style="color: #FFFFFF;border: 0px;"/>
                 <div class="messbox_info">
                     <ul>
-                        <li class="commonli"><input type="text" id="v1" value="-" style="width: 10px;height: 30px;"
-                                                    onclick="document.all.num.value=document.all.num.value-1"/></li>
-                        <li class="commonli"><input type="text" style="width: 40px;height: 30px;" id="num" value="1"
-                                                    readonly="readonly"/></li>
-                        <li class="commonli"><input type="text" id="" value="+" style="width: 10px;height: 30px;"
-                                                    readonly="readonly"
-                                                    onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
+                        <li class="commonli">
+                            <input type="text" id="v1" value="-" style="width: 10px;height: 30px;" onclick="numberDown()"/>
+                        </li>
+                        <li class="commonli">
+                            <input type="text" style="width: 40px;height: 30px;" id="num" value="1" readonly="readonly"/>
+                        </li>
+                        <li class="commonli">
+                            <input type="text" id="" value="+" style="width: 10px;height: 30px;" readonly="readonly" onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
                         </li>
                         <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <img src="${pageContext.request.contextPath}/static/img/addshop.png"  onclick="addShopCart(${book.bId})" />
@@ -273,14 +274,31 @@
         $.ajax({
             type:"POST",
             url:"/shopCart/addBookToShopCart",
+            dataType:"json",
             data:{bId:bId,bNumber:bNumber},
             success:function (data) {
-                alert("已添加"+bNumber+"件商品到购物车！");
+
+                if (data == false) {
+                    alert("请先登录！");
+                    location.href="${pageContext.request.contextPath}/toLoginPage";
+                }else {
+                    alert("已添加"+bNumber+"件图书到购物车");
+                }
+
             },
             fail:function (msg) {
-                alert("服务器错误！");
+                alert("服务器错误");
             }
         })
+    }
+
+    function numberDown() {
+        var num = document.getElementById("num");
+        if(num.value == 1){
+            alert("数量最小为1！");
+        }else{
+            num.value = num.value - 1;
+        }
     }
 </script>
 

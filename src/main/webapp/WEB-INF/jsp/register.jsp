@@ -70,7 +70,8 @@
             <option>请选择城市/地区</option>
           </select></dd>
       </dl>
-      <div class="registerBtn"><input id="registerBtn" type="image" src="${pageContext.request.contextPath}/static/images/register_btn_out.gif" onMouseOver="btn_over()" onMouseOut="btn_out()"></div>
+      <div class="registerBtn">
+          <input id="registerBtn" type="image" src="${pageContext.request.contextPath}/static/images/register_btn_out.gif" onMouseOver="btn_over()" onMouseOut="btn_out()"></div>
    </form>
     </div>
     

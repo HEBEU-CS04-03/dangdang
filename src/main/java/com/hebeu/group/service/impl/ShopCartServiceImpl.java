@@ -32,7 +32,6 @@ public class ShopCartServiceImpl implements ShopCartService {
     public void addBookToShopCart(ShopCart shopCart){
 
         Book book = bookMapper.selectByPrimaryKey(shopCart.getbId());
-        shopCart.setbNumber(1);
         shopCart.setbImage(book.getbImage());
         shopCart.setbName(book.getbName());
         shopCart.setbPrice((double)book.getbPrice());

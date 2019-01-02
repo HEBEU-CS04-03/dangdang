@@ -24,27 +24,32 @@
     </div>
     <div id="shopping_commend_sort">
         <div class="shopping_commend_sort_left">
-            <%--<c:forEach items="" var="">--%>
-                <%--<ul>--%>
-                    <%--<li class="shopping_commend_list_1">·<a href="#" class="blue">JavaScript DOM编程艺术</a></li>--%>
-                    <%--<li class="shopping_commend_list_2">￥39.00</li>--%>
-                    <%--<li class="shopping_commend_list_3">￥29.30</li>--%>
-                    <%--<li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>--%>
-                <%--</ul>--%>
-            <%--</c:forEach>--%>
+            <c:forEach items="${firstBookList}" var="firstBookList">
+                <ul>
+                    <li class="shopping_commend_list_1">
+                        ·<a href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${firstBookList.bId}" class="blue">${firstBookList.bName}</a></li>
+                    <li class="shopping_commend_list_2">￥
+                        <fmt:formatNumber type="number" value="${firstBookList.bPrice * 1.2}" maxFractionDigits="2"/>
+                    </li>
+                    <li class="shopping_commend_list_3">￥${firstBookList.bPrice}</li>
+                    <li class="shopping_commend_list_4"><button onclick="addShopCart(${firstBookList.bId})">购买</button> </li>
+                </ul>
+            </c:forEach>
 
         </div>
         <div class="shopping_commend_sort_mid"></div>
         <div class="shopping_commend_sort_left">
-            <%--<c:forEach items="" var="">--%>
-                <%--<ul>--%>
-                    <%--<li class="shopping_commend_list_1">·<a href="#" class="blue">深入浅出MySQL数据库开发、优...</a></li>--%>
-                    <%--<li class="shopping_commend_list_2">￥59.00</li>--%>
-                    <%--<li class="shopping_commend_list_3">￥47.20</li>--%>
-                    <%--<li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>--%>
-                <%--</ul>--%>
-            <%--</c:forEach>--%>
-
+            <c:forEach items="${secondBookList}" var="secondBookList">
+                <ul>
+                    <li class="shopping_commend_list_1">
+                        ·<a href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${secondBookList.bId}" class="blue">${secondBookList.bName}</a></li>
+                    <li class="shopping_commend_list_2">￥
+                        <fmt:formatNumber type="number" value="${secondBookList.bPrice *1.2}" maxFractionDigits="2"/>
+                    </li>
+                    <li class="shopping_commend_list_3">￥${secondBookList.bPrice}</li>
+                    <li class="shopping_commend_list_4"><button onclick="addShopCart(${secondBookList.bId})">购买</button></li>
+                </ul>
+            </c:forEach>
         </div>
     </div>
 
@@ -170,7 +175,29 @@
         var total = document.getElementById("total").value;
 
         location.href="${pageContext.request.contextPath}/shopCart/submitOrder?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
+    }
 
+    function addShopCart(bId) {
+        $.ajax({
+            type:"POST",
+            url:"/shopCart/addBookToShopCart",
+            dataType:"json",
+            data:{bId:bId,bNumber:1},
+            success:function (data) {
+
+                if (data == false) {
+                    alert("请先登录！");
+                    location.href="${pageContext.request.contextPath}/toLoginPage";
+                }else {
+                    alert("已添加图书到购物车");
+                    location.reload();
+                }
+
+            },
+            fail:function (msg) {
+                alert("服务器错误");
+            }
+        })
     }
 
 

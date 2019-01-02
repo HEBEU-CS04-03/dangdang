@@ -103,4 +103,11 @@ public class BookServiceImpl implements BookService {
         criteria.andBPressLike(keyword);
         return bookMapper.selectByExample(bookExample);
     }
+
+    @Override
+    public List<Book> selectAllBook() {
+        BookExample bookExample = new BookExample();
+
+        return bookMapper.selectByExample(bookExample);
+    }
 }
