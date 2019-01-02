@@ -1,5 +1,7 @@
 package com.hebeu.group.service;
 
+import com.hebeu.group.pojo.OrderRecord;
+import com.hebeu.group.pojo.Orders;
 import com.hebeu.group.pojo.ShopCart;
 
 import java.util.List;
@@ -50,4 +52,16 @@ public interface ShopCartService {
      * @return 购物车信息
      */
     ShopCart selectShopCartByCNameAndBId(String cName,String BId);
+
+    /**
+     * 添加订单
+     * @param orders 订单
+     */
+    void insertOrder(Orders orders);
+
+    /**
+     * 插入订单详情
+     * @param orderRecordList 订单详情
+     */
+    void insertOrderRecord(List<OrderRecord> orderRecordList);
 }

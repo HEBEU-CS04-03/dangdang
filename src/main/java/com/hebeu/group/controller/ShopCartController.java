@@ -164,7 +164,7 @@ public class ShopCartController {
     @ResponseBody
     public void deleteAllFromShopCart(HttpSession session){
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         //通过用户名查询购物车信息
         List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
         for (ShopCart shopCart:shopCartList){
@@ -186,7 +186,7 @@ public class ShopCartController {
     @ResponseBody
     public List<ShopCart> findShopCartInfo(HttpSession session){
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         return shopCartService.selectShopCartByCName(loginCustomer.getcName());
     }
 
@@ -202,36 +202,55 @@ public class ShopCartController {
     public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session){
 
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         if (loginCustomer == null){
             return "login";
         }
-        Orders orders = new Orders();
-        //生成orderId
-        String orderId = UUIDUtil.getUUID();
-        orders.setOrderId(orderId);
-        orders.setOrderAdress(cAddress);
-        orders.setOrderEmail(loginCustomer.getcEmail());
-        orders.setOrderSum(total);
-        orders.setOrderTime(new Date());
-        orders.setOrderUser(receiver);
-        //将付款方式改为电话
-        orders.setOrderPayment(cPhone);
-
-        List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
-        List<OrderRecord> orderRecordList = new ArrayList<>();
-        for (ShopCart shopCart : shopCartList){
-            OrderRecord orderRecord = new OrderRecord();
-            orderRecord.setbNumber(shopCart.getbNumber());
-            orderRecord.setbId(shopCart.getbId());
-            orderRecord.setbImage(shopCart.getbImage());
-            orderRecord.setbName(shopCart.getbName());
-            orderRecord.setbPrice(shopCart.getbPrice());
-            orderRecord.setOrderId(orderId);
-            orderRecord.setcName(loginCustomer.getcName());
-            orderRecord.setbTotalcost(shopCart.getbNumber()*shopCart.getbPrice());
-            orderRecordList.add(orderRecord);
+        try {
+            Orders orders = new Orders();
+            //生成orderId
+            String orderId = UUIDUtil.getUUID();
+            orders.setOrderId(orderId);
+            orders.setOrderAdress(cAddress);
+            orders.setOrderEmail(loginCustomer.getcEmail());
+            orders.setOrderSum(total);
+            orders.setOrderTime(new Date());
+            orders.setOrderUser(receiver);
+            //将付款方式改为电话
+            orders.setOrderPayment(cPhone);
+            //插入订单信息
+            shopCartService.insertOrder(orders);
+            //查询该用户的购物车
+            List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
+            List<OrderRecord> orderRecordList = new ArrayList<>();
+            //获取订单图书集合
+            for (ShopCart shopCart : shopCartList){
+                OrderRecord orderRecord = new OrderRecord();
+                orderRecord.setbNumber(shopCart.getbNumber());
+                orderRecord.setbId(shopCart.getbId());
+                orderRecord.setbImage(shopCart.getbImage());
+                orderRecord.setbName(shopCart.getbName());
+                orderRecord.setbPrice(shopCart.getbPrice());
+                orderRecord.setOrderId(orderId);
+                orderRecord.setcName(loginCustomer.getcName());
+                orderRecord.setbTotalcost(shopCart.getbNumber()*shopCart.getbPrice());
+                orderRecordList.add(orderRecord);
+            }
+            //插入订单图书集合
+            shopCartService.insertOrderRecord(orderRecordList);
+            //删除购物车中信息
+            for (ShopCart shopCart:shopCartList){
+                try {
+                    //删除购物车信息
+                    shopCartService.deleteBookFromShopCart(shopCart.getsId());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         return "order";
     }
 

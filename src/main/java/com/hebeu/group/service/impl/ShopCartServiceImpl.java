@@ -1,10 +1,10 @@
 package com.hebeu.group.service.impl;
 
 import com.hebeu.group.mapper.BookMapper;
+import com.hebeu.group.mapper.OrderRecordMapper;
+import com.hebeu.group.mapper.OrdersMapper;
 import com.hebeu.group.mapper.ShopCartMapper;
-import com.hebeu.group.pojo.Book;
-import com.hebeu.group.pojo.ShopCart;
-import com.hebeu.group.pojo.ShopCartExample;
+import com.hebeu.group.pojo.*;
 import com.hebeu.group.service.ShopCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,15 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     private ShopCartMapper shopCartMapper;
     private BookMapper bookMapper;
+    private OrdersMapper ordersMapper;
+    private OrderRecordMapper orderRecordMapper;
 
     @Autowired
-    public ShopCartServiceImpl(ShopCartMapper shopCartMapper, BookMapper bookMapper) {
+    public ShopCartServiceImpl(ShopCartMapper shopCartMapper, BookMapper bookMapper, OrdersMapper ordersMapper, OrderRecordMapper orderRecordMapper) {
         this.shopCartMapper = shopCartMapper;
         this.bookMapper = bookMapper;
+        this.ordersMapper = ordersMapper;
+        this.orderRecordMapper = orderRecordMapper;
     }
 
     @Override
@@ -87,6 +91,26 @@ public class ShopCartServiceImpl implements ShopCartService {
             return null;
         }else {
             return shopCartList.get(0);
+        }
+    }
+
+    @Override
+    public void insertOrder(Orders orders) {
+        try {
+            ordersMapper.insert(orders);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insertOrderRecord(List<OrderRecord> orderRecordList) {
+        try {
+            for (OrderRecord orderRecord : orderRecordList){
+                orderRecordMapper.insertSelective(orderRecord);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

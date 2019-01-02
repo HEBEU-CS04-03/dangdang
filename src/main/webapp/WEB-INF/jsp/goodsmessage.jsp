@@ -154,23 +154,23 @@
 
                 <hr/>
                 <div class="messbox_info">
-                    配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费
-
+                    <%--配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费--%>
+                        价格：￥${book.bPrice}
                 </div>
-                <hr style="color: #FFFFFF;border: 0px;"/>
+                <hr style="color: #FFFFFF;border: 1px;"/>
                 <div class="messbox_info">
                     <ul>
                         <li class="commonli">
-                            <input type="text" id="v1" value="-" style="width: 10px;height: 30px;" onclick="numberDown()"/>
+                            <input type="button" id="v1" value="-" style="width: 20px;height: 30px;" onclick="numberDown()"/>
                         </li>
                         <li class="commonli">
-                            <input type="text" style="width: 40px;height: 30px;" id="num" value="1" readonly="readonly"/>
+                            <input type="text" style="width: 30px;height: 30px;" id="num" value="1" readonly="readonly"/>
                         </li>
                         <li class="commonli">
-                            <input type="text" id="" value="+" style="width: 10px;height: 30px;" readonly="readonly" onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
+                            <input type="button" id="" value="+" style="width: 20px;height: 30px;" readonly="readonly" onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
                         </li>
                         <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <img src="${pageContext.request.contextPath}/static/img/addshop.png"  onclick="addShopCart(${book.bId})" />
+                            <input type="image" src="${pageContext.request.contextPath}/static/img/addshop.png"  onclick="addShopCart(${book.bId})" />
                         </li>
                     </ul>
 
