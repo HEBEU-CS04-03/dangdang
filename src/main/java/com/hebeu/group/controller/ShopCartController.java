@@ -1,10 +1,9 @@
 package com.hebeu.group.controller;
 
-import com.hebeu.group.pojo.Book;
-import com.hebeu.group.pojo.Customer;
-import com.hebeu.group.pojo.ShopCart;
+import com.hebeu.group.pojo.*;
 import com.hebeu.group.service.BookService;
 import com.hebeu.group.service.ShopCartService;
+import com.hebeu.group.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class ShopCartController {
     @RequestMapping("toShopCart")
     public String toShopCart(HttpSession session, Model model){
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         //判断是否登录
         if(loginCustomer==null){
             model.addAttribute("message","您还未登录，请先登录！");
@@ -54,6 +56,7 @@ public class ShopCartController {
                 totalMoney+=shopCart.getbPrice()*shopCart.getbNumber();
             }
 
+            model.addAttribute("loginCustomer",loginCustomer);
             model.addAttribute("shopCartList",shopCartService.selectShopCartByCName(loginCustomer.getcName()));
             model.addAttribute("totalMoney",totalMoney);
         }
@@ -69,7 +72,7 @@ public class ShopCartController {
     @ResponseBody
     public void addBookToShopCart(String bId,Integer bNumber, HttpSession session){
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         ShopCart oldShopCart = shopCartService.selectShopCartByCNameAndBId(loginCustomer.getcName(), bId);
         //判断该图书是否已在购物车中
         if(oldShopCart == null){
@@ -169,6 +172,54 @@ public class ShopCartController {
         //获取session中的登录用户信息
         Customer loginCustomer = (Customer)session.getAttribute("loginUser");
         return shopCartService.selectShopCartByCName(loginCustomer.getcName());
+    }
+
+    /**
+     * 提交订单
+     * @param cAddress 地址
+     * @param receiver 收件人
+     * @param cPhone 电话
+     * @param total 总价
+     * @return
+     */
+    @RequestMapping("submitOrder")
+    public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session){
+
+        //获取session中的登录用户信息
+        Customer loginCustomer = (Customer)session.getAttribute("loginUser");
+        if (loginCustomer == null){
+            return "login";
+        }
+        Orders orders = new Orders();
+        //生成orderId
+        String orderId = UUIDUtil.getUUID();
+        orders.setOrderId(orderId);
+        orders.setOrderAdress(cAddress);
+        orders.setOrderEmail(loginCustomer.getcEmail());
+        orders.setOrderSum(total);
+        orders.setOrderTime(new Date());
+        orders.setOrderUser(receiver);
+        //将付款方式改为电话
+        orders.setOrderPayment(cPhone);
+
+        List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
+        List<OrderRecord> orderRecordList = new ArrayList<>();
+        for (ShopCart shopCart : shopCartList){
+            OrderRecord orderRecord = new OrderRecord();
+            orderRecord.setbNumber(shopCart.getbNumber());
+            orderRecord.setbId(shopCart.getbId());
+            orderRecord.setbImage(shopCart.getbImage());
+            orderRecord.setbName(shopCart.getbName());
+            orderRecord.setbPrice(shopCart.getbPrice());
+            orderRecord.setOrderId(orderId);
+            orderRecord.setcName(loginCustomer.getcName());
+            orderRecord.setbTotalcost(shopCart.getbNumber()*shopCart.getbPrice());
+            orderRecordList.add(orderRecord);
+        }
+
+
+
+        return "order";
     }
 
 }

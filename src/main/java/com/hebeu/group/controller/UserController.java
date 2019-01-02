@@ -44,7 +44,8 @@ public class UserController {
         Customer customer = new Customer();
         customer.setcName("测试");
         customer.setcPhone("18832025733");
-        session.setAttribute("loginUser",customer);
+        customer.setcAddress("河北工程大学");
+        session.setAttribute("loginCustomer",customer);
 
         // 返回值
         return "redirect:/book/toIndex";

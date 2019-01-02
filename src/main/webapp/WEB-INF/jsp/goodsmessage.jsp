@@ -270,8 +270,6 @@
 
     function addShopCart(bId) {
         var bNumber = document.getElementById("num").value;
-
-        alert(bNumber);
         $.ajax({
             type:"POST",
             url:"/shopCart/addBookToShopCart",
