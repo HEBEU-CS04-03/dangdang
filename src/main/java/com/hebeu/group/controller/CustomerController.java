@@ -93,45 +93,52 @@ public class CustomerController {
      * @return 跳转的视图
      */
     @RequestMapping("/register")
-    public String register(Model model, Customer customer, HttpSession session) {
+    public String register(Model model, Customer customer) {
         /**
          * 判断用户名，密码，邮箱是否合乎鬼规范
          */
-        Customer customer1 = customerService.selectCustomer(customer.getcName());
-        Customer customer2 = customerService.selectCustomerByEmail(customer);
+
         String username = customer.getcName();
-        int i = 0;
+        int i=0;
         if (username == null || username.trim().isEmpty()) {
             model.addAttribute("username", "用户名不能为空");
-            i = 1;
+            i=1;
         } else if (username.length() < 3 || username.length() > 20) {
             model.addAttribute("username", "用户名长度必须在3~20之间！");
-            i = 1;
+            i=1;
         }
         String password = customer.getcPass();
         if (password == null || password.trim().isEmpty()) {
             model.addAttribute("password", "密码不能为空！");
-            i = 1;
+            i=1;
         } else if (password.length() < 3 || password.length() > 20) {
             model.addAttribute("password", "密码长度必须在3~20之间！");
-            i = 1;
+            i=1;
         }
         String email = customer.getcEmail();
         if (email == null || email.trim().isEmpty()) {
             model.addAttribute("email", "Email不能为空！");
-            i = 1;
+            i=1;
         } else if (!email.matches("\\w+@\\w+\\.\\w+")) {
             model.addAttribute("email", "Email格式错误！");
-            i = 1;
+            i=1;
         }
-        if (customer1 == null && i == 0 && customer2 == null) {
-            customerService.register(customer);
-            return "/registerDid";
-        } else if (customer1 != null && customer2 == null) {
-            model.addAttribute("masg", "该用户名被注册请重新注册");
-        } else if (customer2 != null && customer1 == null) {
-            model.addAttribute("masg", "该邮箱已被注册请重新注册");
+        Customer customer1=customerService.selectCustomer(customer.getcName());
+        Customer customer2=customerService.selectCustomerByEmail(customer);
+        if(customer1==null&&customer2==null&&i==0) {
+        customerService.register(customer);
+        return "/registerDid";
         }
+        else if (customer1!=null&&customer2==null&&i==0){
+            model.addAttribute("masg","该用户名被注册请重新注册");
+        }
+        else if (customer1==null&&i==0&&customer2!=null){
+            model.addAttribute("masg","该邮箱已被注册请重新注册");
+        }
+        else if(customer1!=null&&customer2!=null){
+            model.addAttribute("masg","邮箱用户都被占用");
+        }
+        model.addAttribute("masg1","注册失败");
         return "/register";
     }
 }

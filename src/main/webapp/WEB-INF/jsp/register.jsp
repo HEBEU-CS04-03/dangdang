@@ -32,7 +32,7 @@
     </div>
     <div class="register_dotted_bg"></div>
     <div class="register_message">
-    <form action="" method="post" id="myform" onSubmit="return checkRegister()">
+    <form action="${pageContext.request.contextPath}/customer/register" method="post" id="myform" onSubmit="return checkRegister()">
      
       <dl class="register_row">
          <dt>用户名：</dt>
@@ -41,7 +41,7 @@
       </dl>
      <dl class="register_row">
          <dt>密码：</dt>
-         <dd><input id="pwd0" type="password" class="register_input" name="cPass" value="${customer.cPass}"></dd>
+         <dd><input onclick="nameCompare()" id="pwd0" type="password" class="register_input" name="cPass" value="${customer.cPass}"></dd>
          <dd><div id="pwd_prompt"><font color="red">${password}</font></div></dd>
      </dl>
         <dl class="register_row">
@@ -49,25 +49,19 @@
             <dd><input id="pwd1" type="password" class="register_input" name="cPass1" value="" ></dd>
             <dd><div id="pwd_prompt1"><font color="red">${password}</font></div></dd>
         </dl>
-        <dl class="register_row">
-         <dt>电话：</dt>
-         <dd><input onclick="pwdCompare()" id="phone" type="text" class="register_input" name="cPhone" value="${customer.cPhone}"></dd>
-        <dd><div id="phone_prompt"></div></dd>
-     </dl>
      <dl class="register_row">
         <dt>邮箱：</dt>
-        <dd><input id="email" type="text" class="register_input" name="cEmail" value="${customer.cEmail}"></dd>
+        <dd><input onclick="pwdCompare()" id="email" type="text" class="register_input" name="cEmail" value="${customer.cEmail}"></dd>
         <dd><div id="email_prompt"><font color="red">${email}</font> </div></dd>
       </dl>
         <dl class="register_row">
-            <dt>地址：</dt>
-            <dd><input id="address" type="text" class="register_input" name="cAddress" value="${customer.cAddress}"></dd>
-            <dd><div id="address_prompt"></div></dd>
+            <dt>电话：</dt>
+            <dd><input onclick="pwdCompare()" id="phone" type="text" class="register_input" name="cPhone" value="${customer.cPhone}"></dd>
         </dl>
-
       <div class="registerBtn"><input class="tzz" type="image" src="${pageContext.request.contextPath}/static/images/register_btn_out.gif">
       </div>
-        <dd value="${masg}"><font size="3" color="red">${masg}</font> </dd>
+        <dd ><font size="3" color="red">${masg}</font> </dd>
+        <dd ><font size="3" color="red">${masg1}</font> </dd>
    </form>
     </div>
   </div>
