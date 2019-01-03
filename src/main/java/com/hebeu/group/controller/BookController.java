@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -153,6 +154,21 @@ public class BookController {
         }
         model.addAttribute("books", books);
         return "bookList";
+    }
+
+    /**
+     * 异步查询图书库存
+     * @param bId 图书id
+     * @return 库存数量
+     */
+    @RequestMapping("/findBookQuantity")
+    @ResponseBody
+    public Integer findBookQuantity(String bId){
+
+        //查询图书信息
+        Book book = bookService.selectBookById(bId);
+
+        return book.getbQuantity();
     }
 }
 */

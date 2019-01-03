@@ -1,5 +1,6 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 
 <head>
@@ -23,63 +24,37 @@
     </div>
     <div id="shopping_commend_sort">
         <div class="shopping_commend_sort_left">
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">JavaScript DOM编程艺术</a></li>
-                <li class="shopping_commend_list_2">￥39.00</li>
-                <li class="shopping_commend_list_3">￥29.30</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">解禁（当当网独家首发）</a></li>
-                <li class="shopping_commend_list_2">￥28.00</li>
-                <li class="shopping_commend_list_3">￥19.40</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">地王之王（金融危机下房地产行...</a></li>
-                <li class="shopping_commend_list_2">￥32.80</li>
-                <li class="shopping_commend_list_3">￥25.10</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">逃庄</a></li>
-                <li class="shopping_commend_list_2">￥36.00</li>
-                <li class="shopping_commend_list_3">￥27.70</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
+            <c:forEach items="${firstBookList}" var="firstBookList">
+                <ul>
+                    <li class="shopping_commend_list_1">
+                        ·<a href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${firstBookList.bId}" class="blue">${firstBookList.bName}</a></li>
+                    <li class="shopping_commend_list_2">￥
+                        <fmt:formatNumber type="number" value="${firstBookList.bPrice * 1.2}" maxFractionDigits="2"/>
+                    </li>
+                    <li class="shopping_commend_list_3">￥${firstBookList.bPrice}</li>
+                    <li class="shopping_commend_list_4"><button onclick="addShopCart(${firstBookList.bId})">购买</button> </li>
+                </ul>
+            </c:forEach>
+
         </div>
         <div class="shopping_commend_sort_mid"></div>
         <div class="shopping_commend_sort_left">
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">深入浅出MySQL数据库开发、优...</a></li>
-                <li class="shopping_commend_list_2">￥59.00</li>
-                <li class="shopping_commend_list_3">￥47.20</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">大玩家（马未都、王刚推荐!央...</a></li>
-                <li class="shopping_commend_list_2">￥34.80</li>
-                <li class="shopping_commend_list_3">￥20.60</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">都市风水师--官场风水小说：一...</a></li>
-                <li class="shopping_commend_list_2">￥39.80</li>
-                <li class="shopping_commend_list_3">￥30.50</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">国戏（以麻将术语解读宦海沉浮...</a></li>
-                <li class="shopping_commend_list_2">￥25.00</li>
-                <li class="shopping_commend_list_3">￥17.30</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
+            <c:forEach items="${secondBookList}" var="secondBookList">
+                <ul>
+                    <li class="shopping_commend_list_1">
+                        ·<a href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${secondBookList.bId}" class="blue">${secondBookList.bName}</a></li>
+                    <li class="shopping_commend_list_2">￥
+                        <fmt:formatNumber type="number" value="${secondBookList.bPrice *1.2}" maxFractionDigits="2"/>
+                    </li>
+                    <li class="shopping_commend_list_3">￥${secondBookList.bPrice}</li>
+                    <li class="shopping_commend_list_4"><button onclick="addShopCart(${secondBookList.bId})">购买</button></li>
+                </ul>
+            </c:forEach>
         </div>
     </div>
 
     <div class="shopping_list_top">您已选购以下商品</div>
     <div class="shopping_list_border">
-
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="shopping_list_title">
                 <td class="shopping_list_title_1">商品名</td>
@@ -96,63 +71,63 @@
                     onMouseOut="productOut('shoppingProduct_01')">
                     <td class="shopping_product_list_1">
                         <input type="checkbox" name="" value="" checked="checked"/>
-                        <a href="#" class="blue">${shopCartList.bName}</a>
+                        <a href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${shopCartList.bId}" class="blue" >${shopCartList.bName}</a>
                     </td>
                     <td class="shopping_product_list_2">
-                        <label>${shopCartList.bPrice}</label>
+                        <label><fmt:formatNumber type="number" value="${shopCartList.bPrice}" maxFractionDigits="0"/></label>
                     </td>
                     <td class="shopping_product_list_3">
-                        ￥<label>${shopCartList.bPrice * 1.2}</label>
+                        ￥<label><fmt:formatNumber type="number" value="${shopCartList.bPrice * 1.2}" maxFractionDigits="2"/></label>
                     </td>
                     <td class="shopping_product_list_4">
-                        ￥<label>${shopCartList.bPrice} </label>(8折)
+                        ￥<label><fmt:formatNumber type="number" value="${shopCartList.bPrice}" maxFractionDigits="2"/></label>(8折)
                     </td>
                     <td class="shopping_product_list_5">
-                        <input id="bNumber" type="text" value="${shopCartList.bNumber}" onchange="productCount(${shopCartList.sId})">
+                        <input id="bNumber" type="text" value="${shopCartList.bNumber}" onchange="productCount(${shopCartList.sId},this.value,${shopCartList.bId})">
                     </td>
                     <td class="shopping_product_list_6">
                         <a href="${pageContext.request.contextPath}/shopCart/deleteBookFormShopCart?sid=${shopCartList.sId}" class="blue">删除</a>
                     </td>
                 </tr>
             </c:forEach>
-
         </table>
 
-        <div class="ordersmessage" style="margin-top: 10px;">
+        <div class="ordersmessage" style="margin-top: 30px;margin-left: 700px;">
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">收货地址</li>
+                <li class="ordersmessageli shopping_product_list_6">收货地址:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="address" value="" name=""/>
+                    <input type="text" id="address" value="${loginCustomer.cAddress}" name=""/>
                 </li>
             </ul>
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">收货人</li>
+                <li class="ordersmessageli shopping_product_list_6">收货人:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="receiver" value="" name=""/>
+                    <input type="text" id="receiver" value="${loginCustomer.cName}" name=""/>
                 </li>
             </ul>
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">电话</li>
+                <li class="ordersmessageli shopping_product_list_6">电话:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="phone" value="" name=""/>
+                    <input type="text" id="phone" value="${loginCustomer.cPhone}" name=""/>
                 </li>
             </ul>
         </div>
         <div class="shopping_list_end floatclear">
+            <input type="hidden" id="total" value="${totalMoney}">
             <ul>
                 <li class="shopping_list_end_1">
-                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif">
+                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif" onclick="balance()">
                 </li>
                 <li class="shopping_list_end_2">
                     ￥<label id="product_total"></label>
                 </li>
                 <li class="shopping_list_end_3">
-                    商品金额总计：${totalMoney}
+                    商品金额总计：<fmt:formatNumber type="number" value="${totalMoney}" maxFractionDigits="2"/>
                 </li>
                 <li class="shopping_list_end_4">
-                    您共节省金额：${totalMoney*0.2}￥<label class="shopping_list_end_yellow" id="product_save"></label>
+                    您共节省金额：<fmt:formatNumber type="number" value="${totalMoney*0.2}" maxFractionDigits="2"/>￥<label class="shopping_list_end_yellow" id="product_save"></label>
                     <br/>
-                    可获商品积分：${totalMoney}<label class="shopping_list_end_yellow" id="product_integral"></label>
+                    可获商品积分：<fmt:formatNumber  type="number" value="${totalMoney}" maxFractionDigits="0"/><label class="shopping_list_end_yellow" id="product_integral"></label>
                 </li>
             </ul>
         </div>
@@ -168,20 +143,61 @@
 </div>
 
 <script>
-    function productCount(sId) {
-        var bNumber = document.getElementById("bNumber").value;
-        location.href="${pageContext.request.contextPath}/shopCart/updateShopCart?sid="+sId+"&number="+bNumber+"";
-        // $.ajax({
-        //     type:"POST",
-        //     url: '/shopCart/updateShopCart',
-        //     data:{sid:sId,number:bNumber},
-        //     success:function (){
-        //         alert("修改图书数量成功！")
-        //     },
-        //     error: function (msg) {    //服务器执行异常调用此方法，msg为异常是服务器返回的数据
-        //         alert("服务器异常！");
-        //     }
-        // })
+    function productCount(sId,bNumber,bId) {
+        $.ajax({
+            type:"POST",
+            url: '/book/findBookQuantity',
+            dataType:"json",
+            data:{bId:bId},
+            success:function (data){
+                if(bNumber <= data){
+                    location.href="${pageContext.request.contextPath}/shopCart/updateShopCart?sid="+sId+"&number="+bNumber+"";
+                    alert("修改图书数量成功！");
+                }else {
+                    alert("图书库存不足！");
+                    location.reload();
+                }
+            },
+            error: function (msg) {    //服务器执行异常调用此方法，msg为异常是服务器返回的数据
+                alert("服务器异常！");
+            }
+        })
+    }
+    
+    function balance() {
+        if (!confirm("您确定要提交订单么？")){
+            alert("已取消！");
+            return;
+        }
+        var address = document.getElementById("address").value;
+        var receiver = document.getElementById("receiver").value;
+        var phone = document.getElementById("phone").value;
+        var total = document.getElementById("total").value;
+
+        location.href="${pageContext.request.contextPath}/shopCart/submitOrder?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
+    }
+
+    function addShopCart(bId) {
+        $.ajax({
+            type:"POST",
+            url:"/shopCart/addBookToShopCart",
+            dataType:"json",
+            data:{bId:bId,bNumber:1},
+            success:function (data) {
+
+                if (data == false) {
+                    alert("请先登录！");
+                    location.href="${pageContext.request.contextPath}/toLoginPage";
+                }else {
+                    alert("已添加图书到购物车");
+                    location.reload();
+                }
+
+            },
+            fail:function (msg) {
+                alert("服务器错误");
+            }
+        })
     }
 
 

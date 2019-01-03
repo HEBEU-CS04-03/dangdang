@@ -11,11 +11,11 @@ import com.hebeu.group.pojo.BookType;
 public interface AdminService {
 	/**
 	 * 用户登录
-	 * @param  loginname
+	 * @param  username
 	 * @param  password
 	 * @return User对象
 	 * */
-	Admin login(String username, String passwrod);
+	Admin login(String username, String password);
 	
 	/**
      * 通过id查询管理员

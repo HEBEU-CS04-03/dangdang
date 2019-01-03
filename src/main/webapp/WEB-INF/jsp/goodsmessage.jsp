@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/goodsmessage.css"/>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/css/bootstrap.css"/>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-1.12.4.min.js"></script>
 
 </head>
 
@@ -61,8 +62,8 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="javascript:void(0)" name="购物车">
-                    购物车0
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车">
+                    购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>
@@ -128,10 +129,10 @@
                 </div>
 
                 <div class="messbox_info">
-                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="" target="_blank"
+                    <span class="t1" id="author" dd_name="作者" ddt-area="002">作者：<a href="/book/searchBook?keyword=${book.bAuthor}" target="_blank"
                                                                                    dd_name="作者">${book.bAuthor}</a></span>&nbsp;&nbsp;
                     <br/>
-                    <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="" target="_blank"
+                    <span class="t1" dd_name="出版社" ddt-area="003">出版社：<a href="/book/searchBook?keyword=${book.bPress}" target="_blank"
                                                                          dd_name="出版社">${book.bPress}</a></span>&nbsp;&nbsp;
                     <br/>
                     <span class="t1">出版时间：${dateUtil.formateTime(book.bTime)}&nbsp;</span>
@@ -152,26 +153,25 @@
                 </div>
 
                 <hr/>
-                <br/>
-                <br/>
                 <div class="messbox_info">
-                    配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费
-
+                    <%--配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费--%>
+                        价格：￥${book.bPrice}
                 </div>
-                <hr style="color: #FFFFFF;border: 0px;"/>
+                <hr style="color: #FFFFFF;border: 1px;"/>
                 <div class="messbox_info">
                     <ul>
-                        <li class="commonli"><input type="text" id="v1" value="-" style="width: 10px;height: 30px;"
-                                                    onclick="document.all.num.value=document.all.num.value-1"/></li>
-                        <li class="commonli"><input type="text" style="width: 40px;height: 30px;" id="num" value="1"
-                                                    readonly="readonly"/></li>
-                        <li class="commonli"><input type="text" id="" value="+" style="width: 10px;height: 30px;"
-                                                    readonly="readonly"
-                                                    onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
+                        <li class="commonli">
+                            <input type="button" id="v1" value="-" style="width: 20px;height: 30px;" onclick="numberDown()"/>
                         </li>
-
-                        <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
-                                src="${pageContext.request.contextPath}/static/img/addshop.png"/></li>
+                        <li class="commonli">
+                            <input type="text" style="width: 30px;height: 30px;" id="num" value="1" readonly="readonly"/>
+                        </li>
+                        <li class="commonli">
+                            <input type="button" id="" value="+" style="width: 20px;height: 30px;" readonly="readonly" onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
+                        </li>
+                        <li class="commonli">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="image" src="${pageContext.request.contextPath}/static/img/addshop.png"  onclick="addShopCart(${book.bId})" />
+                        </li>
                     </ul>
 
                 </div>
@@ -261,6 +261,46 @@
             window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
         }
     </script>
+</div>
+<script>
+    function search() {
+        var keyword = document.getElementById("keyword");
+        // alert("关键字：" + keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
+    }
+
+    function addShopCart(bId) {
+        var bNumber = document.getElementById("num").value;
+        $.ajax({
+            type:"POST",
+            url:"/shopCart/addBookToShopCart",
+            dataType:"json",
+            data:{bId:bId,bNumber:bNumber},
+            success:function (data) {
+
+                if (data == false) {
+                    alert("请先登录！");
+                    location.href="${pageContext.request.contextPath}/toLoginPage";
+                }else {
+                    alert("已添加"+bNumber+"件图书到购物车");
+                }
+
+            },
+            fail:function (msg) {
+                alert("服务器错误");
+            }
+        })
+    }
+
+    function numberDown() {
+        var num = document.getElementById("num");
+        if(num.value == 1){
+            alert("数量最小为1！");
+        }else{
+            num.value = num.value - 1;
+        }
+    }
+</script>
 
 </body>
 

@@ -14,14 +14,15 @@
 <!--头部-->
 <div id="booktop">
     <div class="widthmid">
-        <c:if test="${username eq null}">
-            <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="javascript:PageTopLogIn();" target="_self" rel="nofollow"
-                                           class="login_link">登录</a></span>
+        <c:if test="${loginName eq null}">
+            <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="${pageContext.request.contextPath}/customer/loginTo" target="_self"
+                                           rel="nofollow" class="login_link">登录</a></span>
         </c:if>
-        <c:if test="${username != null}">
-            <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
+        <c:if test="${loginName ne null}">
+            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer" target="_self"
                                       rel="nofollow"
-                                      class="login_link">${username}</a></span>
+                                      class="login_link">${loginName}</a></span>
+            <span id="nickname">&nbsp;&nbsp;<a dd_name="退出登录" href="${pageContext.request.contextPath}/customer/loginOut">退出登录</a></span>
         </c:if>
         <ul class="topbox">
             <li class="boxlia">
@@ -57,8 +58,8 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="javascript:void(0)" name="购物车">
-                    购物车0
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车" target="_blank">
+                    购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>

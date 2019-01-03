@@ -70,4 +70,10 @@ public interface BookService {
      * @return
      */
     List<Book> selectBookByPress(String keyword);
+
+    /**
+     * 查询多条书籍
+     * @return
+     */
+    List<Book> selectAllBook();
 }

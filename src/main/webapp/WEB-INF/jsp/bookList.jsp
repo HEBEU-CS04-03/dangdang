@@ -64,8 +64,8 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="javascript:void(0)" name="购物车">
-                    购物车0
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车">
+                    购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>
@@ -125,7 +125,7 @@
                 </ul>
             </div>
         </c:forEach>
-        <c:if test="${books eq null}">
+        <c:if test="${books.size() eq 0}">
             <p style="color: red; font-size: medium">暂无图书</p>
         </c:if>
 
