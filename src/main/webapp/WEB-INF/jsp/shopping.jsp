@@ -86,7 +86,7 @@
                         <input id="bNumber" type="text" value="${shopCartList.bNumber}" onchange="productCount(${shopCartList.sId},this.value,${shopCartList.bId})">
                     </td>
                     <td class="shopping_product_list_6">
-                        <a href="${pageContext.request.contextPath}/shopCart/deleteBookFormShopCart?sid=${shopCartList.sId}" class="blue">删除</a>
+                        <button onclick="deleteBook(${shopCartList.sId})">删除</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -198,6 +198,11 @@
                 alert("服务器错误");
             }
         })
+    }
+    function deleteBook(sid) {
+        if (confirm("您确定要从购物车删除这本图书么？")){
+            location.href="${pageContext.request.contextPath}/shopCart/deleteBookFormShopCart?sid="+sid+"";
+        }
     }
 
 

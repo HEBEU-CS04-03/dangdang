@@ -34,7 +34,6 @@ public class ShopCartServiceImpl implements ShopCartService {
 
     @Override
     public void addBookToShopCart(ShopCart shopCart){
-
         Book book = bookMapper.selectByPrimaryKey(shopCart.getbId());
         shopCart.setbImage(book.getbImage());
         shopCart.setbName(book.getbName());
