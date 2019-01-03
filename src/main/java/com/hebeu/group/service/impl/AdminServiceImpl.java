@@ -57,7 +57,9 @@ public class AdminServiceImpl implements AdminService {
     public AdminServiceImpl(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
     }
-
+/**
+ * 通过id查询
+ */
     @Override
     public Admin getAdminById(Integer id) {
         AdminExample adminExample = new AdminExample();
@@ -65,4 +67,16 @@ public class AdminServiceImpl implements AdminService {
         criteria.andAIdEqualTo(id);
         return adminMapper.selectByExample(adminExample).get(0);
     }
+
+/**
+ * 修改信息
+ */
+	@Override
+	public void updateAdmin(Admin admin) {
+		// TODO Auto-generated method stub
+		AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria criteria = adminExample.createCriteria();
+        criteria.andAIdEqualTo(admin.getaId());
+		adminMapper.updateByExampleSelective(admin,adminExample);
+	}
 }

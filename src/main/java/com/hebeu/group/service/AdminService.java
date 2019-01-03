@@ -1,6 +1,7 @@
 package com.hebeu.group.service;
 
 import com.hebeu.group.pojo.Admin;
+import com.hebeu.group.pojo.BookType;
 
 /**
  * @author 言立慧
@@ -21,5 +22,7 @@ public interface AdminService {
      * @param id
      * @return
      */
-    Admin getAdminById(Integer id);
+    Admin getAdminById(Integer aId);
+    
+    void updateAdmin(Admin admin);
 }
