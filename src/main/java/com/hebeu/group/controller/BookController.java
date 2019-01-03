@@ -32,12 +32,13 @@ public class BookController {
         this.bookService = bookService;
         this.commentService = commentService;
     }
-
+    
     /**
      * 跳转到首页，查询图书及个人相关信息
      *
      * @return
      */
+
     @RequestMapping("/toIndex")
     public String toIndex(Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
@@ -85,6 +86,7 @@ public class BookController {
      * @param session
      * @return
      */
+
     @RequestMapping("/toBookMessage")
     public String toBookMessage(String bookId, Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
@@ -112,6 +114,7 @@ public class BookController {
      * @param session
      * @return
      */
+
     @RequestMapping("/searchBook")
     public String searchBook(String keyword, Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
