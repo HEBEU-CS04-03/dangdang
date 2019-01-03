@@ -66,7 +66,7 @@
     <label class="login_content_bold">还不是当当网用户？</label>快捷方便的免费注册，让你立刻尽享当当网提供的条项优惠服务......
      </div>
      <div class="login_content_end_bg_end">
-     <input  class="login_register_out" value=" " type="button" onmouseover="this.className='login_register_over'"  onmouseout="this.className='login_register_out'">
+     <input  class="login_register_out" value=" " type="button" onmouseover="this.className='login_register_over'"  onmouseout="this.className='login_register_out'" onclick="toRegister()">
       </div>
     
     </div>
@@ -77,5 +77,11 @@
 
 <div id="footer">
 </div>
+<script type="text/javascript">
+    function toRegister() {
+        window.open("http://localhost:8080/customer/registerTo");
+    }
+</script>
+
 </body>
 </html>

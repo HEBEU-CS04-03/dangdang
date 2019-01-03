@@ -17,6 +17,8 @@ public class Orders {
 
     private Float orderSum;
 
+    private Boolean orderStatus;
+
     public String getOrderId() {
         return orderId;
     }
@@ -71,5 +73,13 @@ public class Orders {
 
     public void setOrderSum(Float orderSum) {
         this.orderSum = orderSum;
+    }
+
+    public Boolean getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Boolean orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

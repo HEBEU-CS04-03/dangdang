@@ -41,11 +41,11 @@ public class BookController {
     @RequestMapping("/toIndex")
     public String toIndex(Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
-        Object user = session.getAttribute("user");
+        Object user = session.getAttribute("loginCustomer");
         if (user != null) {
             // 强制类型转换
             Customer customer = (Customer) user;
-            model.addAttribute("username", customer.getcName());
+            model.addAttribute("loginName", customer.getcName());
         }
         // 2.查询图书分类
         List<BookType> bookTypes = bookService.selectBookType();

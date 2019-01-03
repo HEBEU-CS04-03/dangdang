@@ -46,7 +46,7 @@ public class CustomerController {
         }
         model.addAttribute("loginName", loginName);
         session.setAttribute("loginCustomer", customer);
-        return "/index";
+        return "redirect:/book/toIndex";
     }
 
     /**
@@ -78,7 +78,7 @@ public class CustomerController {
     @RequestMapping("/loginOut")
     public String loginOut(HttpSession session) {
         session.invalidate();
-        return "/index";
+        return "redirect:/book/toIndex";
     }
 
     @RequestMapping("/registerTo")
