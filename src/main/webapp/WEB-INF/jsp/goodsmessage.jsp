@@ -19,14 +19,14 @@
 <div id="booktop">
     <div class="widthmid">
 
-        <c:if test="${username eq null}">
+        <c:if test="${loginName eq null}">
             <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="javascript:PageTopLogIn();" target="_self" rel="nofollow"
                                            class="login_link">登录</a></span>
         </c:if>
-        <c:if test="${username != null}">
+        <c:if test="${loginName != null}">
             <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
                                       rel="nofollow"
-                                      class="login_link">${username}</a></span>
+                                      class="login_link">${loginName}</a></span>
         </c:if>
         <ul class="topbox">
             <li class="boxlia">
@@ -94,7 +94,7 @@
                 <a target="_blank" href="http://book.dangdang.com/20161128_zl3t">当当阅读器</a>
             </li>
             <li class="want_to_recharge">
-                <a href="" target="_blank">我要充值</a>
+                <a href="" target="_blank">积分管理</a>
             </li>
             <li class="writer_sys">
                 <a href="http://pbook-shequ.dangdang.com/welcome/" target="_blank">作者后台</a>

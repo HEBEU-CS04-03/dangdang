@@ -96,7 +96,7 @@
                 <a target="_blank" href="http://book.dangdang.com/20161128_zl3t">当当阅读器</a>
             </li>
             <li class="want_to_recharge">
-                <a href="" target="_blank">我要充值</a>
+                <a href="" target="_blank">积分管理</a>
             </li>
             <li class="writer_sys">
                 <a href="http://pbook-shequ.dangdang.com/welcome/" target="_blank">作者后台</a>

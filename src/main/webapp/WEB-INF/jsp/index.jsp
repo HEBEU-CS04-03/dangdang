@@ -11,18 +11,29 @@
 </head>
 
 <body>
+
+<!-- 广告 -->
+<div id="ad" style="position:absolute">
+    <a href="/book/toIndex" title="有奖问答">
+        <img style="height: 50px; width: 50px" src="${pageContext.request.contextPath}/static/img/youjiang.png"/>
+    </a>
+</div>
+
 <!--头部-->
 <div id="booktop">
     <div class="widthmid">
         <c:if test="${loginName eq null}">
-            <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="${pageContext.request.contextPath}/customer/loginTo" target="_self"
+            <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="${pageContext.request.contextPath}/customer/loginTo"
+                                           target="_self"
                                            rel="nofollow" class="login_link">登录</a></span>
         </c:if>
         <c:if test="${loginName ne null}">
-            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer" target="_self"
+            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer"
+                                      target="_self"
                                       rel="nofollow"
                                       class="login_link">${loginName}</a></span>
-            <span id="nickname">&nbsp;&nbsp;<a dd_name="退出登录" href="${pageContext.request.contextPath}/customer/loginOut">退出登录</a></span>
+            <span id="nickname">&nbsp;&nbsp;<a dd_name="退出登录"
+                                               href="${pageContext.request.contextPath}/customer/loginOut">退出登录</a></span>
         </c:if>
         <ul class="topbox">
             <li class="boxlia">
@@ -90,7 +101,7 @@
                 <a target="_blank" href="http://book.dangdang.com/20161128_zl3t">当当阅读器</a>
             </li>
             <li class="want_to_recharge">
-                <a href="" target="_blank">我要充值</a>
+                <a href="" target="_blank">积分管理</a>
             </li>
             <li class="writer_sys">
                 <a href="http://pbook-shequ.dangdang.com/welcome/" target="_blank">作者后台</a>
@@ -119,11 +130,16 @@
         <!--滚动菜单开始-->
         <div class="booktreemid">
             <div class="booktreemidtop">
-                <img src="${pageContext.request.contextPath}/static/img/midimg.png"
-                     style="width: 100%; height: 150px;"/>
+                <a href="/book/toBookMessage?bookId=1002" target="_blank">
+                    <img src="${pageContext.request.contextPath}/static/img/midimg.png"
+                         style="width: 100%; height: 150px;"/>
+                </a>
             </div>
             <div class="booktreemidend">
-                <img src="${pageContext.request.contextPath}/static/img/midgg.png" style="width: 100%; height: 120px;"/>
+                <a href="/book/toBookMessage?bookId=1008" target="_blank">
+                    <img src="${pageContext.request.contextPath}/static/img/midgg.png"
+                         style="width: 100%; height: 120px;"/>
+                </a>
             </div>
 
         </div>
@@ -227,7 +243,47 @@
     function search() {
         var keyword = document.getElementById("keyword");
         // alert("关键字：" + keyword.value);
-        window.open("http://localhost:8080/book/searchBook?keyword="+keyword.value);
+        window.open("http://localhost:8080/book/searchBook?keyword=" + keyword.value);
+    }
+
+    var x = 50, y = 60;
+    var xin = true, yin = true;
+    var step = 1;
+    var delay = 50;
+    var obj = document.getElementById("ad");
+
+    function floatAD() {
+        var L = T = 0;
+        var R = document.body.clientWidth - obj.offsetWidth;
+        var B = document.body.clientHeight - obj.offsetHeight;
+        obj.style.left = x + document.body.scrollLeft;
+        obj.style.top = y + document.body.scrollTop;
+        x = x + step * (xin ? 1 : -1);
+        if (x < L) {
+            xin = true;
+            x = L
+        }
+        if (x > R) {
+            xin = false;
+            x = R
+        }
+        y = y + step * (yin ? 1 : -1);
+        if (y < T) {
+            yin = true;
+            y = T
+        }
+        if (y > B) {
+            yin = false;
+            y = B
+        }
+    }
+
+    var itl = setInterval("floatAD()", delay);
+    obj.onmouseover = function floatStop() {
+        clearInterval(itl);
+    };
+    obj.onmouseout = function () {
+        itl = setInterval("floatAD()", delay)
     }
 </script>
 
