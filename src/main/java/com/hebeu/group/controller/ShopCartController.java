@@ -107,7 +107,6 @@ public class ShopCartController {
                 e.printStackTrace();
             }
         }
-
         return true;
     }
 
@@ -118,7 +117,6 @@ public class ShopCartController {
      */
     @RequestMapping("updateShopCart")
     public String updateBookNumFromShopCart(Integer sid, Integer number){
-
         if (number <= 0){
             try {
                 shopCartService.deleteBookFromShopCart(sid);
@@ -127,7 +125,6 @@ public class ShopCartController {
             }
             return "redirect:/shopCart/toShopCart";
         }
-
         //更新购物车信息
         ShopCart shopCart = new ShopCart();
         shopCart.setbNumber(number);
@@ -137,7 +134,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "redirect:/shopCart/toShopCart";
     }
 
@@ -152,7 +148,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "redirect:/shopCart/toShopCart";
     }
 

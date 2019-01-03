@@ -277,14 +277,12 @@
             dataType:"json",
             data:{bId:bId,bNumber:bNumber},
             success:function (data) {
-
                 if (data == false) {
                     alert("请先登录！");
                     location.href="${pageContext.request.contextPath}/toLoginPage";
                 }else {
                     alert("已添加"+bNumber+"件图书到购物车");
                 }
-
             },
             fail:function (msg) {
                 alert("服务器错误");
