@@ -66,7 +66,11 @@ public class CustomerController {
      * @return
      */
     @RequestMapping("/updateCustomer")
-    public String updateCustomer(Customer customer, HttpSession session) {
+    public String updateCustomer(Customer customer,String cPass1, HttpSession session) {
+
+        if(cPass1!=null&&cPass1!=""){
+            customer.setcPass(cPass1);
+        }
         customerService.updateCustomer(customer);
         Customer customer1 = customerService.selectCustomer(customer.getcName());
         session.setAttribute("loginCustomer", customer1);

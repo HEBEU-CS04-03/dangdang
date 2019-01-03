@@ -56,10 +56,10 @@ public class CustomerServicelmpl implements CustomerService {
      */
     @Override
     public Customer updateCustomer(Customer customer){
-        CustomerExample customerExample= new CustomerExample();
-        CustomerExample.Criteria criteria = customerExample.createCriteria();
-        criteria.andCNameEqualTo(customer.getcName());
-        customerMapper.updateByExample(customer,customerExample);
+//        CustomerExample customerExample= new CustomerExample();
+//        CustomerExample.Criteria criteria = customerExample.createCriteria();
+//        criteria.andCNameEqualTo(customer.getcName());
+        customerMapper.updateByPrimaryKeySelective(customer);
         return null;
     }
     @Override
