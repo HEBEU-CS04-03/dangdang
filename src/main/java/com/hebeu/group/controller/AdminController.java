@@ -111,9 +111,6 @@ public class AdminController {
 				model.addAttribute("admin", admin);
 				model.addAttribute("messge2", "请您在修改信息后重新登录！");
 				return "redirect:/admin/toLogin";
-			model.addAttribute("admin", admin);
-			model.addAttribute("messge2", "请您在修改信息后重新登录！");
-			return "redirect:/admin/toLogin";
 		}
 	
 }
