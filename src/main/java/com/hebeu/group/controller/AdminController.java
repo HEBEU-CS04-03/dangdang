@@ -32,6 +32,7 @@ public class AdminController {
 	@RequestMapping("/toLogin")
 	public String toLogin() {
 		return "admin/admin_login";
+		return "admin/admin_login";
 	}
 
 
@@ -88,11 +89,15 @@ public class AdminController {
 		  */
 		@RequestMapping(value="/updateAdmin")
 		public String updateAdmin(Admin admin){
+		public String updateAdmin(Admin admin,Model model){
 			System.out.println("进入到controller修改请求");
 				//执行修改操作
 			adminService.updateAdmin(admin);
 					
 				return "redirect:/admin/findAdminById";
+				model.addAttribute("admin", admin);
+				model.addAttribute("messge2", "请您在修改信息后重新登录！");
+				return "redirect:/admin/toLogin";
 		}
 	
 }
