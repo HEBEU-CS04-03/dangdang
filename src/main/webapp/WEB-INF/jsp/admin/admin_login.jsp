@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -17,14 +18,14 @@
 <link href="${pageContext.request.contextPath}/static/css/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/static/css/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath}/static/css/style.css" rel="stylesheet" type="text/css" />
-<link href="${pageContext.request.contextPath}/static/css/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/static/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
 
-<!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
 
 <title>当当后台登录</title>
+<script>
+
+</script>
+
 </head>
 <body>
 	<input type="hidden" id="TenantId" name="TenantId" value="" />
@@ -34,9 +35,12 @@
     <form class="form form-horizontal" action="login" method="post">
       <div class="row cl">
       
+     <p ></p>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <font color="red" style=＂text-align: center＂>${requestScope.msg}</font>
+<br>
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-        
-        <p color="ff0000">&nbsp;&nbsp;&nbsp;${requestScope.msg} </p>
         <div class="formControls col-xs-8">
           <input id="" name="username" type="text" placeholder="账户" class="input-text size-L" value=${username}>
         </div>
@@ -74,8 +78,8 @@
   </div>
 </div>
 <div class="footer">Copyright 当当书城-第三组</div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/js/jquery.min.js"></script> 
+<script type="text/javascript" src="../static/js/H-ui.min.js"></script>
 <!--此乃百度统计代码，请自行删除-->
 <script>
 	var _hmt = _hmt || [];
