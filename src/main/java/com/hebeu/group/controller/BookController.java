@@ -32,20 +32,21 @@ public class BookController {
         this.bookService = bookService;
         this.commentService = commentService;
     }
-
+    
     /**
      * 跳转到首页，查询图书及个人相关信息
      *
      * @return
      */
+
     @RequestMapping("/toIndex")
     public String toIndex(Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
-        Object user = session.getAttribute("user");
+        Object user = session.getAttribute("loginCustomer");
         if (user != null) {
             // 强制类型转换
             Customer customer = (Customer) user;
-            model.addAttribute("username", customer.getcName());
+            model.addAttribute("loginName", customer.getcName());
         }
         // 2.查询图书分类
         List<BookType> bookTypes = bookService.selectBookType();
@@ -61,7 +62,7 @@ public class BookController {
     @RequestMapping("/toSort")
     public String toSort(Integer typeId, HttpSession session, Model model) {
         //1. 获取用户信息，如果用户信息不为空的话
-        Object user = session.getAttribute("user");
+        Object user = session.getAttribute("loginCustomer");
         if (user != null) {
             // 强制类型转换
             Customer customer = (Customer) user;
@@ -85,14 +86,15 @@ public class BookController {
      * @param session
      * @return
      */
+
     @RequestMapping("/toBookMessage")
     public String toBookMessage(String bookId, Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
-        Object user = session.getAttribute("user");
+        Object user = session.getAttribute("loginCustomer");
         if (user != null) {
             // 强制类型转换
             Customer customer = (Customer) user;
-            model.addAttribute("username", customer.getcName());
+            model.addAttribute("loginName", customer.getcName());
         }
         DateUtil dateUtil = new DateUtil();
         model.addAttribute("dateUtil", dateUtil);
@@ -112,14 +114,15 @@ public class BookController {
      * @param session
      * @return
      */
+
     @RequestMapping("/searchBook")
     public String searchBook(String keyword, Model model, HttpSession session) {
         //1. 获取用户信息，如果用户信息不为空的话
-        Object user = session.getAttribute("user");
+        Object user = session.getAttribute("loginCustomer");
         if (user != null) {
             // 强制类型转换
             Customer customer = (Customer) user;
-            model.addAttribute("username", customer.getcName());
+            model.addAttribute("loginName", customer.getcName());
         }
 
         // 2. 设置信息关键字

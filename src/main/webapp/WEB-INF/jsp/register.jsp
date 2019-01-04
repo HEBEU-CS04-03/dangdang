@@ -22,63 +22,59 @@
     <div class="register_mid_bg">
       <ul>
         <li class="register_mid_left">填写注册信息</li>
-        <li class="register_mid_mid">2. 邮箱验证</li>
-        <li class="register_mid_right">3. 完成注册</li>
+        <li class="register_mid_right">2. 完成注册</li>
     </ul>
     </div>
     <div class="register_top_bg_mid">
     <div class="register_top_bg_two_left"></div>
     <div class="register_top_bg_two_right"></div>
-    <div class="register_title_bg"><img src="images/register_pic_02.gif" alt="欢迎注册"><br>您所提供的资料不会做其他用途，敬请安心填写。</div>
+    <div class="register_title_bg"><img src="${pageContext.request.contextPath}/static/images/register_pic_02.gif" alt="欢迎注册"><br>您所提供的资料不会做其他用途，敬请安心填写。</div>
     </div>
     <div class="register_dotted_bg"></div>
     <div class="register_message">
-    <form action="" method="post" id="myform" onSubmit="return checkRegister()">
+    <form action="${pageContext.request.contextPath}/customer/register" method="post" id="myform" onSubmit="return checkRegister()">
      
       <dl class="register_row">
          <dt>用户名：</dt>
-         <dd><input id="nickName" type="text" class="register_input" onFocus="nickNameFocus()" onBlur="nickNameBlur()"></dd>
-        <dd><div id="nickName_prompt"></div></dd>
+         <dd><input id="nickName" type="text" class="register_input" name="cName" value="${customer.cName}"></dd>
+        <dd><div id="nickName_prompt"><font color="red">${username}</font> </div></dd>
       </dl>
      <dl class="register_row">
          <dt>密码：</dt>
-         <dd><input id="pwd" type="password" class="register_input" onFocus="pwdFocus()" onBlur="pwdBlur()"></dd>
-         <dd><div id="pwd_prompt"></div></dd>
-     </dl> 
-     <dl class="register_row"> 
-         <dt>电话：</dt>
-         <dd><input id="repwd" type="password" class="register_input" onFocus="repwdFocus()" onBlur="repwdBlur()"></dd>
-        <dd><div id="repwd_prompt"></div></dd>
+         <dd><input onclick="nameCompare()" id="pwd0" type="password" class="register_input" name="cPass" value="${customer.cPass}"></dd>
+         <dd><div id="pwd_prompt"><font color="red">${password}</font></div></dd>
      </dl>
+        <dl class="register_row">
+            <dt>确认密码：</dt>
+            <dd><input id="pwd1" type="password" class="register_input" name="cPass1" value="" ></dd>
+            <dd><div id="pwd_prompt1"><font color="red">${password}</font></div></dd>
+        </dl>
      <dl class="register_row">
-        <dt>地址：</dt>
-        <dd><input id="email" type="text" class="register_input" onFocus="emailFocus()" onBlur="emailBlur()"></dd>
-        <dd><div id="email_prompt"></div></dd>
+        <dt>邮箱：</dt>
+        <dd><input onclick="pwdCompare()" id="email" type="text" class="register_input" name="cEmail" value="${customer.cEmail}"></dd>
+        <dd><div id="email_prompt"><font color="red">${email}</font> </div></dd>
       </dl>
-     <dl class="register_row">
-        <dt>性别：</dt>
-        <dd><input name="sex" id="man" type="radio" value="男"> <label for="man">男</label></dd>
-       <dd> <input name="sex" id="woman" type="radio" value="女"> <label for="woman">女</label></dd>
-     </dl>
-     <dl class="register_row">
-        <dt>所在地区：</dt>
-        <dd><select id="province" onChange="changeCity()" style="width:120px;">
-              <option>请选择省/城市</option>
-              </select>
-             </dd>
-        <dd><select id="city"  style="width:130px;">
-            <option>请选择城市/地区</option>
-          </select></dd>
-      </dl>
-      <div class="registerBtn"><input id="registerBtn" type="image" src="${pageContext.request.contextPath}/static/images/register_btn_out.gif" onMouseOver="btn_over()" onMouseOut="btn_out()"></div>
+        <dl class="register_row">
+            <dt>电话：</dt>
+            <dd><input onclick="pwdCompare()" id="phone" type="text" class="register_input" name="cPhone" value="${customer.cPhone}"></dd>
+        </dl>
+      <div class="registerBtn"><input class="tzz" type="image" src="${pageContext.request.contextPath}/static/images/register_btn_out.gif">
+      </div>
+        <dd ><font size="3" color="red">${masg}</font> </dd>
+        <dd ><font size="3" color="red">${masg1}</font> </dd>
    </form>
     </div>
-    
-    
   </div>
   </div>
-<!--网站版权部分开始-->
-<div id="footer">
-</div>
+<script>
+    function pwdCompare() {
+        var pwd0 = document.getElementById("pwd0").value;
+        var pwd1 = document.getElementById("pwd1").value;
+        if(pwd0!=pwd1){
+            alert("两次密码不相同");
+        }
+    }
+</script>
 </body>
+
 </html>

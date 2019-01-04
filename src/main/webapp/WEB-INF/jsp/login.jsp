@@ -14,7 +14,7 @@
 <div id="header">
    <div class="login_header_left"><img src="${pageContext.request.contextPath}/static/img/logo.jpg" alt="logo"></div>
    <div class="login_header_mid">我的生活我的当当</div>
-   <div class="login_header_right"><a href="index.jsp" class="blue">首页</a> | <a href="product.html" class="blue">商品展示页</a>  | <a href="shopping.jsp" class="blue">购物车</a> | <a href="register.jsp" class="blue">注册</a></div>
+   <div class="login_header_right"><a href="index.jsp" class="blue">首页</a> | <a href="product.html" class="blue">商品展示页</a>  | <a href="shopping.jsp" class="blue">购物车</a> | <a href="${pageContext.request.contextPath}/customer/registerTo;" class="blue">注册</a></div>
 </div>
 
 <div id="main">
@@ -45,14 +45,15 @@
   <div class="login_main_mid">
     <div class="login_content_top">请登录当当网</div>
     <div class="login_content_line"></div>
-    <form action="${pageContext.request.contextPath}/login" method="post" onSubmit="return checkLogin()">
+    <form action="${pageContext.request.contextPath}/customer/login" method="post" onSubmit="return checkLogin()">
     <dl class="login_content">
        <dt>用户名：</dt>
-       <dd><input id="email" type="text" class="login_content_input" onFocus="emailFocus()" onBlur="emailBlur()"></dd>
+       <dd><input id="email" type="text" class="login_content_input" name="loginName" value="${loginName}"></dd>
     </dl>
      <dl class="login_content">
        <dt>密码：</dt>
-       <dd><input id="pwd" type="password" class="login_content_input" onFocus="pwdFocus()" onBlur="pwdBlur()"></dd>
+       <dd><input id="pwd" type="password" class="login_content_input" name="password" value="${password}"></dd>
+         <dd value="${msg}"><font color="red">${msg}</font> </dd>
     </dl>
      <dl class="login_content">
        <dt></dt>
@@ -65,7 +66,7 @@
     <label class="login_content_bold">还不是当当网用户？</label>快捷方便的免费注册，让你立刻尽享当当网提供的条项优惠服务......
      </div>
      <div class="login_content_end_bg_end">
-     <input  class="login_register_out" value=" " type="button" onmouseover="this.className='login_register_over'"  onmouseout="this.className='login_register_out'">
+     <input  class="login_register_out" value=" " type="button" onmouseover="this.className='login_register_over'"  onmouseout="this.className='login_register_out'" onclick="toRegister()">
       </div>
     
     </div>
@@ -76,5 +77,11 @@
 
 <div id="footer">
 </div>
+<script type="text/javascript">
+    function toRegister() {
+        window.open("http://localhost:8080/customer/registerTo");
+    }
+</script>
+
 </body>
 </html>

@@ -1,14 +1,15 @@
 package com.hebeu.group.service.impl;
 
-import com.hebeu.group.mapper.*;
-import com.hebeu.group.pojo.*;
+import com.hebeu.group.mapper.AdminMapper;
+import com.hebeu.group.pojo.Admin;
+import com.hebeu.group.pojo.AdminExample;
 import com.hebeu.group.service.AdminService;
-import com.hebeu.group.util.DateUtil;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 言立慧
@@ -16,27 +17,45 @@ import java.util.List;
  */
 @Service
 public class AdminServiceImpl implements AdminService {
-    private AdminMapper adminMapper;
-    private OrdersMapper ordersMapper;
-    private OrderRecordMapper orderRecordMapper;
-    private BookMapper bookMapper;
-    private BookTypeMapper bookTypeMapper;
-    @Autowired
-    public AdminServiceImpl(AdminMapper adminMapper,OrdersMapper ordersMapper, OrderRecordMapper orderRecordMapper, BookMapper bookMapper, BookTypeMapper bookTypeMapper) {
-        this.adminMapper = adminMapper;
-        this.ordersMapper = ordersMapper;
-        this.orderRecordMapper = orderRecordMapper;
-        this.bookMapper = bookMapper;
-        this.bookTypeMapper = bookTypeMapper;
-    }
+   /**
+    * 自动注入数据层（Dao）
+    */
+	private AdminMapper adminMapper;
 
+	
+	
+	/*****************管理员服务接口实现*************************************/
+	/**
+	 * AdminServiceImpl接口login方法实现
+	 *  @see { AdminService }
+	 * */
+	@Transactional(readOnly=true)
     @Override
-    public Admin login(String username, String passwrod) {
-        AdminExample adminExample = new AdminExample();
-        AdminExample.Criteria criteria = adminExample.createCriteria();
-        criteria.andANameEqualTo(username);
-        criteria.andAPassEqualTo(passwrod);
-        return adminMapper.selectByExample(adminExample).get(0);
+	public Admin login(String loginname, String password) {
+		// TODO Auto-generated method stub
+		//定义一个新的Example对象
+		AdminExample adminExample = new AdminExample();
+		//不知道
+		AdminExample.Criteria criteria = adminExample.createCriteria();
+		//判断用户名密码是否正确
+		criteria.andANameEqualTo(loginname);
+		criteria.andAPassEqualTo(password);
+		
+		//得到该用户的结果集，是一个list集合
+		List<Admin> admins = adminMapper.selectByExample(adminExample);
+		//如果存在则集合长度不为0
+		if (admins.size() != 0) {
+			//得到第一条数据就是一个用户
+			return admins.get(0);
+		}
+		//不存在就为空
+		return null;
+	}
+    
+    
+    @Autowired
+    public AdminServiceImpl(AdminMapper adminMapper) {
+        this.adminMapper = adminMapper;
     }
 
     @Override
@@ -46,5 +65,4 @@ public class AdminServiceImpl implements AdminService {
         criteria.andAIdEqualTo(id);
         return adminMapper.selectByExample(adminExample).get(0);
     }
-
 }

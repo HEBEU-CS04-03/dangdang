@@ -2,13 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.OrdersMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.Orders">
-    <id column="order_id" jdbcType="CHAR" property="orderId" />
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="order_payment" jdbcType="VARCHAR" property="orderPayment" />
     <result column="order_adress" jdbcType="VARCHAR" property="orderAdress" />
     <result column="order_email" jdbcType="VARCHAR" property="orderEmail" />
     <result column="order_user" jdbcType="CHAR" property="orderUser" />
     <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
     <result column="order_sum" jdbcType="REAL" property="orderSum" />
+    <result column="order_status" jdbcType="BIT" property="orderStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, order_payment, order_adress, order_email, order_user, order_time, order_sum
+    order_id, order_payment, order_adress, order_email, order_user, order_time, order_sum, 
+    order_status
   </sql>
   <select id="selectByExample" parameterType="com.hebeu.group.pojo.OrdersExample" resultMap="BaseResultMap">
     select
@@ -89,11 +91,11 @@
     select 
     <include refid="Base_Column_List" />
     from orders
-    where order_id = #{orderId,jdbcType=CHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from orders
-    where order_id = #{orderId,jdbcType=CHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.OrdersExample">
     delete from orders
@@ -104,10 +106,10 @@
   <insert id="insert" parameterType="com.hebeu.group.pojo.Orders">
     insert into orders (order_id, order_payment, order_adress, 
       order_email, order_user, order_time, 
-      order_sum)
-    values (#{orderId,jdbcType=CHAR}, #{orderPayment,jdbcType=VARCHAR}, #{orderAdress,jdbcType=VARCHAR}, 
+      order_sum, order_status)
+    values (#{orderId,jdbcType=VARCHAR}, #{orderPayment,jdbcType=VARCHAR}, #{orderAdress,jdbcType=VARCHAR}, 
       #{orderEmail,jdbcType=VARCHAR}, #{orderUser,jdbcType=CHAR}, #{orderTime,jdbcType=TIMESTAMP}, 
-      #{orderSum,jdbcType=REAL})
+      #{orderSum,jdbcType=REAL}, #{orderStatus,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.hebeu.group.pojo.Orders">
     insert into orders
@@ -133,10 +135,13 @@
       <if test="orderSum != null">
         order_sum,
       </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
-        #{orderId,jdbcType=CHAR},
+        #{orderId,jdbcType=VARCHAR},
       </if>
       <if test="orderPayment != null">
         #{orderPayment,jdbcType=VARCHAR},
@@ -156,6 +161,9 @@
       <if test="orderSum != null">
         #{orderSum,jdbcType=REAL},
       </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=BIT},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.hebeu.group.pojo.OrdersExample" resultType="java.lang.Long">
@@ -168,7 +176,7 @@
     update orders
     <set>
       <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=CHAR},
+        order_id = #{record.orderId,jdbcType=VARCHAR},
       </if>
       <if test="record.orderPayment != null">
         order_payment = #{record.orderPayment,jdbcType=VARCHAR},
@@ -188,6 +196,9 @@
       <if test="record.orderSum != null">
         order_sum = #{record.orderSum,jdbcType=REAL},
       </if>
+      <if test="record.orderStatus != null">
+        order_status = #{record.orderStatus,jdbcType=BIT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,13 +206,14 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update orders
-    set order_id = #{record.orderId,jdbcType=CHAR},
+    set order_id = #{record.orderId,jdbcType=VARCHAR},
       order_payment = #{record.orderPayment,jdbcType=VARCHAR},
       order_adress = #{record.orderAdress,jdbcType=VARCHAR},
       order_email = #{record.orderEmail,jdbcType=VARCHAR},
       order_user = #{record.orderUser,jdbcType=CHAR},
       order_time = #{record.orderTime,jdbcType=TIMESTAMP},
-      order_sum = #{record.orderSum,jdbcType=REAL}
+      order_sum = #{record.orderSum,jdbcType=REAL},
+      order_status = #{record.orderStatus,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,8 +239,11 @@
       <if test="orderSum != null">
         order_sum = #{orderSum,jdbcType=REAL},
       </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=BIT},
+      </if>
     </set>
-    where order_id = #{orderId,jdbcType=CHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.Orders">
     update orders
@@ -237,7 +252,8 @@
       order_email = #{orderEmail,jdbcType=VARCHAR},
       order_user = #{orderUser,jdbcType=CHAR},
       order_time = #{orderTime,jdbcType=TIMESTAMP},
-      order_sum = #{orderSum,jdbcType=REAL}
-    where order_id = #{orderId,jdbcType=CHAR}
+      order_sum = #{orderSum,jdbcType=REAL},
+      order_status = #{orderStatus,jdbcType=BIT}
+    where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
 </mapper>

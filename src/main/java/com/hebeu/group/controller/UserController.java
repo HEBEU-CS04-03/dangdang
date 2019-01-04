@@ -1,13 +1,10 @@
 package com.hebeu.group.controller;
 
-import com.hebeu.group.pojo.Admin;
 import com.hebeu.group.pojo.Customer;
 import com.hebeu.group.service.AdminService;
-import com.hebeu.group.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,12 +16,11 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private AdminService adminService;
-    private UserService userService;
 
     @Autowired
-    public UserController(AdminService adminService, UserService userService) {
+    public UserController(AdminService adminService) {
         this.adminService = adminService;
-        this.userService = userService;
+
     }
 
     @RequestMapping("/toLoginPage")
@@ -45,6 +41,7 @@ public class UserController {
         customer.setcName("测试");
         customer.setcPhone("18832025733");
         customer.setcAddress("河北工程大学");
+        customer.setcEmail("905008726@qq.com");
         session.setAttribute("loginCustomer",customer);
 
         // 返回值

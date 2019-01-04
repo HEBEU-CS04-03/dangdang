@@ -576,6 +576,66 @@ public class OrdersExample {
             addCriterion("order_sum not between", value1, value2, "orderSum");
             return (Criteria) this;
         }
+
+        public Criteria andOrderStatusIsNull() {
+            addCriterion("order_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusIsNotNull() {
+            addCriterion("order_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusEqualTo(Boolean value) {
+            addCriterion("order_status =", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotEqualTo(Boolean value) {
+            addCriterion("order_status <>", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusGreaterThan(Boolean value) {
+            addCriterion("order_status >", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("order_status >=", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusLessThan(Boolean value) {
+            addCriterion("order_status <", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusLessThanOrEqualTo(Boolean value) {
+            addCriterion("order_status <=", value, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusIn(List<Boolean> values) {
+            addCriterion("order_status in", values, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotIn(List<Boolean> values) {
+            addCriterion("order_status not in", values, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusBetween(Boolean value1, Boolean value2) {
+            addCriterion("order_status between", value1, value2, "orderStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrderStatusNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("order_status not between", value1, value2, "orderStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
