@@ -25,7 +25,7 @@ public class AdminOrdersController {
         System.out.println(brandclass);
         //查询所有图书类型信息
         List<BookType> booktypes = adminOrdersService.findAllBookType();
-        model.addAttribute("bookType", booktypes);
+        model.addAttribute("booktypes", booktypes);
         //通过下单时间查询订单id
         List<Orders> orderitems = adminOrdersService.findOrdersByorderTime();
         System.out.println("订单信息：");
