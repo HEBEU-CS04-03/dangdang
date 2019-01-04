@@ -31,9 +31,13 @@ public class AdminController {
 	 */
 	@RequestMapping("/toLogin")
 	public String toLogin() {
+<<<<<<< HEAD
 		return "admin/admin_login";
+=======
+		return "houtai/admin/admin_login";
 		return "admin/admin_login";
 		// ${username}
+>>>>>>> parent of bb4e3e6... Revert "修改"
 	}
 
 
