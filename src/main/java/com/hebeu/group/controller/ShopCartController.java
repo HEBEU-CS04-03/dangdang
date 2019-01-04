@@ -195,7 +195,6 @@ public class ShopCartController {
      */
     @RequestMapping("submitOrder")
     public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session){
-
         //获取session中的登录用户信息
         Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         if (loginCustomer == null){
@@ -211,6 +210,7 @@ public class ShopCartController {
             orders.setOrderSum(total);
             orders.setOrderTime(new Date());
             orders.setOrderUser(receiver);
+            orders.setOrderStatus(1);
             //将付款方式改为电话
             orders.setOrderPayment(cPhone);
             //插入订单信息
@@ -245,7 +245,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "order";
     }
 

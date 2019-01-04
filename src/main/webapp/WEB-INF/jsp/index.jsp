@@ -152,19 +152,17 @@
             <span class="bodytitlespan">新书上市</span>
         </div>
         <c:forEach items="${bookByTime}" var="book">
-            <div class="bookshow ">
+            <div class="bookshow " onclick="toInfo(${book.bId})">
                 <img class="bookshowleftimg" src="${pageContext.request.contextPath}/static/img/${book.bImage}"/>
-                <ul class="bookshowrightul">
-                    <li class="bookname">${book.bName}</li>
-                    <li class="bookauthor">${book.bAuthor}</li>
-                    <li class="bookimg"><img src="${pageContext.request.contextPath}/static/img/xingxing.png"></li>
-                    <li class="bookprice">￥${book.bPrice}</li>
-                    <li class="bookmes">${book.bDescription}</li>
-                    <li class="bookxiangxi">
-                        <a class="bookxiangxia" target="_blank"
-                           href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${book.bId}">查看详细</a>
-                    </li>
-                </ul>
+                <div class="bookshowright">
+                    <ul>
+                        <li class="bookname">${book.bName}</li>
+                        <li class="bookauthor">${book.bAuthor}</li>
+                        <li class="bookimg"><img src="${pageContext.request.contextPath}/static/img/xingxing.png"></li>
+                        <li class="bookprice">￥${book.bPrice}</li>
+                        <li class="bookmes">${book.bDescription}</li>
+                    </ul>
+                </div>
             </div>
         </c:forEach>
 
@@ -175,19 +173,17 @@
             <span class="bodytitlespan">性价比推荐</span>
         </div>
         <c:forEach items="${bookByPrice}" var="book">
-            <div class="bookshow ">
+            <div class="bookshow " onclick="toInfo(${book.bId})">
                 <img class="bookshowleftimg" src="${pageContext.request.contextPath}/static/img/${book.bImage}"/>
-                <ul class="bookshowrightul">
-                    <li class="bookname">${book.bName}</li>
-                    <li class="bookauthor">${book.bAuthor}</li>
-                    <li class="bookimg"><img src="${pageContext.request.contextPath}/static/img/xingxing.png"></li>
-                    <li class="bookprice">￥${book.bPrice}</li>
-                    <li class="bookmes">${book.bDescription}</li>
-                    <li class="bookxiangxi">
-                        <a class="bookxiangxia" target="_blank"
-                           href="${pageContext.request.contextPath}/book/toBookMessage?bookId=${book.bId}">查看详细</a>
-                    </li>
-                </ul>
+                <div class="bookshowright">
+                    <ul>
+                        <li class="bookname">${book.bName}</li>
+                        <li class="bookauthor">${book.bAuthor}</li>
+                        <li class="bookimg"><img src="${pageContext.request.contextPath}/static/img/xingxing.png"></li>
+                        <li class="bookprice">￥${book.bPrice}</li>
+                        <li class="bookmes"><p>${book.bDescription}</p></li>
+                    </ul>
+                </div>
             </div>
         </c:forEach>
     </div>
@@ -199,39 +195,28 @@
 
         </div>
         <div class="inner">
-            <ul>
-                <li class="func focusOn clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">关注我们</p>
-                        <p class="desc">最受欢迎的阅读产品</p>
-                        <p class="subtitle">关注我们：</p>
-
-                    </div>
-                </li>
-                <li class="func author clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">作者后台</p>
-                        <p class="desc">加入当当原创网，尊享作者</p>
-                        <p class="subtitle">福利，成就网文大神</p>
-                    </div>
-                </li>
-                <li class="func about_us clearfix">
-                    <div class="left">
-                        <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
-                    </div>
-                    <div class="right">
-                        <p class="title">关于我们</p>
-                        <p class="desc">欢迎反馈宝贵意见给我们</p>
-                        <p class="subtitle">客服书吧：当当读书5.0问答</p>
-                    </div>
-                </li>
-            </ul>
+            <table class="footerTable">
+                <tr>
+                    <td>
+                        <div class="footerTable footDiv">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt="" class="icon">
+                            <span class="title">关注我们</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="footerTable footDiv">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt="" class="icon">
+                            <span class="title">作者后台</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="footerTable footDiv">
+                            <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
+                            <span class="title">关于我们</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
     </div>
@@ -284,6 +269,10 @@
     };
     obj.onmouseout = function () {
         itl = setInterval("floatAD()", delay)
+    }
+
+    function toInfo(bId) {
+        location.href="${pageContext.request.contextPath}/book/toBookMessage?bookId="+bId+""
     }
 </script>
 
