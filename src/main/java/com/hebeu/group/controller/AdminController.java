@@ -31,6 +31,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/toLogin")//3
 	public String toLogin() {
+		return "houtai/admin/admin_login";
 		return "admin/admin_login";
 		// ${username}
 	}
@@ -55,17 +56,26 @@ public class AdminController {
 		//存在转向主页面
 //		session.setAttribute(DangConstants.USER_SESSION, admin);
 		model.addAttribute("username", username);
+<<<<<<< HEAD
 		model.addAttribute("admin", admin);
 		return "admin/index";
-
+=======
+		return "houtai/main";
+>>>>>>> 41a3316e54f1bdf609b3bd22103bc441c596caab
+		// ${username}
 	}
 
 		/**
 		 * 处理退出请求
 		 */
 		@RequestMapping("/logout")
+<<<<<<< HEAD
 		public String logout(Model model,String username,HttpSession session) {
 			session.removeAttribute(username);
+=======
+		public String logout(String username) {
+
+>>>>>>> 41a3316e54f1bdf609b3bd22103bc441c596caab
 			return "admin/admin_login";
 
 		}
@@ -91,10 +101,16 @@ public class AdminController {
 		  * @return
 		  */
 		@RequestMapping(value="/updateAdmin")
+		public String updateAdmin(Admin admin){
 		public String updateAdmin(Admin admin,Model model){
 			System.out.println("进入到controller修改请求");
 				//执行修改操作
 			adminService.updateAdmin(admin);
+					
+				return "redirect:/admin/findAdminById";
+				model.addAttribute("admin", admin);
+				model.addAttribute("messge2", "请您在修改信息后重新登录！");
+				return "redirect:/admin/toLogin";
 			model.addAttribute("admin", admin);
 			model.addAttribute("messge2", "请您在修改信息后重新登录！");
 			return "redirect:/admin/toLogin";
