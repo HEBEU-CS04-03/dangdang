@@ -33,6 +33,7 @@ public class AdminController {
 	public String toLogin() {
 		return "admin/admin_login";
 		return "admin/admin_login";
+		// ${username}
 	}
 
 
