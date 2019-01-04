@@ -56,10 +56,10 @@ public class CustomerServicelmpl implements CustomerService {
      */
     @Override
     public Customer updateCustomer(Customer customer){
-        CustomerExample customerExample= new CustomerExample();
-        CustomerExample.Criteria criteria = customerExample.createCriteria();
-        criteria.andCNameEqualTo(customer.getcName());
-        customerMapper.updateByExample(customer,customerExample);
+//        CustomerExample customerExample= new CustomerExample();
+//        CustomerExample.Criteria criteria = customerExample.createCriteria();
+//        criteria.andCNameEqualTo(customer.getcName());
+        customerMapper.updateByPrimaryKeySelective(customer);
         return null;
     }
     @Override
@@ -75,22 +75,25 @@ public class CustomerServicelmpl implements CustomerService {
      * @return
      */
     @Override
-    public Customer selectCustomerByEmail( Customer customer){
+    public Customer selectCustomerByEmail(Customer customer){
         CustomerExample customerExample= new CustomerExample();
         CustomerExample.Criteria criteria = customerExample.createCriteria();
         criteria.andCEmailEqualTo(customer.getcEmail());
-        customerMapper.selectByExample(customerExample);
-
-        return customer;
-
+        List<Customer> customers=customerMapper.selectByExample(customerExample);
+        if(customers!=null) {
+            //如果存在则集合长度不为0
+            if (customers.size() != 0) {
+                //得到第一条数据就是一个用户
+                return customers.get(0);
+            }
+        }
+        return null;
     }
-
     /**
      * CustomerServiceImpl接口register方法实现注册
      * */
     @Override
     public Customer register(Customer customer) {
-
         customerMapper.insert(customer);
         return null;
     }

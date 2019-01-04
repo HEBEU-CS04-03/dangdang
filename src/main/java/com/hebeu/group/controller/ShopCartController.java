@@ -107,7 +107,6 @@ public class ShopCartController {
                 e.printStackTrace();
             }
         }
-
         return true;
     }
 
@@ -118,7 +117,6 @@ public class ShopCartController {
      */
     @RequestMapping("updateShopCart")
     public String updateBookNumFromShopCart(Integer sid, Integer number){
-
         if (number <= 0){
             try {
                 shopCartService.deleteBookFromShopCart(sid);
@@ -127,7 +125,6 @@ public class ShopCartController {
             }
             return "redirect:/shopCart/toShopCart";
         }
-
         //更新购物车信息
         ShopCart shopCart = new ShopCart();
         shopCart.setbNumber(number);
@@ -137,7 +134,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "redirect:/shopCart/toShopCart";
     }
 
@@ -152,7 +148,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "redirect:/shopCart/toShopCart";
     }
 
@@ -200,7 +195,6 @@ public class ShopCartController {
      */
     @RequestMapping("submitOrder")
     public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session){
-
         //获取session中的登录用户信息
         Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         if (loginCustomer == null){
@@ -216,6 +210,7 @@ public class ShopCartController {
             orders.setOrderSum(total);
             orders.setOrderTime(new Date());
             orders.setOrderUser(receiver);
+            orders.setOrderStatus(1);
             //将付款方式改为电话
             orders.setOrderPayment(cPhone);
             //插入订单信息
@@ -250,7 +245,6 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return "order";
     }
 

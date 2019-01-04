@@ -70,4 +70,17 @@ public class Customer {
     public void setcBlance(Double cBlance) {
         this.cBlance = cBlance;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "cName='" + cName + '\'' +
+                ", cPass='" + cPass + '\'' +
+                ", cPhone='" + cPhone + '\'' +
+                ", cAddress='" + cAddress + '\'' +
+                ", cEmail='" + cEmail + '\'' +
+                ", cScore=" + cScore +
+                ", cBlance=" + cBlance +
+                '}';
+    }
 }

@@ -19,27 +19,26 @@ import com.hebeu.group.service.AdminService;
  */
 
 
-@Controller//1
+@Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
-	@Autowired//2
+	@Autowired
 	private AdminService adminService;
 	/**
 	 * 去登录页面
 	 * @return
 	 */
-	@RequestMapping("/toLogin")//3
+	@RequestMapping("/toLogin")
 	public String toLogin() {
-		return "houtai/admin/admin_login";
-		// ${username}
+		return "admin/admin_login";
 	}
 
 
 	/**
 	 * 处理登录请求
-	 * @param String loginname  登录名
-	 * @param String password 密码
+	 * @param  username  登录名
+	 * @param  password 密码
 	 * @return 跳转的视图
 	 * */
 	@RequestMapping("/login")
@@ -55,28 +54,17 @@ public class AdminController {
 		//存在转向主页面
 //		session.setAttribute(DangConstants.USER_SESSION, admin);
 		model.addAttribute("username", username);
-<<<<<<< HEAD
 		model.addAttribute("admin", admin);
 		return "admin/index";
-=======
-		return "houtai/main";
->>>>>>> 41a3316e54f1bdf609b3bd22103bc441c596caab
-		// ${username}
 	}
 
 		/**
 		 * 处理退出请求
 		 */
 		@RequestMapping("/logout")
-<<<<<<< HEAD
 		public String logout(Model model,String username,HttpSession session) {
 			session.removeAttribute(username);
-=======
-		public String logout(String username) {
-
->>>>>>> 41a3316e54f1bdf609b3bd22103bc441c596caab
 			return "admin/admin_login";
-
 		}
 		
 		/**
@@ -95,8 +83,7 @@ public class AdminController {
 		
 		 /**
 		  * 修改管理员信息
-		  * @param model
-		  * @param booktype
+		  * @param admin
 		  * @return
 		  */
 		@RequestMapping(value="/updateAdmin")

@@ -357,53 +357,61 @@ body {
 }
 
 .bookshow {
-	width: 241px;
-	border: 1px solid white;
 	height: 180px;
 	float: left;
-	margin: 3px 0px 10px 3px;
+	margin: 0 0 10px 0;
+	padding: 10px 5px 0 5px;
+	cursor: pointer;
 }
 
 .bookshow:hover {
-	/***border-color: #A9A9A9;***/
-	box-shadow: 4px 4px  4px #A9A9A9;
+	box-shadow: 2px 2px 16px 2px rgba(136, 134, 134, 0.6);
+	transition: box-shadow .5s;
 }
+.bookxiangxia{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	color: #0076eb;
+	text-decoration: none;
+	font-size: 12px;
 
-.bookshow:hover .bookxiangxia {
-	display: block;
+}
+.bookxiangxia:hover{
+	color: #005dba;
 }
 
 .bookshowleftimg {
 	height: 98%;
 	width: 120px;
 	float: left;
-	margin: 2px;
 }
-
-.bookshowrightul {
+.bookshowright {
 	float: left;
 	width: 113px;
-	padding: 0px;
 	margin: 2px;
+	height: 98%;
+	position: relative;
+}
+.bookshowright ul{
+	padding: 0;
+	margin: 0;
 }
 
-.bookshowrightul li {
+.bookshowright li {
 	list-style: none;
 }
 
 .bookname {
-	font-size: 14px;
-	height: 38px;
-	overflow: hidden;
-	padding-top: 4px;
+	font-size: 18px;
+	margin: 5px 0 0 5px;
+	font-weight: lighter;
 }
 
 .bookauthor {
 	font-size: 12px;
-	color: #687280;
-	height: 30px;
-	line-height: 30px;
-	overflow: hidden;
+	color: #7d7d7d;
+	margin:10px 0 0 5px ;
 }
 
 .bookprice {
@@ -417,46 +425,47 @@ body {
 	font-size: 12px;
 	color: #687280;
 	overflow: hidden;
-	height: 40px;
+	text-indent: 5px;
 }
-
-.bookxiangxi {
-	text-align: right;
-	font-size: 14px;
+.bookmes p{
+	position: relative;
+	/*line-height: 1.6em;*/
+	/*height: 6em;*/
+	overflow: hidden;
 }
-
-.bookxiangxi a {
-	color: #ff4100;
-	text-decoration: none;
-	display: none;
-}
+/*.bookmes p:after{*/
+	/*content: "...";*/
+	/*position: absolute;*/
+	/*bottom: 0;*/
+	/*right: 0;*/
+	/*background-color: rgba(255, 255, 255, 0.75);*/
+/*}*/
 
 /***底部开始**/
 .kong{
 	height: 20px;
 }
 .inner{
-	border-top: 1px solid #ebebeb; border-bottom: 1px solid #ebebeb;height: 90px;margin-bottom: 20px;padding: 20px 0px;
+	border-top: 1px solid #ebebeb;
+	border-bottom: 1px solid #ebebeb;
+	height: 90px;
+	margin-bottom: 20px;
+	padding: 20px 0px;
 }
-
-.inner ul{
-	margin: 0px;
+.footerTable{
+	width: 100%;
+	table-layout: fixed;
+	text-align: center;
 }
-.func{
-	list-style:none;float: left;width: 300px;
-}
-.right{
-	font-size: 12px; color:#666666;
+.footerTable .footDiv{
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
 }
 .title{
-	font-size: 14px; color:#000000;
-}
-.left{
-	float: left;width: 30px;
-}
-.right{
-	float: left;;width: 200px;
-}
-.right p{
-	margin: 10px;
+	font-size: 14px;
+	color:#000000;
+	margin-left: 10px;
 }

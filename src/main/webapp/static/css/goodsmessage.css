@@ -6,7 +6,10 @@
 }
 
 .goodsmessageoutright{
-	width: 60%;float: left ;
+	width: 60%;
+	float: left ;
+	height: 50%;
+	position: relative;
 }
 .goodsmessageoutright a{
 	color: #214c90;
@@ -19,7 +22,13 @@ margin: 0px;
 }
 .messbox_info{
 	font-size: 12px;
+	margin-top: 10px;
 }
 .commonli{
 	list-style: none;float: left;
+}
+.bookDescription{
+	font-weight: lighter;
+	font-size: 16px;
+	text-indent: 32px;
 }

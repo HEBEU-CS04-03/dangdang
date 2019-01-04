@@ -19,14 +19,14 @@
 <div id="booktop">
     <div class="widthmid">
 
-        <c:if test="${username eq null}">
+        <c:if test="${loginName eq null}">
             <span id="nickname">欢迎光临当当，请<a dd_name="登录" href="javascript:PageTopLogIn();" target="_self" rel="nofollow"
                                            class="login_link">登录</a></span>
         </c:if>
-        <c:if test="${username != null}">
+        <c:if test="${loginName != null}">
             <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
                                       rel="nofollow"
-                                      class="login_link">${username}</a></span>
+                                      class="login_link">${loginName}</a></span>
         </c:if>
         <ul class="topbox">
             <li class="boxlia">
@@ -94,7 +94,7 @@
                 <a target="_blank" href="http://book.dangdang.com/20161128_zl3t">当当阅读器</a>
             </li>
             <li class="want_to_recharge">
-                <a href="" target="_blank">我要充值</a>
+                <a href="" target="_blank">积分管理</a>
             </li>
             <li class="writer_sys">
                 <a href="http://pbook-shequ.dangdang.com/welcome/" target="_blank">作者后台</a>
@@ -115,17 +115,6 @@
                     <!-- 主标题 -->
                     <h3 title="">
                         ${book.bName} </h3>
-                    <!-- 副标题、促销语 -->
-                    <h4>
-                        <span class="head_title_name" title="">
-                            包邮！${book.bDescription}
-                        </span>
-                        <br/>
-                        <span class="hot" title="">
-                            <a href="http://book.dangdang.com/20170612_nrsg">青春动漫传记分会场畅品3折起5折封</a>
-                        </span>
-                        <span class="yushou" id="presale-title" style="display: none;"></span>
-                    </h4>
                 </div>
 
                 <div class="messbox_info">
@@ -157,14 +146,26 @@
                     <%--配送至 <input type="text" id="address" style="outline: none;" value=""/> 有货 满39元免运费--%>
                         价格：￥${book.bPrice}
                 </div>
+                <span class="hot" title="">
+                            <a href="http://book.dangdang.com/20170612_nrsg">青春动漫传记分会场畅品3折起5折封</a>
+                        </span>
                 <hr style="color: #FFFFFF;border: 1px;"/>
                 <div class="messbox_info">
-                    <ul>
+                    <!-- 副标题、促销语 -->
+                    <p class="bookDescription">
+                        <span class="head_title_name" title="">
+                            包邮！${book.bDescription}
+                        </span>
+                        <br/>
+
+                        <span class="yushou" id="presale-title" style="display: none;"></span>
+                    </p>
+                    <ul style="position: absolute;bottom: 0;right: 0">
                         <li class="commonli">
                             <input type="button" id="v1" value="-" style="width: 20px;height: 30px;" onclick="numberDown()"/>
                         </li>
                         <li class="commonli">
-                            <input type="text" style="width: 30px;height: 30px;" id="num" value="1" readonly="readonly"/>
+                            <input type="text" style="width: 30px;height: 30px;text-align: center" id="num" value="1" readonly="readonly" />
                         </li>
                         <li class="commonli">
                             <input type="button" id="" value="+" style="width: 20px;height: 30px;" readonly="readonly" onclick="document.all.num.value=parseInt(document.all.num.value)+1"/>
@@ -213,41 +214,28 @@
 
             </div>
             <div class="inner">
-                <ul>
-                    <li class="func focusOn clearfix">
-                        <div class="left">
-                            <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt=""
-                                 class="icon">
-                        </div>
-                        <div class="right">
-                            <p class="title">关注我们</p>
-                            <p class="desc">最受欢迎的阅读产品</p>
-                            <p class="subtitle">关注我们：</p>
-
-                        </div>
-                    </li>
-                    <li class="func author clearfix">
-                        <div class="left">
-                            <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt=""
-                                 class="icon">
-                        </div>
-                        <div class="right">
-                            <p class="title">作者后台</p>
-                            <p class="desc">加入当当原创网，尊享作者</p>
-                            <p class="subtitle">福利，成就网文大神</p>
-                        </div>
-                    </li>
-                    <li class="func about_us clearfix">
-                        <div class="left">
-                            <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
-                        </div>
-                        <div class="right">
-                            <p class="title">关于我们</p>
-                            <p class="desc">欢迎反馈宝贵意见给我们</p>
-                            <p class="subtitle">客服书吧：当当读书5.0问答</p>
-                        </div>
-                    </li>
-                </ul>
+                <table class="footerTable">
+                    <tr>
+                        <td>
+                            <div class="footerTable footDiv">
+                                <img src="${pageContext.request.contextPath}/static/img/footer_share.jpg" alt="" class="icon">
+                                <span class="title">关注我们</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="footerTable footDiv">
+                                <img src="${pageContext.request.contextPath}/static/img/footer_author.jpg" alt="" class="icon">
+                                <span class="title">作者后台</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="footerTable footDiv">
+                                <img src="${pageContext.request.contextPath}/static/img/footer_us.jpg" alt="" class="icon">
+                                <span class="title">关于我们</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
         </div>
@@ -277,14 +265,12 @@
             dataType:"json",
             data:{bId:bId,bNumber:bNumber},
             success:function (data) {
-
                 if (data == false) {
                     alert("请先登录！");
                     location.href="${pageContext.request.contextPath}/toLoginPage";
                 }else {
                     alert("已添加"+bNumber+"件图书到购物车");
                 }
-
             },
             fail:function (msg) {
                 alert("服务器错误");
