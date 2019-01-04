@@ -24,63 +24,32 @@
     </div>
     <div id="shopping_commend_sort">
         <div class="shopping_commend_sort_left">
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">JavaScript DOM编程艺术</a></li>
-                <li class="shopping_commend_list_2">￥39.00</li>
-                <li class="shopping_commend_list_3">￥29.30</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">解禁（当当网独家首发）</a></li>
-                <li class="shopping_commend_list_2">￥28.00</li>
-                <li class="shopping_commend_list_3">￥19.40</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">地王之王（金融危机下房地产行...</a></li>
-                <li class="shopping_commend_list_2">￥32.80</li>
-                <li class="shopping_commend_list_3">￥25.10</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">逃庄</a></li>
-                <li class="shopping_commend_list_2">￥36.00</li>
-                <li class="shopping_commend_list_3">￥27.70</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
+            <%--<c:forEach items="" var="">--%>
+                <%--<ul>--%>
+                    <%--<li class="shopping_commend_list_1">·<a href="#" class="blue">JavaScript DOM编程艺术</a></li>--%>
+                    <%--<li class="shopping_commend_list_2">￥39.00</li>--%>
+                    <%--<li class="shopping_commend_list_3">￥29.30</li>--%>
+                    <%--<li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>--%>
+                <%--</ul>--%>
+            <%--</c:forEach>--%>
+
         </div>
         <div class="shopping_commend_sort_mid"></div>
         <div class="shopping_commend_sort_left">
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">深入浅出MySQL数据库开发、优...</a></li>
-                <li class="shopping_commend_list_2">￥59.00</li>
-                <li class="shopping_commend_list_3">￥47.20</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">大玩家（马未都、王刚推荐!央...</a></li>
-                <li class="shopping_commend_list_2">￥34.80</li>
-                <li class="shopping_commend_list_3">￥20.60</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">都市风水师--官场风水小说：一...</a></li>
-                <li class="shopping_commend_list_2">￥39.80</li>
-                <li class="shopping_commend_list_3">￥30.50</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
-            <ul>
-                <li class="shopping_commend_list_1">·<a href="#" class="blue">国戏（以麻将术语解读宦海沉浮...</a></li>
-                <li class="shopping_commend_list_2">￥25.00</li>
-                <li class="shopping_commend_list_3">￥17.30</li>
-                <li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>
-            </ul>
+            <%--<c:forEach items="" var="">--%>
+                <%--<ul>--%>
+                    <%--<li class="shopping_commend_list_1">·<a href="#" class="blue">深入浅出MySQL数据库开发、优...</a></li>--%>
+                    <%--<li class="shopping_commend_list_2">￥59.00</li>--%>
+                    <%--<li class="shopping_commend_list_3">￥47.20</li>--%>
+                    <%--<li class="shopping_commend_list_4"><a href="#" class="shopping_yellow">购买</a></li>--%>
+                <%--</ul>--%>
+            <%--</c:forEach>--%>
+
         </div>
     </div>
 
     <div class="shopping_list_top">您已选购以下商品</div>
     <div class="shopping_list_border">
-
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr class="shopping_list_title">
                 <td class="shopping_list_title_1">商品名</td>
@@ -120,28 +89,29 @@
 
         <div class="ordersmessage" style="margin-top: 30px;margin-left: 700px;">
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">收货地址</li>
+                <li class="ordersmessageli shopping_product_list_6">收货地址:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="address" value="" name=""/>
+                    <input type="text" id="address" value="${loginCustomer.cAddress}" name=""/>
                 </li>
             </ul>
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">收货人</li>
+                <li class="ordersmessageli shopping_product_list_6">收货人:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="receiver" value="" name=""/>
+                    <input type="text" id="receiver" value="${loginCustomer.cName}" name=""/>
                 </li>
             </ul>
             <ul class="floatclear">
-                <li class="ordersmessageli shopping_product_list_6">电话</li>
+                <li class="ordersmessageli shopping_product_list_6">电话:</li>
                 <li class="ordersmessageli">
-                    <input type="text" id="phone" value="" name=""/>
+                    <input type="text" id="phone" value="${loginCustomer.cPhone}" name=""/>
                 </li>
             </ul>
         </div>
         <div class="shopping_list_end floatclear">
+            <input type="hidden" id="total" value="${totalMoney}">
             <ul>
                 <li class="shopping_list_end_1">
-                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif">
+                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif" onclick="balance()">
                 </li>
                 <li class="shopping_list_end_2">
                     ￥<label id="product_total"></label>
@@ -152,7 +122,7 @@
                 <li class="shopping_list_end_4">
                     您共节省金额：<fmt:formatNumber type="number" value="${totalMoney*0.2}" maxFractionDigits="2"/>￥<label class="shopping_list_end_yellow" id="product_save"></label>
                     <br/>
-                    可获商品积分：<fmt:formatNumber type="number" value="${totalMoney}" maxFractionDigits="0"/><label class="shopping_list_end_yellow" id="product_integral"></label>
+                    可获商品积分：<fmt:formatNumber  type="number" value="${totalMoney}" maxFractionDigits="0"/><label class="shopping_list_end_yellow" id="product_integral"></label>
                 </li>
             </ul>
         </div>
@@ -190,7 +160,17 @@
     }
     
     function balance() {
-        
+        if (!confirm("您确定要提交订单么？")){
+            alert("已取消！");
+            return;
+        }
+        var address = document.getElementById("address").value;
+        var receiver = document.getElementById("receiver").value;
+        var phone = document.getElementById("phone").value;
+        var total = document.getElementById("total").value;
+
+        location.href="${pageContext.request.contextPath}/shopCart/submitOrder?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
+
     }
 
 

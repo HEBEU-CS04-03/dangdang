@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: 91074
-  Date: 2018/12/31
-  Time: 12:05
+  Date: 2019/1/3
+  Time: 15:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,37 +26,9 @@
           id="skin" />
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/static/h-ui.admin/css/style.css" />
-
-
-
-    <title>Insert title here</title>
+    <title>Title</title>
 </head>
 <body>
-<div id="header" class="navbar-wrapper">
-    <div class="navbar navbar-fixed-top">
-        <div class="container-fluid cl">
-            <a class="logo navbar-logo f-l mr-10 hidden-xs" href="">当当网上书城管理员后台界面</a>
-            <nav class="nav navbar-nav">
-                <ul class="cl">
-                    <li class="dropDown dropDown_hover"><a href=""
-                                                           class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i>新增<i
-                            class="Hui-iconfont">&#xe6d5;</i></a>
-                        <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a href="" onclick=""><i class="Hui-iconfont">&#xe616;</i>资讯</a></li>
-                            <li><a href="" onclick=""><i class="Hui-iconfont">&#xe613;</i>图片</a></li>
-                        </ul></li>
-                </ul>
-            </nav>
-            <nav id="Hui-userbar"
-                 class="nav navbar-nav navbar-userbar hidden-xs">
-                <ul class="cl">
-                    <li>超级管理员</li>
-
-                </ul>
-            </nav>
-        </div>
-    </div>
-</div>
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         <dl id="">
@@ -67,7 +38,7 @@
             </dt>
             <dd>
                 <ul>
-                    <li><a href="${pageContext.request.contextPath}/admin/selectbooktype" target="" title="统计订单">统计订单</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/selectbooktype" title="统计订单" target="main">统计订单</a></li>
                     <li><a data-href="admin_ordersstatus.jsp" data-title="物流状态" href="javascript:void(0)">物流状态</a></li>
                 </ul>
             </dd>
@@ -113,8 +84,5 @@
         src="${pageContext.request.contextPath}/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript"
         src="${pageContext.request.contextPath}/static/js/jquery.contextmenu.r2.js"></script>
-
-
-
 </body>
 </html>

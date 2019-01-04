@@ -125,7 +125,7 @@
                 </ul>
             </div>
         </c:forEach>
-        <c:if test="${books eq null}">
+        <c:if test="${books.size() eq 0}">
             <p style="color: red; font-size: medium">暂无图书</p>
         </c:if>
 

@@ -1,5 +1,7 @@
 package com.hebeu.group.pojo;
 
+import com.hebeu.group.util.DateUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -465,7 +467,7 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderTimeEqualTo(Date value) {
+        public Criteria andOrderTimeEqualTo(String value) {
             addCriterion("order_time =", value, "orderTime");
             return (Criteria) this;
         }
@@ -505,7 +507,7 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderTimeBetween(Date value1, Date value2) {
+        public Criteria andOrderTimeBetween(String value1, String value2) {
             addCriterion("order_time between", value1, value2, "orderTime");
             return (Criteria) this;
         }
