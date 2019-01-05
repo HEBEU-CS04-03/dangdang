@@ -82,4 +82,18 @@ public class Orders {
     public void setOrderStatus(Boolean orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "orderId='" + orderId + '\'' +
+                ", orderPayment='" + orderPayment + '\'' +
+                ", orderAdress='" + orderAdress + '\'' +
+                ", orderEmail='" + orderEmail + '\'' +
+                ", orderUser='" + orderUser + '\'' +
+                ", orderTime=" + orderTime +
+                ", orderSum=" + orderSum +
+                ", orderStatus=" + orderStatus +
+                '}';
+    }
 }
