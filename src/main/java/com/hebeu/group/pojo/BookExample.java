@@ -185,7 +185,7 @@ public class BookExample {
             return (Criteria) this;
         }
 
-        public Criteria andTIdEqualTo(Integer value) {
+        public Criteria andTIdEqualTo(String value) {
             addCriterion("t_id =", value, "tId");
             return (Criteria) this;
         }

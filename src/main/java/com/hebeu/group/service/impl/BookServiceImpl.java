@@ -71,7 +71,7 @@ import java.util.List;
     public List<Book> selectBooksByType(Integer typeId) {
         BookExample bookExample = new BookExample();
         BookExample.Criteria criteria = bookExample.createCriteria();
-        criteria.andTIdEqualTo(typeId);
+        criteria.andTIdGreaterThanOrEqualTo(typeId);
         return bookMapper.selectByExample(bookExample);
     }
 
