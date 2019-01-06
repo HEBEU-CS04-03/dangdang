@@ -76,4 +76,22 @@ public interface BookService {
      * @return
      */
     List<Book> selectAllBook();
+
+    /**
+     * 更新图书
+     * @param book
+     */
+    void updateBook(Book book);
+
+    /**
+     * 删除图书通过id
+     * @param id
+     */
+    void deleteBookById(String id);
+
+    /**
+     * 新增图书
+     * @param book
+     */
+    void addBook(Book book);
 }

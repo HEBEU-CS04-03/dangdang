@@ -55,6 +55,63 @@
 </head>
 
 <body>
+
+<!-- 员工添加的模态框 -->
+<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">图书添加</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">图书名称</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="empName" class="form-control" id="empName_add_input"
+                                   placeholder="呵呵">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="address" class="form-control" id="email_add_input"
+                                   placeholder="roobtyan@aliyun.com">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">性别</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender1_add_input" value="男" checked="checked"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" id="gender2_add_input" value="女"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">部门名称</label>
+                        <div class="col-sm-4">
+                            <!-- 部门提交部门id即可 -->
+                            <select class="form-control" name="dId">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page-content clearfix">
     <div id="Member_Ratings">
         <div class="d_Confirm_Order_style">
@@ -155,23 +212,23 @@
         }
     })
 
-    /*-审核通过*/
+    /*-删除通过*/
     function member_go(obj, id) {
-        layer.confirm('确认要审核通过吗？', function (index) {
+        layer.confirm('确认要删除吗？', function (index) {
             $.ajax({
-                url: "/admin/restaurant",
-                data: "method=auditThrough&restaurantId=" + id,
+                url: "/adminBook/deleteBookById",
+                data: "bId=" + id,
                 type: "POST",
                 success: function (result) {
-                    layer.msg('审核通过!', {icon: 6, time: 1000});
+                    layer.msg('删除成功!', {icon: 6, time: 1000});
                 }
             });
-            setTimeout("location.href = '/admin/restaurant?method=auditRestaurantList'", "1500");
+            setTimeout("location.href = '/adminBook/toBookList'", "1500");
         });
     }
 
 
-    //批量通过
+    //批量删除
     $("#delete_selected").click(function () {
         //遍历每一个被选中的元素
         var userNames = "";
@@ -185,18 +242,25 @@
         userNames = userNames.substring(0, userNames.length - 1);
         //去除删除的id多余的-
         del_idstr = del_idstr.substring(0, del_idstr.length - 1);
-        layer.confirm('确认要审核通过' + '[' + userNames + ']' + '吗？', function () {
+        layer.confirm('确认要删除' + '[' + userNames + ']' + '吗？', function () {
             $.ajax({
-                url: "/admin/restaurant",
-                data: "method=auditThrough&restaurantId=" + del_idstr,
+                url: "/adminBook/deleteBookById",
+                data: "bId=" + del_idstr,
                 type: "POST",
                 success: function () {
-                    layer.msg('已经通过!', {icon: 1, time: 1000});
+                    layer.msg('删除成功!', {icon: 1, time: 1000});
                 }
             });
-            setTimeout("location.href = '/admin/restaurant?method=auditRestaurantList'", "1500");
+            setTimeout("location.href = '/adminBook/toBookList'", "1500");
         });
     });
+
+    $("#member_add").click(function () {
+        // location.href = "/adminBook/toAddBook";
+        $("#empAddModal").modal({
+            backdrop: "static"
+        });
+    })
 
     laydate({
         elem: '#start',

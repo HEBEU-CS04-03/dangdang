@@ -110,4 +110,19 @@ public class BookServiceImpl implements BookService {
 
         return bookMapper.selectByExample(bookExample);
     }
+
+    @Override
+    public void updateBook(Book book) {
+        bookMapper.updateByPrimaryKey(book);
+    }
+
+    @Override
+    public void deleteBookById(String id) {
+        bookMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void addBook(Book book) {
+        bookMapper.insert(book);
+    }
 }
