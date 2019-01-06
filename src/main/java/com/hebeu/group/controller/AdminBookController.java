@@ -1,13 +1,20 @@
 package com.hebeu.group.controller;
 
 import com.hebeu.group.pojo.Book;
+import com.hebeu.group.pojo.BookType;
+import com.hebeu.group.pojo.vo.BookVo;
 import com.hebeu.group.service.BookService;
 import com.hebeu.group.util.DateUtil;
+import com.hebeu.group.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,7 +53,9 @@ public class AdminBookController {
      * @return
      */
     @RequestMapping(value = "/toAddBook")
-    public String toAddBook() {
+    public String toAddBook(Model model) {
+        List<BookType> bookTypes = bookService.selectBookType();
+        model.addAttribute("bookType", bookTypes);
         return "admin/book_add";
     }
 
@@ -57,7 +66,29 @@ public class AdminBookController {
      * @return
      */
     @RequestMapping(value = "/addBook")
-    public String addBook(Book book) {
+    public String addBook(BookVo book, HttpSession session) {
+        System.out.println(book.toString());
+        // 上传文件路径
+        String path = session.getServletContext().getRealPath(
+                "/static/img/");
+        System.out.println(path);
+        // 上传文件名
+        String fileName = book.getFile().getOriginalFilename();
+        // 将上传文件保存到一个目标文件当中
+        try {
+            book.getFile().transferTo(new File(path + File.separator + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<Book> books = bookService.selectAllBook();
+        Book book1 = books.get(books.size() - 1);
+        int id = Integer.parseInt(book1.getbId());
+        book.setbId(String.valueOf(id + 1));
+        // 插入数据库
+        // 设置fileName
+        book.setbImage(fileName);
+        // 插入数据库
         bookService.addBook(book);
         //重定向列表请求
         return "redirect:/adminBook/toBookList";
@@ -71,8 +102,11 @@ public class AdminBookController {
      */
     @RequestMapping(value = "/findBookById")
     public String findBookById(String bId, Model model) {
-        Book book1 = bookService.selectBookById(bId);
-        model.addAttribute("booktype", book1);
+        Book book = bookService.selectBookById(bId);
+        List<BookType> bookTypes = bookService.selectBookType();
+        model.addAttribute("bookType", bookTypes);
+        model.addAttribute("dateUtil",new DateUtil());
+        model.addAttribute("book", book);
         return "admin/book_edit";
     }
 
@@ -83,11 +117,27 @@ public class AdminBookController {
      * @return
      */
     @RequestMapping(value = "/updateBook")
-    public String updateBook(Book book) {
-        System.out.println("进入到controller修改请求");
-        //执行修改操作
-        bookService.updateBook(book);
+    public String updateBook(BookVo bookVo, HttpSession session) {
 
+        // 插入数据库
+        if (bookVo.getFile() != null) {
+            // 上传文件路径
+            String path = session.getServletContext().getRealPath(
+                    "/static/img/");
+            System.out.println(path);
+            // 上传文件名
+            String fileName = bookVo.getFile().getOriginalFilename();
+            // 将上传文件保存到一个目标文件当中
+            try {
+                bookVo.getFile().transferTo(new File(path + File.separator + fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // 设置fileName
+            bookVo.setbImage(fileName);
+        }
+        //执行修改操作
+        bookService.updateBook(bookVo);
         return "redirect:/adminBook/toBookList";
     }
 

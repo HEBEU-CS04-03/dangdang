@@ -113,7 +113,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateBook(Book book) {
-        bookMapper.updateByPrimaryKey(book);
+        bookMapper.updateByPrimaryKeySelective(book);
     }
 
     @Override

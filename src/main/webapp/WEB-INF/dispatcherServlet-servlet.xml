@@ -34,5 +34,17 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!-- 自定义参数绑定 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <set>
+                <!-- 日期类型转换 -->
+                <bean class="com.hebeu.group.controller.CustomDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
 
 </beans>

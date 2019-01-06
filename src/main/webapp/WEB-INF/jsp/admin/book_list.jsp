@@ -56,62 +56,6 @@
 
 <body>
 
-<!-- 员工添加的模态框 -->
-<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">图书添加</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">图书名称</label>
-                        <div class="col-sm-8">
-                            <input type="text" name="empName" class="form-control" id="empName_add_input"
-                                   placeholder="呵呵">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">邮箱</label>
-                        <div class="col-sm-8">
-                            <input type="text" name="address" class="form-control" id="email_add_input"
-                                   placeholder="roobtyan@aliyun.com">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">性别</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender1_add_input" value="男" checked="checked"> 男
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="gender" id="gender2_add_input" value="女"> 女
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">部门名称</label>
-                        <div class="col-sm-4">
-                            <!-- 部门提交部门id即可 -->
-                            <select class="form-control" name="dId">
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="page-content clearfix">
     <div id="Member_Ratings">
         <div class="d_Confirm_Order_style">
@@ -157,9 +101,9 @@
                                 <span class="label label-success radius">审核通过</span>
                             </td>
                             <td class="td-manage">
-                                <a onClick="member_go(this,'${re.bId}')" href="javascript:;" title="删除图书"
+                                <a onClick="member_go(this,'${re.bId}')" href="javascript:void()" title="删除图书"
                                    class="btn btn-xs btn-danger"><i class="icon-trash bigger-120"></i></a>
-                                <a onClick="update_go(this,'${re.bId}')" href="javascript:;" title="修改图书"
+                                <a onclick="update_go(this,'${re.bId}')" href="javascript:void()" title="修改图书"
                                    class="btn btn-xs btn-success"><i class="icon-edit bigger-120"></i></a>
                             </td>
                         </tr>
@@ -227,6 +171,10 @@
         });
     }
 
+    function update_go(obj, id) {
+        location.href = "/adminBook/findBookById?bId=" + id;
+    }
+
 
     //批量删除
     $("#delete_selected").click(function () {
@@ -256,10 +204,7 @@
     });
 
     $("#member_add").click(function () {
-        // location.href = "/adminBook/toAddBook";
-        $("#empAddModal").modal({
-            backdrop: "static"
-        });
+        location.href = "/adminBook/toAddBook";
     })
 
     laydate({
