@@ -17,15 +17,15 @@ import java.util.List;
  * @date 2018/12/25 8:44
  */
 @Service
-    public class BookServiceImpl implements BookService {
-        private BookTypeMapper bookTypeMapper;
-        private BookMapper bookMapper;
+public class BookServiceImpl implements BookService {
+    private BookTypeMapper bookTypeMapper;
+    private BookMapper bookMapper;
 
-        @Autowired
-        public BookServiceImpl(BookTypeMapper bookTypeMapper, BookMapper bookMapper) {
-            this.bookTypeMapper = bookTypeMapper;
-            this.bookMapper = bookMapper;
-        }
+    @Autowired
+    public BookServiceImpl(BookTypeMapper bookTypeMapper, BookMapper bookMapper) {
+        this.bookTypeMapper = bookTypeMapper;
+        this.bookMapper = bookMapper;
+    }
 
     @Override
     public List<BookType> selectBookType() {

@@ -65,4 +65,9 @@ public class AdminServiceImpl implements AdminService {
         criteria.andAIdEqualTo(id);
         return adminMapper.selectByExample(adminExample).get(0);
     }
+
+    @Override
+    public void updateAdmin(Admin admin) {
+        adminMapper.updateByPrimaryKey(admin);
+    }
 }

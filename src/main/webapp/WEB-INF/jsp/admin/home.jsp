@@ -33,18 +33,18 @@
 <div class="page-content clearfix">
  <div class="alert alert-block alert-success">
   <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-  <i class="icon-ok green"></i>欢迎使用<strong class="green">后台管理系统<small>(v1.2)</small></strong>,你本次登陆时间为2016年7月12日13时34分，登陆IP:192.168.1.110.	
+  <i class="icon-ok green"></i>欢迎使用<strong class="green">"当当书城"后台管理系统<small>(v1.2)</small></strong>
  </div>
  <div class="state-overview clearfix">
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
-                      <a href="#" title="商城会员">
+                      <a href="#" title="'当当书城'用户">
                           <div class="symbol terques">
                              <i class="icon-user"></i>
                           </div>
                           <div class="value">
-                              <h1>34522</h1>
-                              <p>访问数量</p>
+                              <h1>${userNums}</h1>
+                              <p>用户数量</p>
                           </div>
                           </a>
                       </section>
@@ -55,8 +55,8 @@
                               <i class="icon-tags"></i>
                           </div>
                           <div class="value">
-                              <h1>${dishNum}</h1>
-                              <p>菜品数量</p>
+                              <h1>${restaurantNums}</h1>
+                              <p>商家数量</p>
                           </div>
                       </section>
                   </div>
@@ -66,8 +66,8 @@
                               <i class="icon-shopping-cart"></i>
                           </div>
                           <div class="value">
-                              <h1>${orderNum}</h1>
-                              <p>订单数量</p>
+                              <h1>${orderNums}</h1>
+                              <p>商城订单</p>
                           </div>
                       </section>
                   </div>
@@ -77,8 +77,8 @@
                               <i class="icon-bar-chart"></i>
                           </div>
                           <div class="value">
-                              <h1>￥${totalMoney}</h1>
-                              <p>订单金额</p>
+                              <h1>${subMoney}</h1>
+                              <p>交易记录</p>
                           </div>
                       </section>
                   </div>
@@ -87,17 +87,7 @@
              <div class="clearfix">
              <div class="t_Record">
                <div id="main" style="height:300px; overflow:hidden; width:100%; overflow:auto" ></div>     
-              </div> 
-         <div class="news_style">
-          <div class="title_name">最新消息</div>
-          <ul class="list">
-           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
-           <li><i class="icon-bell red"></i><a href="#">6月共处理订单3451比，作废为...</a></li>
-           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
-           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
-           <li><i class="icon-bell red"></i><a href="#">后台系统找那个是开通了。</a></li>
-          </ul>
-         </div> 
+              </div>
          </div>
  
 <script type="text/javascript">

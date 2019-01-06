@@ -22,4 +22,10 @@ public interface AdminService {
      * @return
      */
     Admin getAdminById(Integer id);
+
+	/**
+	 * 更新管理员
+	 * @param admin
+	 */
+	void updateAdmin(Admin admin);
 }

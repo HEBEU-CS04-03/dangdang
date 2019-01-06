@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hebeu.group.mapper.AdminMapper">
   <resultMap id="BaseResultMap" type="com.hebeu.group.pojo.Admin">
-    <result column="a_id" jdbcType="INTEGER" property="aId" />
+    <id column="a_id" jdbcType="INTEGER" property="aId" />
     <result column="a_name" jdbcType="VARCHAR" property="aName" />
     <result column="a_pass" jdbcType="VARCHAR" property="aPass" />
     <result column="a_phone" jdbcType="VARCHAR" property="aPhone" />
@@ -83,6 +83,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.hebeu.group.pojo.AdminExample">
     delete from admin
     <if test="_parameter != null">
@@ -171,5 +181,31 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hebeu.group.pojo.Admin">
+    update admin
+    <set>
+      <if test="aName != null">
+        a_name = #{aName,jdbcType=VARCHAR},
+      </if>
+      <if test="aPass != null">
+        a_pass = #{aPass,jdbcType=VARCHAR},
+      </if>
+      <if test="aPhone != null">
+        a_phone = #{aPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="aEmail != null">
+        a_email = #{aEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hebeu.group.pojo.Admin">
+    update admin
+    set a_name = #{aName,jdbcType=VARCHAR},
+      a_pass = #{aPass,jdbcType=VARCHAR},
+      a_phone = #{aPhone,jdbcType=VARCHAR},
+      a_email = #{aEmail,jdbcType=VARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,7 +1,5 @@
 package com.hebeu.group.pojo;
 
-import com.hebeu.group.util.DateUtil;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -467,7 +465,7 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderTimeEqualTo(String value) {
+        public Criteria andOrderTimeEqualTo(Date value) {
             addCriterion("order_time =", value, "orderTime");
             return (Criteria) this;
         }
@@ -507,7 +505,7 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderTimeBetween(String value1, String value2) {
+        public Criteria andOrderTimeBetween(Date value1, Date value2) {
             addCriterion("order_time between", value1, value2, "orderTime");
             return (Criteria) this;
         }
@@ -587,52 +585,52 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusEqualTo(Boolean value) {
+        public Criteria andOrderStatusEqualTo(Integer value) {
             addCriterion("order_status =", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotEqualTo(Boolean value) {
+        public Criteria andOrderStatusNotEqualTo(Integer value) {
             addCriterion("order_status <>", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThan(Boolean value) {
+        public Criteria andOrderStatusGreaterThan(Integer value) {
             addCriterion("order_status >", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andOrderStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("order_status >=", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThan(Boolean value) {
+        public Criteria andOrderStatusLessThan(Integer value) {
             addCriterion("order_status <", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusLessThanOrEqualTo(Boolean value) {
+        public Criteria andOrderStatusLessThanOrEqualTo(Integer value) {
             addCriterion("order_status <=", value, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusIn(List<Boolean> values) {
+        public Criteria andOrderStatusIn(List<Integer> values) {
             addCriterion("order_status in", values, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotIn(List<Boolean> values) {
+        public Criteria andOrderStatusNotIn(List<Integer> values) {
             addCriterion("order_status not in", values, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusBetween(Boolean value1, Boolean value2) {
+        public Criteria andOrderStatusBetween(Integer value1, Integer value2) {
             addCriterion("order_status between", value1, value2, "orderStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOrderStatusNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andOrderStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("order_status not between", value1, value2, "orderStatus");
             return (Criteria) this;
         }

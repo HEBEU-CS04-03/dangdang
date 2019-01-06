@@ -20,9 +20,11 @@ import com.hebeu.group.service.BookTypeService;
 */
 
 @Controller
-@RequestMapping(value="/admin")
+@RequestMapping(value="/bookType")
 public class BookTypeController {
-	//注入service
+	/**
+	 * 自动注入
+	 */
 	@Autowired
 	private BookTypeService booktypeService;
 	/**
@@ -32,11 +34,12 @@ public class BookTypeController {
 	 */
 	@RequestMapping(value="/selectBookType")
 	 public String selectBookType(Model model){
-		List<BookType> booktype = booktypeService.findAllBookType();
+		List<BookType> bookType = booktypeService.findAllBookType();
 		//返回前端的信息
-		model.addAttribute("booktype", booktype);
-		model.addAttribute("booktype_count", booktype.size());
-		return "admin/booktype_list";  //图书种类页面
+		model.addAttribute("bookType", bookType);
+		model.addAttribute("bookTypeCount", bookType.size());
+		//图书种类页面
+		return "admin/book_type_list";
 	}
 	/**
 	 * 搜索功能通过名称搜索，模糊查询
