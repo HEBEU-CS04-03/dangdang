@@ -60,10 +60,9 @@
         <div class="d_Confirm_Order_style">
             <div class="border clearfix">
        <span class="l_f">
-<%--
-        <a href="javascript:ovid()" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
---%>
-        <a href="javascript:ovid()" class="btn btn-success" id="delete_selected"><i class="icon-archive"></i>批量通过</a>
+        <a href="javascript:void()" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加图书</a>
+        <a href="javascript:void()" class="btn btn-danger" id="delete_selected"><i class="icon-archive"></i>批量删除</a>
+
        </span>
                 <span class="r_f">共：<b>${count}</b>条</span>
             </div>
@@ -156,7 +155,7 @@
         }
     })
 
-    /*商家-审核通过*/
+    /*-审核通过*/
     function member_go(obj, id) {
         layer.confirm('确认要审核通过吗？', function (index) {
             $.ajax({

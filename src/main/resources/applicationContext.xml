@@ -71,21 +71,19 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--开启基于注解的控制,一般使用配置方式进行控制-->
+    <!--开启基于注解的AOP控制,一般使用配置方式进行控制-->
     <aop:config>
         <!--切入点表达式-->
-        <aop:pointcut id="txPoint" expression="execution(* com.hebeu.group.service..*(..))"/>
-        <!--事务增强配置-->
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPoint"/>
+        <!--<aop:pointcut id="txPoint" expression="execution(* com.hebeu.group.controller.AdminController.*(..))"/>-->
     </aop:config>
 
     <!--事务增强-->
     <tx:advice id="txAdvice">
-        <tx:attributes>
-            <tx:method name="*"/>
-            <!--以get开始的所有方法-->
-            <tx:method name="get*" read-only="true"/>
-        </tx:attributes>
+        <!--<tx:attributes>-->
+            <!--<tx:method name="*"/>-->
+            <!--&lt;!&ndash;以get开始的所有方法&ndash;&gt;-->
+            <!--<tx:method name="get*" read-only="true"/>-->
+        <!--</tx:attributes>-->
     </tx:advice>
 
     <!--Spring配置的核心:数据源\mybatis整合\事务控制\事务增强-->

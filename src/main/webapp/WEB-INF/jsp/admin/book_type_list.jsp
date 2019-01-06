@@ -60,10 +60,11 @@
         <div class="d_Confirm_Order_style">
             <div class="border clearfix">
        <span class="l_f">
-<%--
-        <a href="javascript:ovid()" id="member_add" class="btn btn-warning"><i class="icon-plus"></i>添加用户</a>
---%>
-        <a href="javascript:ovid()" class="btn btn-danger" id="delete_selected"><i class="icon-trash"></i>批量删除</a>
+           <a href="javascript:void()" class="btn btn-danger" id="delete_selected"><i class="icon-trash"></i>批量删除</a>
+           &nbsp;&nbsp;
+           <a href="javascript:void()" class="btn btn-success" id="insert_book_type" title="新增图书分类"><i
+                   class="icon-adjust"></i>新增图书分类</a>
+
        </span>
                 <span class="r_f">共：<b>${bookTypeCount}</b>条</span>
             </div>
@@ -158,23 +159,28 @@
         }
     })
 
-    /*商家-删除商家*/
+    /*删除*/
     function member_go(obj, id) {
-        layer.confirm('确认要删除此商家吗？', function (index) {
+        layer.confirm('确认要删除此分类吗？', function (index) {
             $.ajax({
-                url: "/admin/restaurant",
-                data: "method=deleteRes&restaurantId=" + id,
+                url: "/bookType/deleteBookTypeById",
+                data: "tId=" + id,
                 type: "POST",
                 success: function (result) {
                     layer.msg('已经删除!', {icon: 6, time: 1000});
                 }
             });
-            setTimeout("location.href = '/admin/restaurant?method=toRestaurantList'", "1500");
+            setTimeout("location.href = '/bookType/selectBookType'", "1500");
         });
     }
 
+    /* 修改 */
+    function update_go(obj, id) {
+        location.href = "/bookType/findBookTypeById?id=" + id;
+    }
 
-    //批量通过
+
+    //批量删除
     $("#delete_selected").click(function () {
         //遍历每一个被选中的元素
         var userNames = "";
@@ -188,17 +194,21 @@
         userNames = userNames.substring(0, userNames.length - 1);
         //去除删除的id多余的-
         del_idstr = del_idstr.substring(0, del_idstr.length - 1);
-        layer.confirm('确认要审核通过' + '[' + userNames + ']' + '吗？', function () {
+        layer.confirm('确认要删除' + '[' + userNames + ']' + '吗？', function () {
             $.ajax({
-                url: "/admin/restaurant",
-                data: "method=deleteRes&restaurantId=" + del_idstr,
+                url: "/bookType/deleteBookTypeById",
+                data: "tId=" + del_idstr,
                 type: "POST",
                 success: function () {
                     layer.msg('已经删除!', {icon: 1, time: 1000});
                 }
             });
-            setTimeout("location.href = '/admin/restaurant?method=toRestaurantList'", "1500");
+            setTimeout("location.href = '/bookType/selectBookType'", "1500");
         });
+    });
+
+    $("#insert_book_type").click(function () {
+        location.href = "/bookType/toaddBookType";
     });
 
     laydate({

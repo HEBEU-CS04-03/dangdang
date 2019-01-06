@@ -252,12 +252,12 @@
                     <ul class="submenu">
                         <li class="home"><a href="javascript:void(0)"
                                             name="${pageContext.request.contextPath}/admin/restaurant?method=auditRestaurantList"
-                                            title="商家入驻审核"
-                                            class="iframeurl"><i class="icon-double-angle-right"></i>商家入驻审核</a></li>
+                                            title="入驻审核"
+                                            class="iframeurl"><i class="icon-double-angle-right"></i>入驻审核</a></li>
                         <li class="home"><a href="javascript:void(0)"
                                             name="${pageContext.request.contextPath}/admin/restaurant?method=toRestaurantList"
-                                            title="商家列表"
-                                            class="iframeurl"><i class="icon-double-angle-right"></i>商家列表 </a></li>
+                                            title="列表"
+                                            class="iframeurl"><i class="icon-double-angle-right"></i>列表 </a></li>
                     </ul>
                 </li>
                 <li>

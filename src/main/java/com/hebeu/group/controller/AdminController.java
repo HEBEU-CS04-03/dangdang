@@ -38,20 +38,6 @@ public class AdminController {
     }
 
     /**
-     * 跳转至首页
-     *
-     * @param session
-     * @param model
-     * @return
-     */
-    @RequestMapping("/toIndex")
-    public String toIndex(HttpSession session, Model model) {
-        Admin admin = (Admin) session.getAttribute("admin");
-        model.addAttribute("admin", admin);
-        return "admin/index";
-    }
-
-    /**
      * 跳转到home页面
      * @param model
      * @param session
@@ -82,7 +68,19 @@ public class AdminController {
         }
         //存在转向主页面
         session.setAttribute("admin", admin);
-        model.addAttribute("username", username);
+        return "redirect:/admin/toIndex";
+    }
+
+    /**
+     * 防止重复提交表单
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("toIndex")
+    public String toIndex(Model model, HttpSession session) {
+        Admin admin = (Admin) session.getAttribute("admin");
+        model.addAttribute("username", admin.getaName());
         model.addAttribute("admin", admin);
         return "admin/index";
     }

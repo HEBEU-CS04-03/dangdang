@@ -153,9 +153,9 @@
         }
     })
 
-    /*商家-删除商家*/
+    /*-删除*/
     /*function member_go(obj, id) {
-        layer.confirm('确认要删除此商家吗？', function (index) {
+        layer.confirm('确认要删除此吗？', function (index) {
             $.ajax({
                 url: "/admin/restaurant",
                 data: "method=deleteRes&restaurantId=" + id,

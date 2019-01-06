@@ -56,7 +56,7 @@
                           </div>
                           <div class="value">
                               <h1>${restaurantNums}</h1>
-                              <p>商家数量</p>
+                              <p>数量</p>
                           </div>
                       </section>
                   </div>
