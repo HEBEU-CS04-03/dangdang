@@ -116,7 +116,8 @@
             <input type="hidden" id="total" value="${totalMoney}">
             <ul>
                 <li class="shopping_list_end_1">
-                    <input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif" onclick="balance()">
+                    <%--<input name="" type="image" src="${pageContext.request.contextPath}/static/images/shopping_balance.gif" onclick="balance()">--%>
+                    <button onclick="balance()" style="height: 43px">提交订单</button>
                 </li>
                 <li class="shopping_list_end_2">
                     ￥<label id="product_total"></label>
@@ -173,8 +174,13 @@
         var receiver = document.getElementById("receiver").value;
         var phone = document.getElementById("phone").value;
         var total = document.getElementById("total").value;
-
+        if (total == 0){
+            alert("当前购物车为空，无法提交订单！");
+            return;
+        }
         location.href="${pageContext.request.contextPath}/shopCart/submitOrder?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
+
+        <%--location.href="${pageContext.request.contextPath}/orders/toPay?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";--%>
     }
 
     function addShopCart(bId) {

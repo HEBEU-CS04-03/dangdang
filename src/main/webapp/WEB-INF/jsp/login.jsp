@@ -14,7 +14,7 @@
 <div id="header">
    <div class="login_header_left"><img src="${pageContext.request.contextPath}/static/img/logo.jpg" alt="logo"></div>
    <div class="login_header_mid">我的生活我的当当</div>
-   <div class="login_header_right"><a href="index.jsp" class="blue">首页</a> | <a href="product.html" class="blue">商品展示页</a>  | <a href="shopping.jsp" class="blue">购物车</a> | <a href="${pageContext.request.contextPath}/customer/registerTo;" class="blue">注册</a></div>
+   <div class="login_header_right"><a href="${pageContext.request.contextPath}/book/toIndex" class="blue">首页</a>| <a href="${pageContext.request.contextPath}/customer/registerTo;" class="blue">注册</a></div>
 </div>
 
 <div id="main">

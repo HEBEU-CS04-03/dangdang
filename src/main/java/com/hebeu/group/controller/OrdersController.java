@@ -1,9 +1,9 @@
 package com.hebeu.group.controller;
 
-import com.hebeu.group.pojo.Book;
-import com.hebeu.group.pojo.Customer;
-import com.hebeu.group.pojo.ShopCart;
+import com.hebeu.group.pojo.*;
+import com.hebeu.group.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,54 +23,56 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrdersController {
     private OrdersService ordersService;
-    private BookService bookService;
 
     @Autowired
     public OrdersController(OrdersService ordersService, BookService bookService) {
         this.ordersService = ordersService;
-        this.bookService = bookService;
     }
 
     /**
-     * 结算页面
+     * 我的订单
      */
-    @RequestMapping("/order-cart")
-    public String showOrderCart() {
-        return "order-cart";
-    }
-
-    /**
-     * 跳转到我的订单
-     *
-     * @param session session
-     * @param model   model
-     * @return 购物车页面
-     */
-    @RequestMapping("toOrders")
-    public String toShopCart(HttpSession session, Model model) {
-        //获取session中的登录用户信息
+    @RequestMapping("/toOrderList")
+    public String toOrderList(HttpSession session, Model model) {
         Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
-        //判断是否登录
         if (loginCustomer == null) {
             model.addAttribute("message", "您还未登录，请先登录！");
             return "login";
         } else {
 
-            return "orderList";
+            List<Orders> ordersList = ordersService.selectOrdersByorderUser(loginCustomer.getcName());
+            model.addAttribute("orders", ordersService.selectOrdersByorderUser(loginCustomer.getcName()));
+            model.addAttribute("dateUtil", new DateUtil());
         }
 
-
+        return "orderlist";
     }
 
     /**
-     * \删除订单
-     *
-     * @param orderId
-     * @return
+     * 查看订单详情
+     * localhost:8080/orders/OrderRecord?orderId=?
      */
-    @RequestMapping("/deleteOrder")
-    public String deleteOrder(String orderId) {
-        ordersService.deleteorders(orderId);
-        return "orderList";
+    @RequestMapping("/OrderRecord")
+    public String OrderRecord(HttpSession session, Model model, String orderId) {
+        List<OrderRecord> orderRecord = ordersService.selectOrdersByorderId(orderId);
+        model.addAttribute("oId", orderId);
+        model.addAttribute("orderRecord", orderRecord);
+        return "orderRecord";
+    }
+
+    /**
+     * 支付页面
+     */
+    @RequestMapping("/toPay")
+    public String toPay() {
+        return "pay";
+    }
+
+    /**
+     * 支付成功
+     */
+    @RequestMapping("/PaySuccess")
+    public String PaySuccess() {
+        return "paysuccess";
     }
 }

@@ -26,7 +26,7 @@
                                            class="login_link">登录</a></span>
         </c:if>
         <c:if test="${username != null}">
-            <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
+            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer" target="_self"
                                       rel="nofollow"
                                       class="login_link">${username}</a></span>
         </c:if>
@@ -64,13 +64,13 @@
         <ul class="header_fun header_funina">
             <li class="icon">&nbsp;</li>
             <li class="header_cart">
-                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车">
+                <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车" target="_blank">
                     购物车
                 </a>
             </li>
             <li class="icon2">&nbsp;</li>
             <li class="header_order">
-                <a href="javascript:void(0)" id="headerMyOrder">
+                <a href="${pageContext.request.contextPath}/orders/toOrderList" id="headerMyOrder">
                     我的订单
                 </a>
             </li>
