@@ -174,7 +174,7 @@
         var phone = document.getElementById("phone").value;
         var total = document.getElementById("total").value;
 
-        location.href="${pageContext.request.contextPath}/shopCart/submitOrder?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
+        location.href="${pageContext.request.contextPath}/orders/toPay?cAddress="+address+"&receiver="+receiver+"&cPhone="+phone+"&total="+total+"";
     }
 
     function addShopCart(bId) {

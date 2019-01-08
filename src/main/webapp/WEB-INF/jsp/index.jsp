@@ -75,7 +75,7 @@
             </li>
             <li class="icon2">&nbsp;</li>
             <li class="header_order">
-                <a href="javascript:void(0)" id="headerMyOrder">
+                <a href="${pageContext.request.contextPath}/orders/toOrderList" id="headerMyOrder">
                     我的订单
                 </a>
             </li>

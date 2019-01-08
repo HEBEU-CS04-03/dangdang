@@ -2,17 +2,12 @@ package com.hebeu.group.service.impl;
 
 import java.util.List;
 
+import com.hebeu.group.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import com.hebeu.group.mapper.OrderRecordMapper;
 import com.hebeu.group.mapper.OrdersMapper;
-import com.hebeu.group.pojo.Orders;
-import com.hebeu.group.pojo.OrdersExample;
-import com.hebeu.group.pojo.ShopCart;
-import com.hebeu.group.pojo.ShopCartExample;
 import com.hebeu.group.pojo.OrdersExample.Criteria;
 import com.hebeu.group.service.OrdersService;
 
@@ -21,36 +16,27 @@ public class OrdersServiceImpl implements OrdersService {
 	@Autowired
 	private OrdersMapper ordersMapper;
 	@Autowired
-	private OrderRecordMapper orderItemMapper;
+	private OrderRecordMapper orderRecordMapper;
 
+	//    全部订单
 	@Override
-	public List<Orders> selectAllOrders() {
-		OrdersExample oe = new OrdersExample();
-		Criteria criteria = oe.createCriteria();
-		criteria.andOrderIdIsNotNull();
-		return ordersMapper.selectByExample(oe);
+	public List<Orders> selectOrdersByorderUser(String orderUser) {
+		OrdersExample ordersExample = new OrdersExample();
+		OrdersExample.Criteria criteria = ordersExample.createCriteria();
+		criteria.andOrderUserEqualTo(orderUser);
+		return ordersMapper.selectByExample(ordersExample);
 	}
 
+	//    订单详情
 	@Override
-	public Orders selectOrdersById(String orderId) {
-		return ordersMapper.selectByPrimaryKey(orderId);
+	public List<OrderRecord> selectOrdersByorderId(String orderId) {
+		OrderRecordExample orderRecordExample = new OrderRecordExample();
+		OrderRecordExample.Criteria criteria = orderRecordExample.createCriteria();
+		criteria.andOrderIdEqualTo(orderId);
+		return  orderRecordMapper.selectByExample(orderRecordExample);
 	}
 
-	@Override
-	public void deleteorders(String orderId) {
-		try {
-			ordersMapper.deleteByPrimaryKey(orderId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("删除订单失败！");
-		}
-	}
-    @Override
-    public List<Orders> selectOrdersByCName(String cName) {
-        OrdersExample ordersExample = new OrdersExample();
-        Criteria criteria =  ordersExample.createCriteria();
-        criteria.andOrderIdEqualTo(cName);
-        return ordersMapper.selectByExample( ordersExample);
-    }
 }
+
+
 
