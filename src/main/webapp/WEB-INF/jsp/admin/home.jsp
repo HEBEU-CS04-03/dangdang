@@ -32,64 +32,73 @@
 <body>
 <div class="page-content clearfix">
  <div class="alert alert-block alert-success">
-  <button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-  <i class="icon-ok green"></i>欢迎使用<strong class="green">"当当书城"后台管理系统<small>(v1.2)</small></strong>
+ <h2><font face="楷体" >欢迎使用"当当书城"后台管理系统1.0</font></h2> 
+  
+ </div>
+  <div class="alert alert-block alert-success">
+ 
+  <i class="icon-ok green"></i><strong class="green">以下为管理系统快捷通道，祝您生活愉快！</strong>
  </div>
  <div class="state-overview clearfix">
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
-                      <a href="#" title="'当当书城'用户">
+                      <a href="#" title="当当书城用户活跃数"/>
                           <div class="symbol terques">
                              <i class="icon-user"></i>
                           </div>
                           <div class="value">
-                              <h1>${userNums}</h1>
+                              
                               <p>用户数量</p>
+                              <p>${customerCount}人</p>
                           </div>
-                          </a>
+                       
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
-                      <section class="panel">
+                      <section class="panel">                   
+                        <a href="${pageContext.request.contextPath}/adminBook/toBookList" title="当当书城图书分类"/>
                           <div class="symbol red">
                               <i class="icon-tags"></i>
                           </div>
                           <div class="value">
-                              <h1>${restaurantNums}</h1>
-                              <p>数量</p>
+                              <p>图书分类</p>
+                              <p>${bookTypeCount}种</p>
                           </div>
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
+                       <a href="${pageContext.request.contextPath}/index.jsp" target="_index" title="即将前往书城前台页面"/>
                           <div class="symbol yellow">
                               <i class="icon-shopping-cart"></i>
                           </div>
                           <div class="value">
-                              <h1>${orderNums}</h1>
-                              <p>商城订单</p>
+                              <p>去商城转转</p>
                           </div>
                       </section>
                   </div>
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
+                      <!-- 去销量页面 -->
                           <div class="symbol blue">
                               <i class="icon-bar-chart"></i>
                           </div>
                           <div class="value">
-                              <h1>${subMoney}</h1>
-                              <p>交易记录</p>
+                              <h1></h1>
+                              <p>图书销量</p>
                           </div>
                       </section>
                   </div>
               </div>
              <!--实时交易记录-->
+             
+             <!-- 
              <div class="clearfix">
              <div class="t_Record">
                <div id="main" style="height:300px; overflow:hidden; width:100%; overflow:auto" ></div>     
               </div>
          </div>
- 
+  -->
 <script type="text/javascript">
      $(document).ready(function(){
 		 

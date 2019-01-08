@@ -1,5 +1,6 @@
 package com.hebeu.group.controller;
 
+import com.hebeu.group.pojo.BookType;
 import com.hebeu.group.pojo.Customer;
 import com.hebeu.group.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -145,6 +147,23 @@ public class CustomerController {
         model.addAttribute("masg1","注册失败");
         return "/register";
     }
+    
+    /**
+     * 查询用户数量，后台使用
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/selectCustomer")
+    public String selectCustomer(Model model) {
+        List<Customer> customer = customerService.selectCustomerCount();
+        
+        model.addAttribute("customer", customer);
+        model.addAttribute("customerCount", customer.size());
+     
+        return null;
+    }
+    
+    
 }
 
 

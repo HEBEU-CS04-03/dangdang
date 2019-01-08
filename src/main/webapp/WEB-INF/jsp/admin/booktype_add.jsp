@@ -46,7 +46,7 @@
             return false;
         }
         var frm = document.getElementById("dishAddId");
-        frm.action = "/bookType/addBookType";
+        frm.action = "${pageContext.request.contextPath}/bookType/addBookType";
         frm.submit();
     }
 </script>

@@ -1,17 +1,19 @@
 package com.hebeu.group.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import com.hebeu.group.pojo.Admin;
 import com.hebeu.group.pojo.BookType;
+import com.hebeu.group.pojo.Customer;
 import com.hebeu.group.service.AdminService;
+import com.hebeu.group.service.BookTypeService;
+import com.hebeu.group.service.CustomerService;
 
 /**
  * @author 王慧
@@ -26,7 +28,10 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
-
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private BookTypeService booktypeService;
     /**
      * 去登录页面
      *
@@ -34,6 +39,7 @@ public class AdminController {
      */
     @RequestMapping("/toLogin")
     public String toLogin() {
+    	System.out.println("进入toLogin");
         return "admin/login";
     }
 
@@ -45,6 +51,13 @@ public class AdminController {
      */
     @RequestMapping("/toHome")
     public String toHome(Model model, HttpSession session) {
+    	  List<Customer> customer = customerService.selectCustomerCount();
+          model.addAttribute("customer", customer);
+          model.addAttribute("customerCount", customer.size());
+          List<BookType> bookType = booktypeService.findAllBookType();
+          //返回前端的信息
+          model.addAttribute("bookType", bookType);
+          model.addAttribute("bookTypeCount", bookType.size());
         return "admin/home";
     }
 
@@ -81,7 +94,11 @@ public class AdminController {
     public String toIndex(Model model, HttpSession session) {
         Admin admin = (Admin) session.getAttribute("admin");
         model.addAttribute("username", admin.getaName());
+        model.addAttribute("admin_aId", admin.getaId());
         model.addAttribute("admin", admin);
+        model.addAttribute("password", admin.getaPass());
+        model.addAttribute("phone", admin.getaPhone());
+        model.addAttribute("email", admin.getaEmail());
         return "admin/index";
     }
 
@@ -91,6 +108,7 @@ public class AdminController {
     @RequestMapping("/logout")
     public String logout(Model model, String username, HttpSession session) {
         // 销毁session
+    	System.out.println("又退出了");
         session.invalidate();
         return "admin/login";
     }
@@ -106,7 +124,7 @@ public class AdminController {
         Admin admin = adminService.getAdminById(aId);
         model.addAttribute("admin", admin);
 
-        return "admin/admin_desc";
+        return "admin/admin_info";
 
     }
 
@@ -123,7 +141,7 @@ public class AdminController {
         adminService.updateAdmin(admin);
         model.addAttribute("admin", admin);
         model.addAttribute("messge2", "请您在修改信息后重新登录！");
-        return "redirect:/admin/toLogin";
+        return "redirect:/admin/logout";
     }
 
 }

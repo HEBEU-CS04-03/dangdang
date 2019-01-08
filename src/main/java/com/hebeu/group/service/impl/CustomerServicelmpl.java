@@ -97,6 +97,18 @@ public class CustomerServicelmpl implements CustomerService {
         customerMapper.insert(customer);
         return null;
     }
+/**
+ * 查询用户数量
+ */
+	@Override
+	public List<Customer> selectCustomerCount() {
+		// TODO Auto-generated method stub
+		 CustomerExample customerExample= new CustomerExample();
+	     CustomerExample.Criteria criteria = customerExample.createCriteria();
+	     criteria.andCNameIsNotNull();
+	     List<Customer> customer = customerMapper.selectByExample(customerExample);
+		return customer;
+	}
 
 
 

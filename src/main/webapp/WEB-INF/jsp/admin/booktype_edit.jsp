@@ -29,9 +29,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/assets/css/font-awesome-ie7.min.css"/>
     <![endif]-->
     <link href="${pageContext.request.contextPath}/static/Widget/icheck/icheck.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/static/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet"
-          type="text/css"/>
-    <title>编辑菜品页面</title>
+    <link href="${pageContext.request.contextPath}/static/Widget/webuploader/0.1.5/webuploader.css" rel="stylesheet"type="text/css"/>
+    <title>编辑图书分类页面</title>
 </head>
 <body>
 <div style="width: 80%;margin: 20px auto">

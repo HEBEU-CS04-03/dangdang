@@ -53,7 +53,7 @@
                         <div class="login_icon"><img src="${pageContext.request.contextPath}/static/images/login.png"/>
                         </div>
 
-                        <form class="" action="/admin/login" method="post">
+                        <form class="" action="${pageContext.request.contextPath}/admin/login" method="post">
                             <fieldset>
                                 <label class="block clearfix">
 														<span class="block input-icon input-icon-right">

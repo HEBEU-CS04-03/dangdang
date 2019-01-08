@@ -51,7 +51,7 @@
     <script type="text/javascript" src="../static/js/H-ui.admin.js"></script>
     <script src="${pageContext.request.contextPath}/static/assets/layer/layer.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/static/assets/laydate/laydate.js" type="text/javascript"></script>
-    <title>用户列表</title>
+    <title></title>
 </head>
 
 <body>
@@ -170,13 +170,13 @@
                     layer.msg('已经删除!', {icon: 6, time: 1000});
                 }
             });
-            setTimeout("location.href = '/bookType/selectBookType'", "1500");
+            setTimeout("location.href = '${pageContext.request.contextPath}/bookType/selectBookType'", "1500");
         });
     }
 
     /* 修改 */
     function update_go(obj, id) {
-        location.href = "/bookType/findBookTypeById?id=" + id;
+        location.href = "${pageContext.request.contextPath}/bookType/findBookTypeById?id=" + id;
     }
 
 
@@ -203,12 +203,12 @@
                     layer.msg('已经删除!', {icon: 1, time: 1000});
                 }
             });
-            setTimeout("location.href = '/bookType/selectBookType'", "1500");
+            setTimeout("location.href = '${pageContext.request.contextPath}/bookType/selectBookType'", "1500");
         });
     });
 
     $("#insert_book_type").click(function () {
-        location.href = "/bookType/toaddBookType";
+        location.href = "${pageContext.request.contextPath}/bookType/toaddBookType";
     });
 
     laydate({

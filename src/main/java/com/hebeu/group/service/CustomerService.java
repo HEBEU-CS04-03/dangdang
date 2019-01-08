@@ -2,6 +2,8 @@ package com.hebeu.group.service;
 
 import com.hebeu.group.pojo.Customer;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -36,6 +38,8 @@ public interface CustomerService {
     Customer selectCustomer(String cName);
 
     Customer selectCustomerByEmail(Customer customer);
+
+	List<Customer> selectCustomerCount();
 
 }
 
