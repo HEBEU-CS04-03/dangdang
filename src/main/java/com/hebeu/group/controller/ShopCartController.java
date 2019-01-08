@@ -2,7 +2,9 @@ package com.hebeu.group.controller;
 
 import com.hebeu.group.pojo.*;
 import com.hebeu.group.service.BookService;
+import com.hebeu.group.service.OrdersService;
 import com.hebeu.group.service.ShopCartService;
+import com.hebeu.group.util.DateUtil;
 import com.hebeu.group.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,11 +28,13 @@ public class ShopCartController {
 
     private ShopCartService shopCartService;
     private BookService bookService;
+    private OrdersService ordersService;
 
     @Autowired
-    public ShopCartController(ShopCartService shopCartService, BookService bookService) {
+    public ShopCartController(ShopCartService shopCartService, BookService bookService, OrdersService ordersService) {
         this.shopCartService = shopCartService;
         this.bookService = bookService;
+        this.ordersService = ordersService;
     }
 
     /**
@@ -194,7 +197,7 @@ public class ShopCartController {
      * @return
      */
     @RequestMapping("submitOrder")
-    public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session){
+    public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session,Model model){
         //获取session中的登录用户信息
         Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
         if (loginCustomer == null){
@@ -245,7 +248,12 @@ public class ShopCartController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "order";
+
+
+        List<Orders> ordersList = ordersService.selectOrdersByorderUser(loginCustomer.getcName());
+        model.addAttribute("orders", ordersService.selectOrdersByorderUser(loginCustomer.getcName()));
+        model.addAttribute("dateUtil", new DateUtil());
+        return "orderlist";
     }
 
 }
