@@ -251,14 +251,12 @@
                 <li><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span
                         class="menu-text"> 订单信息管理 </span><b class="arrow icon-angle-down"></b></a>
                     <ul class="submenu">
-                        <li class="home"><a href="javascript:void(0)"
-                                            name="${pageContext.request.contextPath}/admin/restaurant?method=auditRestaurantList"
-                                            title="入驻审核"
-                                            class="iframeurl"><i class="icon-double-angle-right"></i>入驻审核</a></li>
-                        <li class="home"><a href="javascript:void(0)"
-                                            name="${pageContext.request.contextPath}/admin/restaurant?method=toRestaurantList"
-                                            title="列表"
-                                            class="iframeurl"><i class="icon-double-angle-right"></i>列表 </a></li>
+                        <li class="home"><a href="javascript:void(0)" name="${pageContext.request.contextPath}/admin/selectbooktype"
+                                            title="今日销量"
+                                            class="iframeurl"><i class="icon-double-angle-right"></i>今日销量</a></li>
+                        <li class="home"><a href="javascript:void(0)" name="${pageContext.request.contextPath}/admin/selectallorders"
+                                            title="物流查询"
+                                            class="iframeurl"><i class="icon-double-angle-right"></i>物流查询</a></li>
                     </ul>
                 </li>
                 <li>
