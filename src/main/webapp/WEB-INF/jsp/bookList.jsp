@@ -26,7 +26,7 @@
                                            class="login_link">登录</a></span>
         </c:if>
         <c:if test="${username != null}">
-            <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
+            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer" target="_self"
                                       rel="nofollow"
                                       class="login_link">${username}</a></span>
         </c:if>

@@ -24,7 +24,7 @@
                                            class="login_link">登录</a></span>
         </c:if>
         <c:if test="${loginName != null}">
-            <span id="nickname">你好，<a dd_name="欢迎" href="javascript:PageToPersonCenter();" target="_self"
+            <span id="nickname">你好，<a dd_name="欢迎" href="${pageContext.request.contextPath}/customer/showCustomer" target="_self"
                                       rel="nofollow"
                                       class="login_link">${loginName}</a></span>
         </c:if>
@@ -267,7 +267,7 @@
             success:function (data) {
                 if (data == false) {
                     alert("请先登录！");
-                    location.href="${pageContext.request.contextPath}/toLoginPage";
+                    location.href="${pageContext.request.contextPath}/customer/loginTo";
                 }else {
                     alert("已添加"+bNumber+"件图书到购物车");
                 }

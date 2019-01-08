@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group"><label class="col-sm-3 control-label no-padding-right">书籍图片</label>
                         <div class="img-responsive">
-                            <img src="${pageContext.request.contextPath}/static/img/${book.bImage}" alt=""/>
+                            <img style="width: 15%;height: 30%" src="${pageContext.request.contextPath}/static/img/${book.bImage}" alt=""/>
                         </div>
                     </div>
                     <div class="form-group"><label class="col-sm-3 control-label no-padding-right">替换图片</label>
