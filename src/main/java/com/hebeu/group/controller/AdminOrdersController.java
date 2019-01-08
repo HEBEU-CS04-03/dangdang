@@ -9,22 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 
+/**
+ * @author 王煜
+ */
+
 @Controller
 @RequestMapping("/admin")
 public class AdminOrdersController {
+
     @Autowired
     public AdminOrdersService adminOrdersService;
 
+    @Autowired
+    public AdminOrdersController(AdminOrdersService adminOrdersService){
+        this.adminOrdersService = adminOrdersService;
+    }
     //查询所有的订单图书类型和数量
     @RequestMapping(value = "/selectbooktype")
     public String selectBookType( Model model,Integer brandclass) {
-        if(brandclass == null){
-            brandclass = 0;
-        }
         System.out.println("==================>");
         System.out.println(brandclass);
         //查询所有图书类型信息
         List<BookType> booktypes = adminOrdersService.findAllBookType();
+        System.out.println("所有图书类型：");
+        System.out.println(booktypes);
         model.addAttribute("booktypes", booktypes);
         //通过下单时间查询订单id
         List<Orders> orderitems = adminOrdersService.findOrdersByorderTime();
@@ -43,25 +51,18 @@ public class AdminOrdersController {
 
                 if (bookTypeIntegerMap.containsKey(bookType.gettType())) {
                     bookTypeIntegerMap.put(bookType.gettType(), bookTypeIntegerMap.get(bookType.gettType()) + record.getbNumber());
+                    System.out.println("输出订单该类图书的数量：");
+                    System.out.println(record.getbNumber());
                 } else {
                     bookTypeIntegerMap.put(bookType.gettType(), record.getbNumber());
                 }
             }
         }
-            if(brandclass == 0) {
-                // 把以上的map集合中的数据放入bootypeCounts中
-                for (BookType bookType : booktypes) {
-                    BookTypeCount bookTypeCount = new BookTypeCount();
-                    bookTypeCount.settType(bookType.gettType());
-                    if (!bookTypeIntegerMap.containsKey(bookType.gettType())) {
-                        bookTypeCount.setCount(0);
-                    } else {
-                        bookTypeCount.setCount(bookTypeIntegerMap.get(bookType.gettType()));
-                    }
-                    bookTypeCounts.add(bookTypeCount);
-                }
-            }else{
-                BookType bookType = adminOrdersService.findBookType(brandclass);
+        System.out.println("输出brandclass:");
+        System.out.println(brandclass);
+        if(brandclass == null || brandclass == 0) {
+            // 把以上的map集合中的数据放入bootypeCounts中
+            for (BookType bookType : booktypes) {
                 BookTypeCount bookTypeCount = new BookTypeCount();
                 bookTypeCount.settType(bookType.gettType());
                 if (!bookTypeIntegerMap.containsKey(bookType.gettType())) {
@@ -71,12 +72,23 @@ public class AdminOrdersController {
                 }
                 bookTypeCounts.add(bookTypeCount);
             }
+        }else{
+            BookType bookType = adminOrdersService.findBookType(brandclass);
+            BookTypeCount bookTypeCount = new BookTypeCount();
+            bookTypeCount.settType(bookType.gettType());
+            if (!bookTypeIntegerMap.containsKey(bookType.gettType())) {
+                bookTypeCount.setCount(0);
+            } else {
+                bookTypeCount.setCount(bookTypeIntegerMap.get(bookType.gettType()));
+            }
+            bookTypeCounts.add(bookTypeCount);
+        }
 
         System.out.println(bookTypeCounts);
+        model.addAttribute("bookTypetotal",bookTypeCounts.size());
         model.addAttribute("bookTypeCounts", bookTypeCounts);
-        return "houtai/admin/admin_orderscount";
+        return "admin/admin_orderscount";
 
     }
-
 }
 

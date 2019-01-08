@@ -6,7 +6,7 @@ import com.hebeu.group.pojo.OrderRecord;
 import com.hebeu.group.pojo.Orders;
 import org.springframework.stereotype.Service;
 import java.util.*;
-@Service
+
 public interface AdminOrdersService {
     /**
      * 查询所有图书类型信息
