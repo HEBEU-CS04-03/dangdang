@@ -7,6 +7,8 @@ import com.hebeu.group.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -40,10 +42,17 @@ public class AdminOrdersServiceImpl implements AdminOrdersService {
     public List<Orders> findOrdersByorderTime() {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        Date ordertime = new Date();
-        System.out.println("时间");
-        System.out.println(DateUtil.formateTime(ordertime));
-        criteria.andOrderTimeBetween(DateUtil.formateTime(ordertime)+" 00:00:00",DateUtil.formateTime(ordertime)+" 23:59:59");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00 E");
+        Date orderTime = new Date();
+        Date start = new Date();
+        Date end = new Date();
+        try {
+            start = dateFormat.parse(DateUtil.formateTime(orderTime) + " 00:00:00");
+            end = dateFormat.parse(DateUtil.formateTime(orderTime) + " 23:59:59");
+        } catch (ParseException e) {
+            System.out.println("时间转换错误，默认为当天时间");
+        }
+        criteria.andOrderTimeBetween(start, end);
         List<Orders> orders = ordersMapper.selectByExample(ordersExample);
         return orders;
     }

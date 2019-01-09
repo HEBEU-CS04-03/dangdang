@@ -85,7 +85,7 @@
             <br>
             <div class="cl pd-5 bg-1 bk-gray mt-20">
     <span class="l_f">
-        <a href="javascript:void()" class="btn btn-danger" id="delete_selected"><i class="icon-trash bigger-120"></i>批量删除</a>
+        <%--<a href="javascript:void()" class="btn btn-danger" id="delete_selected"><i class="icon-trash bigger-120"></i>批量删除</a>--%>
     </span>
                 <span class="r">共有数据：<strong>${orderstotal}</strong>条</span>
             </div>
@@ -131,8 +131,8 @@
                             <td class="td-manage">
                                 <a onClick="member_go(this,'${order.orderId}')" href="javascript:void()" title="删除订单"
                                    class="btn btn-xs btn-danger"><i class="icon-trash bigger-120"></i></a>
-                                <a onclick="update_go(this,'${order.orderId}')" href="javascript:void()" title="修改订单"
-                                   class="btn btn-xs btn-success"><i class="icon-edit bigger-120"></i></a>
+                                <%--<a onclick="update_go(this,'${order.orderId}')" href="javascript:void()" title="修改订单"--%>
+                                   <%--class="btn btn-xs btn-success"><i class="icon-edit bigger-120"></i></a>--%>
                             </td>
                         </tr>
                     </c:forEach>

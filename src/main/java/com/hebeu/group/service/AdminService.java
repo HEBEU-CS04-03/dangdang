@@ -23,5 +23,5 @@ public interface AdminService {
      */
     Admin getAdminById(Integer id);
 
-    Admin updateAdmin(Admin admin);
+    void updateAdmin(Admin admin);
 }

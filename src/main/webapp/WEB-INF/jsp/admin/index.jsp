@@ -233,17 +233,17 @@
                 } catch (e) {
                 }
             </script>
-            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                    当当书城后台管理
-                </div>
-                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                    <span class="btn btn-success"></span>
-                    <span class="btn btn-info"></span>
-                    <span class="btn btn-warning"></span>
-                    <span class="btn btn-danger"></span>
-                </div>
-            </div><!-- #sidebar-shortcuts -->
+            <%--<div class="sidebar-shortcuts" id="sidebar-shortcuts">--%>
+                <%--<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">--%>
+                    <%--当当书城后台管理--%>
+                <%--</div>--%>
+                <%--<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">--%>
+                    <%--<span class="btn btn-success"></span>--%>
+                    <%--<span class="btn btn-info"></span>--%>
+                    <%--<span class="btn btn-warning"></span>--%>
+                    <%--<span class="btn btn-danger"></span>--%>
+                <%--</div>--%>
+            <%--</div><!-- #sidebar-shortcuts -->--%>
             <ul class="nav nav-list" id="nav_list">
                 <li class="home"><a href="javascript:void(0)" name="/admin/toHome"
                                     class="iframeurl" title=""><i class="icon-dashboard"></i><span class="menu-text"> 系统首页 </span></a>
