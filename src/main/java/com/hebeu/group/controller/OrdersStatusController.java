@@ -23,14 +23,17 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin")
 public class OrdersStatusController {
+
     public OrdersStatusService ordersStatusService;
+
     @Autowired
-    public OrdersStatusController(OrdersStatusService ordersStatusService){
-        this.ordersStatusService  = ordersStatusService;
+    public OrdersStatusController(OrdersStatusService ordersStatusService) {
+        this.ordersStatusService = ordersStatusService;
     }
 
     /**
      * 查询所有订单状态
+     *
      * @param model
      * @return
      */
@@ -39,10 +42,10 @@ public class OrdersStatusController {
         List<Orders> orders = ordersStatusService.findAllOrders();
 
         List<OrdersVo> ordersVosList = new ArrayList<>();
-        for (Orders orders1 : orders){
+        for (Orders orders1 : orders) {
             System.out.println("输出当前订单id：");
             System.out.println(orders1.getOrderId());
-           // Orders _orders = new Orders();
+            // Orders _orders = new Orders();
             OrdersVo ordersVo = new OrdersVo();
             ordersVo.setOrderId(orders1.getOrderId());
             ordersVo.setOrderTime(orders1.getOrderTime());
@@ -56,43 +59,47 @@ public class OrdersStatusController {
             System.out.println(orderStatuses.getStatusName());
             ordersVosList.add(ordersVo);
         }
-        model.addAttribute("orderstotal",ordersVosList.size());
-        model.addAttribute("ordersVosList",ordersVosList);
+        model.addAttribute("orderstotal", ordersVosList.size());
+        model.addAttribute("ordersVosList", ordersVosList);
         return "admin/status_select";
     }
 
+
     /**
-     * 删除所选状态的订单
-     * @param ids
-     * @param mv
+     * 根据订单编号删除订单
+     *
+     * @param orderId
      * @return
      */
-    @RequestMapping("/removeorders")
-    public ModelAndView removeOrders(String ids, ModelAndView mv){
-        //分解id字符串
-        String[] idArray = ids.split(",");
-        for(String status_id : idArray){
-            //根据id删除订单
-            ordersStatusService.removeOrdersByorderId(Integer.parseInt(status_id));
+    @RequestMapping(value = "/deleteOrdersByOrderId")
+    public String deleteOrdersByOrderId(String orderId) {
+        // 如果是批量删除
+        if (orderId.contains("-")) {
+            String[] ids = orderId.split("-");
+            for (String id : ids) {
+                ordersStatusService.deleteOrderByOrderId(id);
+            }
+        } else {
+            ordersStatusService.deleteOrderByOrderId(orderId);
         }
-        mv.setViewName("redirect:/admin/selectallorders");
-        return  mv;
+        return "redirect:/admin/selectallorders";
     }
 
     /**
      * 通过订单状态查询订单项
+     *
      * @param keyword
      * @param model
      * @return
      */
     @RequestMapping("/selectOrdersBystatus")
-    public String selectOrdersBystatus(String keyword, Model model){
+    public String selectOrdersBystatus(String keyword, Model model) {
         //查询状态名称查询状态id
-        OrderStatus orderStatuses = ordersStatusService.selectBystatusName("%"+keyword+"%");
+        OrderStatus orderStatuses = ordersStatusService.selectBystatusName("%" + keyword + "%");
         //根据状态id查询所有订单
         List<Orders> orders = ordersStatusService.selectByOrderStatus(orderStatuses.getId());
         List<OrdersVo> ordersVosList = new ArrayList<>();
-        for (Orders orders1 : orders){
+        for (Orders orders1 : orders) {
             OrdersVo ordersVo = new OrdersVo();
             ordersVo.setOrderId(orders1.getOrderId());
             ordersVo.setOrderTime(orders1.getOrderTime());
@@ -105,8 +112,8 @@ public class OrdersStatusController {
             System.out.println(orderStatuses.getStatusName());
             ordersVosList.add(ordersVo);
         }
-        model.addAttribute("orderstotal",ordersVosList.size());
-        model.addAttribute("ordersVosList",ordersVosList);
+        model.addAttribute("orderstotal", ordersVosList.size());
+        model.addAttribute("ordersVosList", ordersVosList);
         return "admin/status_select";
     }
 }

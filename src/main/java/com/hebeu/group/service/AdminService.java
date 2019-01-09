@@ -23,9 +23,5 @@ public interface AdminService {
      */
     Admin getAdminById(Integer id);
 
-	/**
-	 * 更新管理员
-	 * @param admin
-	 */
-	void updateAdmin(Admin admin);
+    Admin updateAdmin(Admin admin);
 }

@@ -21,12 +21,13 @@ public class AdminOrdersController {
     public AdminOrdersService adminOrdersService;
 
     @Autowired
-    public AdminOrdersController(AdminOrdersService adminOrdersService){
+    public AdminOrdersController(AdminOrdersService adminOrdersService) {
         this.adminOrdersService = adminOrdersService;
     }
+
     //查询所有的订单图书类型和数量
     @RequestMapping(value = "/selectbooktype")
-    public String selectBookType( Model model,Integer brandclass) {
+    public String selectBookType(Model model, Integer brandclass) {
         System.out.println("==================>");
         System.out.println(brandclass);
         //查询所有图书类型信息
@@ -60,7 +61,7 @@ public class AdminOrdersController {
         }
         System.out.println("输出brandclass:");
         System.out.println(brandclass);
-        if(brandclass == null || brandclass == 0) {
+        if (brandclass == null || brandclass == 0) {
             // 把以上的map集合中的数据放入bootypeCounts中
             for (BookType bookType : booktypes) {
                 BookTypeCount bookTypeCount = new BookTypeCount();
@@ -72,7 +73,7 @@ public class AdminOrdersController {
                 }
                 bookTypeCounts.add(bookTypeCount);
             }
-        }else{
+        } else {
             BookType bookType = adminOrdersService.findBookType(brandclass);
             BookTypeCount bookTypeCount = new BookTypeCount();
             bookTypeCount.settType(bookType.gettType());
@@ -85,7 +86,7 @@ public class AdminOrdersController {
         }
 
         System.out.println(bookTypeCounts);
-        model.addAttribute("bookTypetotal",bookTypeCounts.size());
+        model.addAttribute("bookTypetotal", bookTypeCounts.size());
         model.addAttribute("bookTypeCounts", bookTypeCounts);
         return "admin/admin_orderscount";
 

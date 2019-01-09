@@ -37,14 +37,6 @@ public class OrdersStatusServiceImpl implements OrdersStatusService {
     }
 
     @Override
-    public void removeOrdersByorderId(Integer status_id) {
-        OrdersExample ordersExample = new OrdersExample();
-        OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andOrderStatusEqualTo(status_id);
-        ordersMapper.deleteByExample(ordersExample);
-    }
-
-    @Override
     public OrderStatus selectBystatusName(String keyword) {
         OrderStatusExample orderStatusExample = new OrderStatusExample();
         OrderStatusExample.Criteria criteria = orderStatusExample.createCriteria();
@@ -60,11 +52,9 @@ public class OrdersStatusServiceImpl implements OrdersStatusService {
         return ordersMapper.selectByExample(ordersExample);
     }
 
-    /// @Override
-    /*public Orders findAllOrdersStatus() {
-        OrdersExample ordersExample = new OrdersExample();
-        OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andOrderIdIsNotNull();
-        return null;
-    }*/
+    @Override
+    public void deleteOrderByOrderId(String orderId) {
+        ordersMapper.deleteByPrimaryKey(orderId);
+    }
+
 }
