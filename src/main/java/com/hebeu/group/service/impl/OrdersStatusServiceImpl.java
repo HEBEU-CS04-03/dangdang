@@ -37,22 +37,6 @@ public class OrdersStatusServiceImpl implements OrdersStatusService {
     }
 
     @Override
-    public OrderStatus selectBystatusName(String keyword) {
-        OrderStatusExample orderStatusExample = new OrderStatusExample();
-        OrderStatusExample.Criteria criteria = orderStatusExample.createCriteria();
-        criteria.andStatusNameLike(keyword);
-        return orderStatusMapper.selectByExample(orderStatusExample).get(0);
-    }
-
-    @Override
-    public List<Orders> selectByOrderStatus(Integer orderStatus) {
-        OrdersExample ordersExample = new OrdersExample();
-        OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        criteria.andOrderStatusEqualTo(orderStatus);
-        return ordersMapper.selectByExample(ordersExample);
-    }
-
-    @Override
     public void deleteOrderByOrderId(String orderId) {
         ordersMapper.deleteByPrimaryKey(orderId);
     }

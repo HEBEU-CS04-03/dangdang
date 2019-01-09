@@ -11,10 +11,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/Hui-iconfont/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/ligerui-dialog.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/static/Hui-iconfont/iconfont.css"/>
     <link href="${pageContext.request.contextPath}/static/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css"/>
     <link href="${pageContext.request.contextPath}/static/assets/css/codemirror.css" rel="stylesheet">
@@ -22,9 +24,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/assets/css/font-awesome.min.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.11.0.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-migrate-1.2.1.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/base.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/static/js/ligerDrag.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/static/js/ligerDialog.js" type="text/javascript"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!--[if IE 7]>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/assets/css/font-awesome-ie7.min.css"/>
@@ -75,12 +74,6 @@
                 // 所有数据行的选中状态与全选的状态一致
                 boxs.attr("checked", this.checked);
             })
-            /** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
-            $("tr[id^='data_']").hover(function () {
-                $(this).css("backgroundColor", "#99ccff");
-            }, function () {
-                $(this).css("backgroundColor", "#ffffff");
-            })
         })
     </script>
 </head>
@@ -90,13 +83,6 @@
     <div id="Member_Ratings">
         <div class="d_Confirm_Order_style">
             <br>
-            <div>
-                物流状态：<input type="text" name="oStatus" id="oStatus"
-                            style="width: 120px" class="input-text"/>
-                <button id="find_oStatus" class="btn btn-success" onclick="findOrders()">
-                    <i class="Hui-iconfont">&#xe665;</i> 查询
-                </button>
-            </div>
             <div class="cl pd-5 bg-1 bk-gray mt-20">
     <span class="l_f">
         <a href="javascript:void()" class="btn btn-danger" id="delete_selected"><i class="icon-trash bigger-120"></i>批量删除</a>
@@ -106,7 +92,7 @@
             <br>
             <!---->
             <div class="table_menu_list">
-                <table class="table table-border table-bordered table-bg table-sort" id="sample-table">
+                <table class="table table-striped table-bordered table-hover" id="sample-table">
                     <thead>
                     <tr>
                         <th width="25"><label><input type="checkbox" class="ace" id="checkAll"><span class="lbl"></span></label>
@@ -117,6 +103,9 @@
                         <th width="100">收货地址</th>
                         <th width="70">总金额</th>
                         <th width="80">物流状态</th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
                         <th width="180">操作</th>
                     </tr>
                     </thead>
@@ -130,6 +119,9 @@
                                 <fmt:formatDate value="${order.orderTime}"
                                                 pattern="yyyy-MM-dd HH:mm:ss"/>
                             </td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
                             <td>${order.orderUser}</td>
                             <td>${order.orderAdress}</td>
                             <td>${order.orderSum}元</td>
@@ -234,10 +226,6 @@
         });
     });
 
-    function findOrders() {
-        var type = document.getElementById("oStatus").value;
-        window.location.href = "${pageContext.request.contextPath}/admin/selectOrdersBystatus?keyword=" + type;
-    }
 
     laydate({
         elem: '#start',

@@ -85,35 +85,4 @@ public class OrdersStatusController {
         return "redirect:/admin/selectallorders";
     }
 
-    /**
-     * 通过订单状态查询订单项
-     *
-     * @param keyword
-     * @param model
-     * @return
-     */
-    @RequestMapping("/selectOrdersBystatus")
-    public String selectOrdersBystatus(String keyword, Model model) {
-        //查询状态名称查询状态id
-        OrderStatus orderStatuses = ordersStatusService.selectBystatusName("%" + keyword + "%");
-        //根据状态id查询所有订单
-        List<Orders> orders = ordersStatusService.selectByOrderStatus(orderStatuses.getId());
-        List<OrdersVo> ordersVosList = new ArrayList<>();
-        for (Orders orders1 : orders) {
-            OrdersVo ordersVo = new OrdersVo();
-            ordersVo.setOrderId(orders1.getOrderId());
-            ordersVo.setOrderTime(orders1.getOrderTime());
-            ordersVo.setOrderUser(orders1.getOrderUser());
-            ordersVo.setOrderAdress(orders1.getOrderAdress());
-            ordersVo.setOrderSum(orders1.getOrderSum());
-            ordersVo.setOrderStatus(orders1.getOrderStatus());
-            ordersVo.setOrderStatusName(orderStatuses.getStatusName());
-            System.out.println("输出statusname:");
-            System.out.println(orderStatuses.getStatusName());
-            ordersVosList.add(ordersVo);
-        }
-        model.addAttribute("orderstotal", ordersVosList.size());
-        model.addAttribute("ordersVosList", ordersVosList);
-        return "admin/status_select";
-    }
 }

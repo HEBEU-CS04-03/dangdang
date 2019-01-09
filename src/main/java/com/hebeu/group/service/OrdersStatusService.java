@@ -21,22 +21,6 @@ public interface OrdersStatusService {
     OrderStatus findStatusNameByOrderStatus(Integer orderStatus);
 
     /**
-     * 搜索查询
-     *
-     * @param keyword
-     * @return
-     */
-    OrderStatus selectBystatusName(String keyword);
-
-    /**
-     * 通过状态id查询订单
-     *
-     * @param orderStatus
-     * @return
-     */
-    List<Orders> selectByOrderStatus(Integer orderStatus);
-
-    /**
      * 根据订单编号删除订单
      *
      * @param orderId

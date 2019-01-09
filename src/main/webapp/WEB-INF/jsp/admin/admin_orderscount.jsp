@@ -19,7 +19,6 @@
           href="${pageContext.request.contextPath}/static/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/static/Hui-iconfont/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/ligerui-dialog.css"/>
     <link href="${pageContext.request.contextPath}/static/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/style.css"/>
     <link href="${pageContext.request.contextPath}/static/assets/css/codemirror.css" rel="stylesheet">
@@ -72,14 +71,6 @@
     <script src="${pageContext.request.contextPath}/static/assets/layer/layer.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/static/assets/laydate/laydate.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(function () {
-            /** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
-            $("tr[id^='data_']").hover(function () {
-                $(this).css("backgroundColor", "#99ccff");
-            }, function () {
-                $(this).css("backgroundColor", "#ffffff");
-            })
-        })
     </script>
 </head>
 
@@ -89,36 +80,44 @@
         <div class="d_Confirm_Order_style">
             <br>
             <div>
-                请选择图书类型：<span class="select-box" style="width:200px">
-            <select id="typeS" class="select" name="brandclass" size="1" onchange="searchType()">
-                <option value="0">所有类型</option>
-                <c:forEach items="${booktypes}" var="type">
-                    <option value="${type.tId}">${type.tType}</option>
-                </c:forEach>
-            </select>
-        </span>
-            </div>
-            <div>
                 <span class="r">共有数据：<strong>${bookTypetotal}</strong>条</span>
             </div>
             <br>
             <!---->
             <div class="table_menu_list">
-                <table class="table table-border table-bordered table-bg" id="sample-table">
+                <table class="table table-striped table-bordered table-hover" id="sample-table">
                     <thead>
-                    <tr class="text-c">
+                    <tr>
                         <th colspan="2" scope="col"><h5><strong>今日图书销售信息汇总表</strong></h5></th>
                     </tr>
-                    <tr class="text-c">
+                    <tr>
                         <th>图书类别</th>
                         <th>订单量</th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
+                        <th style="display: none;"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${bookTypeCounts}" var="typeCount" varStatus="stat">
-                        <tr class="text-c" id="data_${stat.index}">
+                    <c:forEach items="${bookTypeCounts}" var="typeCount">
+                        <tr>
                             <td>${typeCount.tType}</td>
                             <td>${typeCount.count}</td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
+                            <td style="display: none"></td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -168,12 +167,6 @@
         }
     })
 
-    function searchType() {
-        var type = document.getElementById("typeS").value;
-        // alert(type);
-        window.location.href = "${pageContext.request.contextPath}/admin/selectbooktype?brandclass=" + type;
-        // window.open("http://localhost:8080/admin/selectbooktype?brandclass=" + type);
-    }
 
     laydate({
         elem: '#start',

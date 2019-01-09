@@ -80,6 +80,7 @@
                   <div class="col-lg-3 col-sm-6">
                       <section class="panel">
                       <!-- 去销量页面 -->
+                          <a href="${pageContext.request.contextPath}/admin/selectbooktype" title="去当日图书销量页面"/>
                           <div class="symbol blue">
                               <i class="icon-bar-chart"></i>
                           </div>
