@@ -13,7 +13,7 @@
 <div id="header">
 <div id="register_header">
    <div class="register_header_left"><img src="${pageContext.request.contextPath}/static/images/logo.gif" alt="logo"></div>
-   <div class="register_header_right"><a href="index.jsp" class="blue">首页</a> | <a href="${pageContext.request.contextPath}/product.jsp" class="blue">商品展示页</a>  | <a href="shopping.jsp" class="blue">购物车</a> |  <a href="login.jsp" class="blue">登录</a></div>
+   <div class="register_header_right"><a href="${pageContext.request.contextPath}/book/toIndex" class="blue">首页</a></div>
    </div>
 </div>
 <div id="main">

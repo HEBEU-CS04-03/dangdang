@@ -44,11 +44,11 @@
     </div>
 </div>
 <!--搜索开始-->
-<div id="booksearch" >
+<div id="booksearch" style="margin-left: 200px">
     <a href="" class="logo">
         <img src="${pageContext.request.contextPath}/static/img/logo.jpg" style="border: none;">
     </a>
-    <ul class="header_fun header_funina">
+    <ul class="header_fun header_funina" style="margin-left: 630px">
         <li class="icon">&nbsp;</li>
         <li class="header_cart">
             <a href="${pageContext.request.contextPath}/shopCart/toShopCart" name="购物车" target="_blank">

@@ -257,12 +257,9 @@ public class ShopCartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
         List<Orders> ordersList = ordersService.selectOrdersByorderUser(loginCustomer.getcName());
         model.addAttribute("orders", ordersService.selectOrdersByorderUser(loginCustomer.getcName()));
         model.addAttribute("dateUtil", new DateUtil());
         return "orderlist";
     }
-
 }
