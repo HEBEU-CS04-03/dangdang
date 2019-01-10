@@ -25,7 +25,11 @@ public class AdminOrdersController {
         this.adminOrdersService = adminOrdersService;
     }
 
-    //查询所有的订单图书类型和数量
+    /**
+     * 查询所有的订单图书类型和数量
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/selectbooktype")
     public String selectBookType(Model model) {
         //查询所有图书类型信息

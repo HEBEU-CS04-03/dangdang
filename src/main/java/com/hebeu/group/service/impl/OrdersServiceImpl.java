@@ -13,28 +13,36 @@ import com.hebeu.group.service.OrdersService;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
-	@Autowired
-	private OrdersMapper ordersMapper;
-	@Autowired
-	private OrderRecordMapper orderRecordMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
+    @Autowired
+    private OrderRecordMapper orderRecordMapper;
 
-	//    全部订单
-	@Override
-	public List<Orders> selectOrdersByorderUser(String orderUser) {
-		OrdersExample ordersExample = new OrdersExample();
-		OrdersExample.Criteria criteria = ordersExample.createCriteria();
-		criteria.andOrderUserEqualTo(orderUser);
-		return ordersMapper.selectByExample(ordersExample);
-	}
+    //    全部订单
+    @Override
+    public List<Orders> selectOrdersByorderUser(String orderUser) {
+        OrdersExample ordersExample = new OrdersExample();
+        OrdersExample.Criteria criteria = ordersExample.createCriteria();
+        criteria.andOrderUserEqualTo(orderUser);
+        return ordersMapper.selectByExample(ordersExample);
+    }
 
-	//    订单详情
-	@Override
-	public List<OrderRecord> selectOrdersByorderId(String orderId) {
-		OrderRecordExample orderRecordExample = new OrderRecordExample();
-		OrderRecordExample.Criteria criteria = orderRecordExample.createCriteria();
-		criteria.andOrderIdEqualTo(orderId);
-		return  orderRecordMapper.selectByExample(orderRecordExample);
-	}
+    //    订单详情
+    @Override
+    public List<OrderRecord> selectOrdersByorderId(String orderId) {
+        OrderRecordExample orderRecordExample = new OrderRecordExample();
+        OrderRecordExample.Criteria criteria = orderRecordExample.createCriteria();
+        criteria.andOrderIdEqualTo(orderId);
+        return orderRecordMapper.selectByExample(orderRecordExample);
+    }
+
+    @Override
+    public void updateStatusById(String id, int i) {
+        Orders orders = new Orders();
+        orders.setOrderId(id);
+        orders.setOrderStatus(i);
+        ordersMapper.updateByPrimaryKeySelective(orders);
+    }
 
 }
 

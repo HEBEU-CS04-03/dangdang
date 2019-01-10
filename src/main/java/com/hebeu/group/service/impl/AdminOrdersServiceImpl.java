@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 @Service
 public class AdminOrdersServiceImpl implements AdminOrdersService {
     private AdminMapper adminMapper;
@@ -42,19 +44,23 @@ public class AdminOrdersServiceImpl implements AdminOrdersService {
     public List<Orders> findOrdersByorderTime() {
         OrdersExample ordersExample = new OrdersExample();
         OrdersExample.Criteria criteria = ordersExample.createCriteria();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd 00:00:00 E");
-        Date orderTime = new Date();
-        Date start = new Date();
-        Date end = new Date();
-        try {
-            start = dateFormat.parse(DateUtil.formateTime(orderTime) + " 00:00:00");
-            end = dateFormat.parse(DateUtil.formateTime(orderTime) + " 23:59:59");
-        } catch (ParseException e) {
-            System.out.println("时间转换错误，默认为当天时间");
-        }
+        // 设置开始时间
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        // 设置结束时间
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(Calendar.HOUR_OF_DAY, 24);
+        cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MINUTE, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        // 设置查询
+        Date start = cal.getTime();
+        Date end = cal1.getTime();
         criteria.andOrderTimeBetween(start, end);
-        List<Orders> orders = ordersMapper.selectByExample(ordersExample);
-        return orders;
+        return ordersMapper.selectByExample(ordersExample);
     }
 
     @Override

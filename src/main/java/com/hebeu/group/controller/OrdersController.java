@@ -64,7 +64,8 @@ public class OrdersController {
      * 支付页面
      */
     @RequestMapping("/toPay")
-    public String toPay() {
+    public String toPay(String id, HttpSession session) {
+        session.setAttribute("orderId", id);
         return "pay";
     }
 
@@ -72,7 +73,9 @@ public class OrdersController {
      * 支付成功
      */
     @RequestMapping("/PaySuccess")
-    public String PaySuccess() {
+    public String PaySuccess(HttpSession session) {
+        String id = (String) session.getAttribute("orderId");
+        ordersService.updateStatusById(id, 2);
         return "paysuccess";
     }
 }

@@ -49,7 +49,7 @@
 												<a target="_blank" href="${pageContext.request.contextPath}/orders/OrderRecord?orderId=${orders.orderId}">查 看</a>&nbsp;&nbsp;
 
 												<c:if test="${orders.orderStatus!=2 }">
-													<a target="_blank" href="${pageContext.request.contextPath}/orders/toPay">支付</a>
+													<a target="_blank" href="${pageContext.request.contextPath}/orders/toPay?id=${orders.orderId}">支付</a>
 												</c:if>
 											</td>
 										</tr>

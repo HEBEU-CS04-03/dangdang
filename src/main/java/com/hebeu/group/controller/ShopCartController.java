@@ -39,74 +39,76 @@ public class ShopCartController {
 
     /**
      * 跳转到购物车页面
+     *
      * @param session session
-     * @param model model
+     * @param model   model
      * @return 购物车页面
      */
     @RequestMapping("toShopCart")
-    public String toShopCart(HttpSession session, Model model){
+    public String toShopCart(HttpSession session, Model model) {
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
+        Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
         //判断是否登录
-        if(loginCustomer==null){
-            model.addAttribute("message","您还未登录，请先登录！");
+        if (loginCustomer == null) {
+            model.addAttribute("message", "您还未登录，请先登录！");
             return "login";
-        }else {
+        } else {
 
             List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
             Double totalMoney = 0.0;
-            for(ShopCart shopCart:shopCartList){
-                totalMoney+=shopCart.getbPrice()*shopCart.getbNumber();
+            for (ShopCart shopCart : shopCartList) {
+                totalMoney += shopCart.getbPrice() * shopCart.getbNumber();
             }
             List<Book> bookList = bookService.selectAllBook();
             List<Book> firstBookList = new ArrayList<>();
-            for(int i=0;i<4;i++){
+            for (int i = 0; i < 4; i++) {
                 firstBookList.add(bookList.get(i));
             }
             List<Book> secondBookList = new ArrayList<>();
-            for(int i=4;i<8;i++){
+            for (int i = 4; i < 8; i++) {
                 secondBookList.add(bookList.get(i));
             }
 
-            model.addAttribute("firstBookList",firstBookList);
-            model.addAttribute("secondBookList",secondBookList);
-            model.addAttribute("loginCustomer",loginCustomer);
-            model.addAttribute("shopCartList",shopCartService.selectShopCartByCName(loginCustomer.getcName()));
-            model.addAttribute("totalMoney",totalMoney);
+            model.addAttribute("firstBookList", firstBookList);
+            model.addAttribute("secondBookList", secondBookList);
+            model.addAttribute("loginCustomer", loginCustomer);
+            model.addAttribute("shopCartList", shopCartService.selectShopCartByCName(loginCustomer.getcName()));
+            model.addAttribute("totalMoney", totalMoney);
         }
         return "shopping";
     }
 
     /**
      * 向购物车中添加图书
-     * @param bId 图书id
+     *
+     * @param bId     图书id
      * @param session session
      */
     @RequestMapping("addBookToShopCart")
     @ResponseBody
-    public boolean addBookToShopCart(String bId,Integer bNumber, HttpSession session){
+    public boolean addBookToShopCart(String bId, Integer bNumber, HttpSession session) {
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
-        if (loginCustomer == null){
+        Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+        if (loginCustomer == null) {
             return false;
         }
         ShopCart oldShopCart = shopCartService.selectShopCartByCNameAndBId(loginCustomer.getcName(), bId);
         //判断该图书是否已在购物车中
-        if(oldShopCart == null){
+        if (oldShopCart == null) {
             try {
                 ShopCart shopCart = new ShopCart();
                 shopCart.setbId(bId);
                 shopCart.setcName(loginCustomer.getcName());
                 shopCart.setbNumber(bNumber);
                 shopCartService.addBookToShopCart(shopCart);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else {
-            oldShopCart.setbNumber(oldShopCart.getbNumber()+bNumber);
+        } else {
+            oldShopCart.setbNumber(oldShopCart.getbNumber() + bNumber);
             try {
                 shopCartService.updateShopCart(oldShopCart);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -115,15 +117,16 @@ public class ShopCartController {
 
     /**
      * 更新购物车中图书数量
-     * @param sid 购物车sid
+     *
+     * @param sid    购物车sid
      * @param number 数量
      */
     @RequestMapping("updateShopCart")
-    public String updateBookNumFromShopCart(Integer sid, Integer number){
-        if (number <= 0){
+    public String updateBookNumFromShopCart(Integer sid, Integer number) {
+        if (number <= 0) {
             try {
                 shopCartService.deleteBookFromShopCart(sid);
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "redirect:/shopCart/toShopCart";
@@ -134,7 +137,7 @@ public class ShopCartController {
         shopCart.setsId(sid);
         try {
             shopCartService.updateShopCart(shopCart);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "redirect:/shopCart/toShopCart";
@@ -142,13 +145,14 @@ public class ShopCartController {
 
     /**
      * 删除购物车中某种图书
+     *
      * @param sid sid
      */
     @RequestMapping("deleteBookFormShopCart")
-    public String deleteBookFormShopCart(Integer sid){
+    public String deleteBookFormShopCart(Integer sid) {
         try {
             shopCartService.deleteBookFromShopCart(sid);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "redirect:/shopCart/toShopCart";
@@ -156,20 +160,21 @@ public class ShopCartController {
 
     /**
      * 清空购物车
+     *
      * @param session session
      */
     @RequestMapping("deleteAllFromShopCart")
     @ResponseBody
-    public void deleteAllFromShopCart(HttpSession session){
+    public void deleteAllFromShopCart(HttpSession session) {
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
+        Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
         //通过用户名查询购物车信息
         List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
-        for (ShopCart shopCart:shopCartList){
+        for (ShopCart shopCart : shopCartList) {
             try {
                 //删除购物车信息
                 shopCartService.deleteBookFromShopCart(shopCart.getsId());
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -177,30 +182,32 @@ public class ShopCartController {
 
     /**
      * 查询购物车列表
+     *
      * @param session session
      * @return 购物车列表
      */
     @RequestMapping("findShopCartInfo")
     @ResponseBody
-    public List<ShopCart> findShopCartInfo(HttpSession session){
+    public List<ShopCart> findShopCartInfo(HttpSession session) {
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
+        Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
         return shopCartService.selectShopCartByCName(loginCustomer.getcName());
     }
 
     /**
      * 提交订单
+     *
      * @param cAddress 地址
      * @param receiver 收件人
-     * @param cPhone 电话
-     * @param total 总价
+     * @param cPhone   电话
+     * @param total    总价
      * @return
      */
     @RequestMapping("submitOrder")
-    public String submitOrder(String cAddress,String receiver,String cPhone,Float total,HttpSession session,Model model){
+    public String submitOrder(String cAddress, String receiver, String cPhone, Float total, HttpSession session, Model model) {
         //获取session中的登录用户信息
-        Customer loginCustomer = (Customer)session.getAttribute("loginCustomer");
-        if (loginCustomer == null){
+        Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+        if (loginCustomer == null) {
             return "login";
         }
         try {
@@ -222,7 +229,7 @@ public class ShopCartController {
             List<ShopCart> shopCartList = shopCartService.selectShopCartByCName(loginCustomer.getcName());
             List<OrderRecord> orderRecordList = new ArrayList<>();
             //获取订单图书集合
-            for (ShopCart shopCart : shopCartList){
+            for (ShopCart shopCart : shopCartList) {
                 OrderRecord orderRecord = new OrderRecord();
                 orderRecord.setbNumber(shopCart.getbNumber());
                 orderRecord.setbId(shopCart.getbId());
@@ -231,21 +238,23 @@ public class ShopCartController {
                 orderRecord.setbPrice(shopCart.getbPrice());
                 orderRecord.setOrderId(orderId);
                 orderRecord.setcName(loginCustomer.getcName());
-                orderRecord.setbTotalcost(shopCart.getbNumber()*shopCart.getbPrice());
+                orderRecord.setbTotalcost(shopCart.getbNumber() * shopCart.getbPrice());
                 orderRecordList.add(orderRecord);
+                // 更新图书数量
+                bookService.updateBookCount(shopCart);
             }
             //插入订单图书集合
             shopCartService.insertOrderRecord(orderRecordList);
             //删除购物车中信息
-            for (ShopCart shopCart:shopCartList){
+            for (ShopCart shopCart : shopCartList) {
                 try {
                     //删除购物车信息
                     shopCartService.deleteBookFromShopCart(shopCart.getsId());
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

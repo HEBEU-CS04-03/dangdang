@@ -2,10 +2,7 @@ package com.hebeu.group.service.impl;
 
 import com.hebeu.group.mapper.BookMapper;
 import com.hebeu.group.mapper.BookTypeMapper;
-import com.hebeu.group.pojo.Book;
-import com.hebeu.group.pojo.BookExample;
-import com.hebeu.group.pojo.BookType;
-import com.hebeu.group.pojo.BookTypeExample;
+import com.hebeu.group.pojo.*;
 import com.hebeu.group.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -124,5 +121,12 @@ public class BookServiceImpl implements BookService {
     @Override
     public void addBook(Book book) {
         bookMapper.insert(book);
+    }
+
+    @Override
+    public void updateBookCount(ShopCart shopCart) {
+        Book book = bookMapper.selectByPrimaryKey(shopCart.getbId());
+        book.setbQuantity(book.getbQuantity() - shopCart.getbNumber());
+        bookMapper.updateByPrimaryKeySelective(book);
     }
 }

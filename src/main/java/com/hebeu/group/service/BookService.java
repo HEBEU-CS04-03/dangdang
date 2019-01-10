@@ -2,6 +2,7 @@ package com.hebeu.group.service;
 
 import com.hebeu.group.pojo.Book;
 import com.hebeu.group.pojo.BookType;
+import com.hebeu.group.pojo.ShopCart;
 
 import java.util.List;
 
@@ -94,4 +95,11 @@ public interface BookService {
      * @param book
      */
     void addBook(Book book);
+
+    /**
+     * 更新图书数量
+     * @param shopCart
+     */
+    void updateBookCount(ShopCart shopCart);
+
 }

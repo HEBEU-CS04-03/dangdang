@@ -22,4 +22,10 @@ public interface OrdersService {
 	 */
 	List<OrderRecord> selectOrdersByorderId(String orderId);
 
+	/**
+	 * 通过id更新订单状态
+	 * @param id
+	 * @param i
+	 */
+    void updateStatusById(String id, int i);
 }
